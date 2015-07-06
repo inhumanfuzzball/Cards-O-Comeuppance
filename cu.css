@@ -1,0 +1,14 @@
+.form label {
+    display: inline-block;
+    width: 50px;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+input{
+	width: 25px;
+}
