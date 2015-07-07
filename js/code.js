@@ -24,7 +24,8 @@ function IncrementScore(column){
 }
 
 function refresh(data){
-	jQuery.each(data, function(index, value) {
+	$("#GameDetails").text("Match: " + data.match + " Game: " + data.game);
+	jQuery.each(data.scores, function(index, value) {
 		var control = '#' + this.column;
 		$(control).val(this.value);
 	});
