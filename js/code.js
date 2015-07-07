@@ -8,7 +8,7 @@ $(document).ready(function() {
 function IncrementScore(column){
 	
 	// Disable input button
-	var control = "#" + column + " > :button";
+	var control = "#" + column + " > :button, #" + column + " > :input";
 	$(control).attr("disabled", true);
 	$(control).addClass("disabled");
 	$.ajax({
@@ -31,8 +31,29 @@ function IncrementScore(column){
 
 function refresh(data){
 	$("#GameDetails").text("Match: " + data.match + " Game: " + data.game);
+	
 	jQuery.each(data.scores, function(index, value) {
 		var control = "#" + this.column + " > :input";
 		$(control).val(this.value);
 	});
+	
+	$("#SansomWin").text(data.stats.Sansom_Matches_Won);
+	$("#CooperWin").text(data.stats.Cooper_Matches_Won);
+	$("#Draws").text(data.stats.Draws);
+	
+	$("#SansomGameWin").text(data.stats.Sansom_Games_Won);
+	$("#CooperGameWin").text(data.stats.Cooper_Games_Won);
+	$("#TableGameWin").text(data.stats.Table_Games_Won);
+	
+	$("#SansomBridge").text(data.stats.Sansom_Bridge_Cards);
+	$("#CooperBridge").text(data.stats.Cooper_Bridge_Cards);
+	$("#TableBridge").text(data.stats.Table_Bridge_Cards);
+	
+	$("#SansomBriggs").text(data.stats.Sansom_Briggsings);
+	$("#CooperBriggs").text(data.stats.Cooper_Briggsings);
+	$("#TableBriggs").text(data.stats.Table_Briggsings);
+	
+	$("#GamesPlayed").text(data.stats.Games_Played);
+	$("#MatchesPlayed").text(data.stats.Matches_Played);
+		
 }

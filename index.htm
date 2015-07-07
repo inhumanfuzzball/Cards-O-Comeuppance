@@ -18,11 +18,30 @@
 	<link rel="stylesheet" href="css/cu.css">
 </head>
 <body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Cards 'o' Comeuppance</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Game</a></li>
+				<li><a href="#stats">Statistics</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+	
 	<div class="container-fluid" role="main">
-		<div class="page-header">
-			<h2>Cards 'o' Comeuppance</h2>
-			<span class="lead" id="GameDetails"></span>
-		</div>
+		<span class="lead" id="GameDetails"></span>
 		<form class="form">
 			<div class="row">
 				<div class="col-xs-6 col-md-4">
@@ -81,6 +100,59 @@
 				</div>
 			</div>
 		</form>	
+	</div>
+	
+	<a name="stats"></a>	
+	<div class="container-fluid" role="main">		
+		<h2>Statistics</h2>
+		<div class="row">
+			<div class="col-md-2">
+				<p>Sansom Match Wins: <span id="SansomWin"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Cooper Match Wins: <span id="CooperWin"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Draws: <span id="Draws"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Sansom Game Wins: <span id="SansomGameWin"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Cooper Game Wins: <span id="CooperGameWin"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Table Game Wins: <span id="TableGameWin"></span></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<p>Sansom Bridge Cards: <span id="SansomBridge"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Cooper Bridge Cards: <span id="CooperBridge"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Table Bridge Cards: <span id="TableBridge"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Sansom Briggsings: <span id="SansomBriggs"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Cooper Briggsings: <span id="CooperBriggs"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Table Briggsings: <span id="TableBriggs"></span></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<p>Games Played: <span id="GamesPlayed"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Matches Played: <span id="MatchesPlayed"></span></p>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

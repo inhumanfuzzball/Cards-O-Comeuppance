@@ -2,21 +2,18 @@ h3{
 	text-align: center;
 }
 
-.bottom {
-  	position: fixed;
-  	bottom: 0;
-  	width: 100%;
+.container-fluid{
+	padding-top: 60px;
 }
 
-
-
+/* Score area */
 .score{
 	width:140px;      
-    height: 35px;
-    margin-bottom: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden; /* Clear floats */
+   height: 35px;
+   margin-bottom: 5px;
+   margin-left: auto;
+   margin-right: auto;
+   overflow: hidden; /* Clear floats */
 }
 
 .display, .add{
@@ -24,38 +21,39 @@ h3{
 }
 
 .form label {
-
   	width: 50px;
 	height: 35px;
 	text-align:center;
 }
 
+/* Score display */
 .display {
-
-	
 	padding: 5px;
-    height: 35px;
-    width: 40px;
-    border: 1px solid #6cbb6b;
+   height: 35px;
+   width: 40px;
+   border-style: solid;
+   border-color: #6cbb6b;
+   border-width: 1px 0px 1px 1px;
 	font-size: 12pt;      
 }
 
-/* ----------------------- */
-
-.add
-{       
+/* Add button */
+.add{       
     background-color: #6cbb6b;
-    border-width: 1px;
+    border-width: 1px 1px 1px 0px;
     border-style: solid;
     border-color: #6cbb6b;
     height: 35px;
     width: 35px;
     color: #FFFFFF; 
-	font-size: 18pt;	
+	 font-size: 18pt;	
 }
 
-.disabled
-{
-    background-color: #9E9E9E;
+button.disabled ,input.disabled{
+    border-color: #BABABA;
+}
+
+button.disabled{
+    background-color: #CFCFCF;
 }
 
