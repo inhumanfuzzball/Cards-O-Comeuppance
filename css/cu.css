@@ -8,8 +8,10 @@ h3{
   	width: 100%;
 }
 
+
+
 .score{
-	 width:129px;      
+	width:140px;      
     height: 35px;
     margin-bottom: 5px;
     margin-left: auto;
@@ -17,32 +19,40 @@ h3{
     overflow: hidden; /* Clear floats */
 }
 
-.add {
+.display, .add{
 	float: right;
 }
 
 .form label {
+
   	width: 50px;
+	height: 35px;
+	text-align:center;
 }
 
 .display {
-	 padding: 5px 9px;
+
+	
+	padding: 5px;
     height: 35px;
     width: 40px;
-    border: 1px solid #a4c3ca;
-    font: normal 13px 'trebuchet MS', arial, helvetica;         
+    border: 1px solid #6cbb6b;
+	font-size: 12pt;      
 }
 
 /* ----------------------- */
 
 .add
 {       
+
+
     background-color: #6cbb6b;
     border-width: 1px;
     border-style: solid;
-    border-color: #7eba7c;
+    border-color: #6cbb6b;
     height: 35px;
     width: 35px;
-    color: #23441e;    
+    color: #FFFFFF; 
+	font-size: 18pt;	
 }
 
