@@ -44,8 +44,6 @@ h3{
 
 .add
 {       
-
-
     background-color: #6cbb6b;
     border-width: 1px;
     border-style: solid;
@@ -54,5 +52,10 @@ h3{
     width: 35px;
     color: #FFFFFF; 
 	font-size: 18pt;	
+}
+
+.disabled
+{
+    background-color: #9E9E9E;
 }
 

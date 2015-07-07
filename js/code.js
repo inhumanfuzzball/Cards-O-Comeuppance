@@ -7,13 +7,19 @@ $(document).ready(function() {
 
 function IncrementScore(column){
 	
-	 $.ajax({
+	// Disable input button
+	var control = "#" + column + " > :button";
+	$(control).attr("disabled", true);
+	$(control).addClass("disabled");
+	$.ajax({
         url: SCRIPT_URL+"?col="+column,
         type: "POST",
         crossDomain: true,
         dataType: "json",
         success:function(result){
             refresh(result);
+			$(control).attr("disabled", false);
+			$(control).removeClass("disabled");
         },
         error:function(xhr,status,error){
             alert(error);
@@ -26,7 +32,7 @@ function IncrementScore(column){
 function refresh(data){
 	$("#GameDetails").text("Match: " + data.match + " Game: " + data.game);
 	jQuery.each(data.scores, function(index, value) {
-		var control = '#' + this.column;
+		var control = "#" + this.column + " > :input";
 		$(control).val(this.value);
 	});
 }
