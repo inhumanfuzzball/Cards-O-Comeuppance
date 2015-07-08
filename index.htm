@@ -4,21 +4,14 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- JQuery -->
-	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	
-	<script src="js/code.js"></script>
-	
+	<!-- Main CSS -->
 	<link rel="stylesheet" href="css/cu.css">
 </head>
 <body>
-
+	<!-- Navigation bar -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -34,66 +27,69 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Game</a></li>
 				<li><a href="#stats">Statistics</a></li>
+				<li><a href="javascript:getScores();">Refresh</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
-	
+	<!-- Scores area -->
 	<div class="container-fluid" role="main">
-		<span class="lead" id="GameDetails"></span>
+		<h2 id="GameDetails">Statistics</h2>
 		<form class="form">
 			<div class="row">
+				<!-- Dan Sansom Scores -->
 				<div class="col-xs-6 col-md-4">
 					<h3>Dan S</h3>
 					<div class="score" id="A">
-						<label>Score</label>
+						<div class="label">Score</div>
 						<button class="add" type="button" onclick="IncrementScore('A');">+</button>
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="D">
-						<label>Bridge</label>
+						<div class="label">Bridge</div>
 						<button class="add" type="button" onclick="IncrementScore('D');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="G">
-						<label>Briggs</label>
+						<div class="label">Briggs</div>
 						<button class="add" type="button" id="G_Button" onclick="IncrementScore('G');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 				</div>
+				<!-- Dan Cooper Scores -->
 				<div class="col-xs-6 col-md-4">
 					<h3>Dan C</h3>
 					<div class="score" id="B">
-						<label>Score</label>
+						<div class="label">Score</div>
 						<button class="add" type="button" onclick="IncrementScore('B');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="E">
-						<label>Bridge</label>
+						<div class="label">Bridge</div>
 						<button class="add" type="button" onclick="IncrementScore('E');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="H">
-						<label>Briggs</label>
+						<div class="label">Briggs</div>
 						<button class="add" type="button" onclick="IncrementScore('H');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 				</div>
+				<!-- Table Scores -->
 				<div class="col-xs-6 col-md-4">
 					<h3>Table</h3>
 					<div class="score" id="C">
-						<label>Score</label>
+						<div class="label">Score</div>
 						<button class="add" type="button" onclick="IncrementScore('C');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="F">
-						<label>Bridge</label>
+						<div class="label">Bridge</div>
 						<button class="add" type="button" onclick="IncrementScore('F');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="I">
-						<label>Briggs</label>
+						<div class="label">Briggs</div>
 						<button class="add" type="button" onclick="IncrementScore('I');">+</button>						
 						<input class="display" readonly></input>
 					</div>
@@ -101,7 +97,7 @@
 			</div>
 		</form>	
 	</div>
-	
+	<!-- Statistics area -->
 	<a name="stats"></a>	
 	<div class="container-fluid" role="main">		
 		<h2>Statistics</h2>
@@ -154,5 +150,13 @@
 			</div>
 		</div>
 	</div>
+	<!-- Java script -->
+	<!-- JQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- Main JS -->
+	<script src="js/code.js"></script>
 </body>
 </html>
