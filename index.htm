@@ -21,7 +21,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Cards 'o' Comeuppance</a>
+          <a class="navbar-brand" href="javascript:getScores();">Cards 'o' Comeuppance</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -34,7 +34,7 @@
     </nav>
 	<!-- Scores area -->
 	<div class="container-fluid" role="main">
-		<h2 id="GameDetails">Statistics</h2>
+		<h2 id="game-details">Statistics</h2>
 		<form class="form">
 			<div class="row">
 				<!-- Dan Sansom Scores -->
@@ -42,17 +42,17 @@
 					<h3>Dan S</h3>
 					<div class="score" id="A">
 						<div class="label">Score</div>
-						<button class="add" type="button" onclick="IncrementScore('A');">+</button>
+						<button class="add" type="button" onclick="incrementScore('A');">+</button>
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="D">
 						<div class="label">Bridge</div>
-						<button class="add" type="button" onclick="IncrementScore('D');">+</button>						
+						<button class="add" type="button" onclick="incrementScore('D');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="G">
 						<div class="label">Briggs</div>
-						<button class="add" type="button" id="G_Button" onclick="IncrementScore('G');">+</button>						
+						<button class="add" type="button" onclick="incrementScore('G');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 				</div>
@@ -61,17 +61,17 @@
 					<h3>Dan C</h3>
 					<div class="score" id="B">
 						<div class="label">Score</div>
-						<button class="add" type="button" onclick="IncrementScore('B');">+</button>						
+						<button class="add" type="button" onclick="incrementScore('B');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="E">
 						<div class="label">Bridge</div>
-						<button class="add" type="button" onclick="IncrementScore('E');">+</button>						
+						<button class="add" type="button" onclick="incrementScore('E');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="H">
 						<div class="label">Briggs</div>
-						<button class="add" type="button" onclick="IncrementScore('H');">+</button>						
+						<button class="add" type="button" onclick="incrementScore('H');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 				</div>
@@ -80,17 +80,17 @@
 					<h3>Table</h3>
 					<div class="score" id="C">
 						<div class="label">Score</div>
-						<button class="add" type="button" onclick="IncrementScore('C');">+</button>						
+						<button class="add" type="button" onclick="incrementScore('C');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="F">
 						<div class="label">Bridge</div>
-						<button class="add" type="button" onclick="IncrementScore('F');">+</button>						
+						<button class="add" type="button" onclick="incrementScore('F');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="I">
 						<div class="label">Briggs</div>
-						<button class="add" type="button" onclick="IncrementScore('I');">+</button>						
+						<button class="add" type="button" onclick="incrementScore('I');">+</button>						
 						<input class="display" readonly></input>
 					</div>
 				</div>
@@ -103,50 +103,50 @@
 		<h2>Statistics</h2>
 		<div class="row">
 			<div class="col-md-2">
-				<p>Sansom Match Wins: <span id="SansomWin"></span></p>
+				<p>Sansom Match Wins: <span id="sansom-win"></span></p>
 			</div>
 			<div class="col-md-2">
-				<p>Cooper Match Wins: <span id="CooperWin"></span></p>
+				<p>Cooper Match Wins: <span id="cooper-win"></span></p>
 			</div>
 			<div class="col-md-2">
-				<p>Draws: <span id="Draws"></span></p>
+				<p>Draws: <span id="draws"></span></p>
 			</div>
 			<div class="col-md-2">
-				<p>Sansom Game Wins: <span id="SansomGameWin"></span></p>
+				<p>Sansom Game Wins: <span id="sansom-game-win"></span></p>
 			</div>
 			<div class="col-md-2">
-				<p>Cooper Game Wins: <span id="CooperGameWin"></span></p>
+				<p>Cooper Game Wins: <span id="cooper-game-win"></span></p>
 			</div>
 			<div class="col-md-2">
-				<p>Table Game Wins: <span id="TableGameWin"></span></p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<p>Sansom Bridge Cards: <span id="SansomBridge"></span></p>
-			</div>
-			<div class="col-md-2">
-				<p>Cooper Bridge Cards: <span id="CooperBridge"></span></p>
-			</div>
-			<div class="col-md-2">
-				<p>Table Bridge Cards: <span id="TableBridge"></span></p>
-			</div>
-			<div class="col-md-2">
-				<p>Sansom Briggsings: <span id="SansomBriggs"></span></p>
-			</div>
-			<div class="col-md-2">
-				<p>Cooper Briggsings: <span id="CooperBriggs"></span></p>
-			</div>
-			<div class="col-md-2">
-				<p>Table Briggsings: <span id="TableBriggs"></span></p>
+				<p>Table Game Wins: <span id="table-game-win"></span></p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-2">
-				<p>Games Played: <span id="GamesPlayed"></span></p>
+				<p>Sansom Bridge Cards: <span id="sansom-bridge"></span></p>
 			</div>
 			<div class="col-md-2">
-				<p>Matches Played: <span id="MatchesPlayed"></span></p>
+				<p>Cooper Bridge Cards: <span id="cooper-bridge"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Table Bridge Cards: <span id="table-bridge"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Sansom Briggsings: <span id="sansom-briggs"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Cooper Briggsings: <span id="cooper-briggs"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Table Briggsings: <span id="table-briggs"></span></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<p>Games Played: <span id="games-played"></span></p>
+			</div>
+			<div class="col-md-2">
+				<p>Matches Played: <span id="matches-played"></span></p>
 			</div>
 		</div>
 	</div>

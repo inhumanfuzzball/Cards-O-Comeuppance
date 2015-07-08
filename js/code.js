@@ -4,11 +4,10 @@ $(document).ready(function() {
 	getScores();
 });
 
-function IncrementScore(column){
-	// Disable input button
+function incrementScore(column){
+	// Disable input button and display box
 	var control = "#" + column + " > :button, #" + column + " > :input";
-	$(control).attr("disabled", true);
-	$(control).addClass("disabled");
+	$(control).attr("disabled", true).addClass("disabled");
 	
 	// Call WS
 	$.ajax({url: SCRIPT_URL+"?col="+column,
@@ -22,8 +21,8 @@ function IncrementScore(column){
 			alert("Error updating score");
         })
 		.always(function() {
-			$(control).attr("disabled", false);
-			$(control).removeClass("disabled");
+			// Enable the button and display when done
+			$(control).attr("disabled", false).removeClass("disabled");
 		});
 }
 
@@ -33,7 +32,7 @@ function getScores(){
 
 function refresh(data){
 	// Game info header
-	$("#GameDetails").text("Match: " + data.match + " Game: " + data.game);
+	$("#game-details").text("Match: " + data.match + " Game: " + data.game);
 	
 	//Scores
 	jQuery.each(data.scores, function(index, value) {
@@ -42,18 +41,18 @@ function refresh(data){
 	});
 	
 	// Statistics
-	$("#SansomWin").text(data.stats.Sansom_Matches_Won);
-	$("#CooperWin").text(data.stats.Cooper_Matches_Won);
-	$("#Draws").text(data.stats.Draws);
-	$("#SansomGameWin").text(data.stats.Sansom_Games_Won);
-	$("#CooperGameWin").text(data.stats.Cooper_Games_Won);
-	$("#TableGameWin").text(data.stats.Table_Games_Won);
-	$("#SansomBridge").text(data.stats.Sansom_Bridge_Cards);
-	$("#CooperBridge").text(data.stats.Cooper_Bridge_Cards);
-	$("#TableBridge").text(data.stats.Table_Bridge_Cards);
-	$("#SansomBriggs").text(data.stats.Sansom_Briggsings);
-	$("#CooperBriggs").text(data.stats.Cooper_Briggsings);
-	$("#TableBriggs").text(data.stats.Table_Briggsings);
-	$("#GamesPlayed").text(data.stats.Games_Played);
-	$("#MatchesPlayed").text(data.stats.Matches_Played);
+	$("#sansom-win").text(data.stats.Sansom_Matches_Won);
+	$("#cooper-win").text(data.stats.Cooper_Matches_Won);
+	$("#draws").text(data.stats.Draws);
+	$("#sansom-game-win").text(data.stats.Sansom_Games_Won);
+	$("#cooper-game-win").text(data.stats.Cooper_Games_Won);
+	$("#table-game-win").text(data.stats.Table_Games_Won);
+	$("#sansom-bridge").text(data.stats.Sansom_Bridge_Cards);
+	$("#cooper-bridge").text(data.stats.Cooper_Bridge_Cards);
+	$("#table-bridge").text(data.stats.Table_Bridge_Cards);
+	$("#sansom-briggs").text(data.stats.Sansom_Briggsings);
+	$("#cooper-briggs").text(data.stats.Cooper_Briggsings);
+	$("#table-briggs").text(data.stats.Table_Briggsings);
+	$("#games-played").text(data.stats.Games_Played);
+	$("#matches-played").text(data.stats.Matches_Played);
 }
