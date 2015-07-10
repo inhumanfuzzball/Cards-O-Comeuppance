@@ -17,12 +17,12 @@ button.disabled{
 /* Score area, label, display text box and add button */
 /******************************************************/
 /* Float the button and text display */
-.display, .add{
+.display, .add, .sub{
 	float: right;
 }
 /* Containing div */
 .score{
-	width:150px;      
+	width:185px;      
 	height: 35px;
 	margin-bottom: 5px;
 	margin-left: auto;
@@ -47,14 +47,22 @@ button.disabled{
 	border-width: 1px 0px 1px 1px;
 	font-size: 12pt;      
 }
-/* Add button */
-.add{       
-    background-color: #6cbb6b;
+/* Add and subtract buttons */
+.add, .sub{       
     border-width: 1px 1px 1px 0px;
     border-style: solid;
-    border-color: #6cbb6b;
     height: 35px;
     width: 35px;
-    color: #FFFFFF; 
-	font-size: 18pt;	
+	font-size: 18pt;
 }
+.add{    
+	color: #FFFFFF;     
+	background-color: #6cbb6b;
+	border-color: #6cbb6b;
+}
+.sub{
+	color: #FFFFFF;     
+	background-color: #DB4D4D;
+	border-color: #DB4D4D;
+}
+

@@ -4,13 +4,17 @@ $(document).ready(function() {
 	getScores();
 });
 
-function incrementScore(column){
+function pushScore(element){
+	//Use the DOM to work out the column and method we need to call
+	var column = element.parentElement.id;
+	var method = element.className;
+	
 	// Disable input button and display box
 	var control = "#" + column + " > :button, #" + column + " > :input";
 	$(control).attr("disabled", true).addClass("disabled");
 	
 	// Call WS
-	$.ajax({url: SCRIPT_URL+"?col="+column,
+	$.ajax({url: SCRIPT_URL+"?col="+column+"&method="+method,
 			type: "POST",
 			crossDomain: true,
 			dataType: "json"})

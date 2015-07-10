@@ -25,9 +25,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Game</a></li>
-				<li><a href="#stats">Statistics</a></li>
-				<li><a href="javascript:getScores();">Refresh</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse" class="active"><a href="#">Game</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="#stats">Statistics</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="javascript:getScores();">Refresh</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -42,17 +42,20 @@
 					<h3>Dan S</h3>
 					<div class="score" id="A">
 						<div class="label">Score</div>
-						<button class="add" type="button" onclick="incrementScore('A');">+</button>
+						<button class="sub" type="button" onclick="pushScore(this);">-</button>						
+						<button class="add" type="button" onclick="pushScore(this);">+</button>
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="D">
 						<div class="label">Bridge</div>
-						<button class="add" type="button" onclick="incrementScore('D');">+</button>						
+						<button class="sub" type="button" onclick="pushScore(this);">-</button>						
+						<button class="add" type="button" onclick="pushScore(this);">+</button>				
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="G">
 						<div class="label">Briggs</div>
-						<button class="add" type="button" onclick="incrementScore('G');">+</button>						
+						<button class="sub" type="button" onclick="pushScore(this);">-</button>						
+						<button class="add" type="button" onclick="pushScore(this);">+</button>				
 						<input class="display" readonly></input>
 					</div>
 				</div>
@@ -61,17 +64,20 @@
 					<h3>Dan C</h3>
 					<div class="score" id="B">
 						<div class="label">Score</div>
-						<button class="add" type="button" onclick="incrementScore('B');">+</button>						
+						<button class="sub" type="button" onclick="pushScore(this);">-</button>						
+						<button class="add" type="button" onclick="pushScore(this);">+</button>				
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="E">
 						<div class="label">Bridge</div>
-						<button class="add" type="button" onclick="incrementScore('E');">+</button>						
+						<button class="sub" type="button" onclick="pushScore(this);">-</button>						
+						<button class="add" type="button" onclick="pushScore(this);">+</button>					
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="H">
 						<div class="label">Briggs</div>
-						<button class="add" type="button" onclick="incrementScore('H');">+</button>						
+						<button class="sub" type="button" onclick="pushScore(this);">-</button>						
+						<button class="add" type="button" onclick="pushScore(this);">+</button>					
 						<input class="display" readonly></input>
 					</div>
 				</div>
@@ -80,17 +86,20 @@
 					<h3>Table</h3>
 					<div class="score" id="C">
 						<div class="label">Score</div>
-						<button class="add" type="button" onclick="incrementScore('C');">+</button>						
+						<button class="sub" type="button" onclick="pushScore(this);">-</button>						
+						<button class="add" type="button" onclick="pushScore(this);">+</button>				
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="F">
 						<div class="label">Bridge</div>
-						<button class="add" type="button" onclick="incrementScore('F');">+</button>						
+						<button class="sub" type="button" onclick="pushScore(this);">-</button>						
+						<button class="add" type="button" onclick="pushScore(this);">+</button>				
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="I">
 						<div class="label">Briggs</div>
-						<button class="add" type="button" onclick="incrementScore('I');">+</button>						
+						<button class="sub" type="button" onclick="pushScore(this);">-</button>						
+						<button class="add" type="button" onclick="pushScore(this);">+</button>			
 						<input class="display" readonly></input>
 					</div>
 				</div>
