@@ -71,7 +71,7 @@ function getMatches(){
 			$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+this.date+'\');"><td>'+this.date+'</td><td>'+this.sansom+'</td><td>'+this.cooper+'</td><td>'+this.table+'</td></tr>');
 		});
 		
-		gameDate = "";
+		gameDate = null;
 	});
 }
 
