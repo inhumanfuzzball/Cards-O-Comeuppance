@@ -25,16 +25,29 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-				<li data-toggle="collapse" data-target=".navbar-collapse" class="active"><a href="#">Game</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse" class="active"><a href="javascript:getMatches();">Matches</a></li>
 				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="#stats">Statistics</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="javascript:addGame();">New</a></li>
 				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="javascript:getScores();">Refresh</a></li>
+				
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+	
+	<div class="container-fluid" id="match-view">
+		<table class="table" id="match-list">
+			<thead>
+				<tr><td>Date</td><td>Sansom</td><td>Cooper</td><td>Table</td></tr>
+			</thead>
+			<tbody id="match-rows">
+			</tbody>
+		</table>
+	</div>
+	
 	<!-- Scores area -->
-	<div class="container-fluid" role="main">
-		<h2 id="game-details">Statistics</h2>
+	<div class="container-fluid" id="game-view">
+		<h2 id="game-details"></h2>
 		<form class="form">
 			<div class="row">
 				<!-- Dan Sansom Scores -->

@@ -33,7 +33,7 @@ button.disabled{
 .label{
 	color: #000000;
 	font-size: 10pt; 
-	width: 30px fixed;
+	width: 30px;
 	height: 35px;
 	line-height: 35px;
 }
@@ -44,11 +44,11 @@ button.disabled{
 	width: 30px;
 	border-style: solid;
 	border-color: #6cbb6b;
-	border-width: 1px 0px 1px 1px;
+	border-width: 1px;
 	font-size: 12pt;      
 }
 /* Add and subtract buttons */
-.add, .sub{       
+.add, .sub{     
     border-width: 1px 1px 1px 0px;
     border-style: solid;
     height: 35px;

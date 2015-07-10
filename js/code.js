@@ -1,7 +1,8 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
+var gameDate;
 
 $(document).ready(function() {
-	getScores();
+	getMatches();
 });
 
 function pushScore(element){
@@ -19,7 +20,7 @@ function pushScore(element){
 			crossDomain: true,
 			dataType: "json"})
 		.done(function(data){
-            refresh(data);
+            displayGame(data);
         })
 		.fail(function(xhr,status,error){
 			alert("Error updating score");
@@ -30,13 +31,51 @@ function pushScore(element){
 		});
 }
 
-function getScores(){
-    $.getJSON(SCRIPT_URL+"?callback=?", function (data) { refresh(data); });
+function addGame(){
+	// Call WS
+	$.ajax({url: SCRIPT_URL+"?method=NEW",
+			type: "POST",
+			crossDomain: true,
+			dataType: "json"})
+		.done(function(data){
+			$("#game-view").show();
+			$("#match-view").hide();
+            displayGame(data);
+        })
+		.fail(function(xhr,status,error){
+			alert("Error creating game");
+        });
 }
 
-function refresh(data){
+function getScores(date){
+	$("#game-view").show();
+	$("#match-view").hide();
+	
+	if(date == null) date = gameDate;
+    $.getJSON(SCRIPT_URL+"?callback=?&date="+date, function (data) { displayGame(data); });
+}
+
+function getMatches(){
+	$("#game-view").hide();
+	$("#match-view").show();
+	
+	$.getJSON(SCRIPT_URL+"?callback=?&method=MATCHES", function (data) { 
+		 $("#match-list").find("tr:gt(0)").remove();
+	
+		jQuery.each(data.matches, function(index, value) {
+			$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+this.date+'\');"><td>'+this.date+'</td><td>'+this.sansom+'</td><td>'+this.cooper+'</td><td>'+this.table+'</td></tr>');
+		});
+		
+		gameDate = "";
+	});
+}
+
+function displayGame(data){
 	// Game info header
-	$("#game-details").text("Match: " + data.match + " Game: " + data.game);
+	if(data.complete)
+		$("#game-details").text("Match: " + data.match);
+	else
+		$("#game-details").text("Match: " + data.match + " Game: " + data.game);
 	
 	//Scores
 	jQuery.each(data.scores, function(index, value) {
@@ -59,4 +98,14 @@ function refresh(data){
 	$("#table-briggs").text(data.stats.Table_Briggsings);
 	$("#games-played").text(data.stats.Games_Played);
 	$("#matches-played").text(data.stats.Matches_Played);
+	
+	//Remove add and sub buttons if this game is complete
+	if(data.complete){
+		$(".score > :button").hide();
+	}
+	else{
+		$(".score > :button").show();
+	}
+	
+	gameDate = data.gameDate;
 }
