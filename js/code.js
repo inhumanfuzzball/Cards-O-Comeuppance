@@ -5,6 +5,11 @@ $(document).ready(function() {
 	getMatches();
 });
 
+function refresh(){
+	if(gameDate == null) getMatches();
+	else getScores();
+}
+
 function pushScore(element){
 	//Use the DOM to work out the column and method we need to call
 	var column = element.parentElement.id;
@@ -107,5 +112,6 @@ function displayGame(data){
 		$(".score > :button").show();
 	}
 	
+	//Store the current game
 	gameDate = data.gameDate;
 }
