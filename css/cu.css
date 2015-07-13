@@ -64,6 +64,7 @@ button.disabled{
     width: 30px;
 	 font-size: 18pt;
 	 display: none;
+	 padding-top: 3px;
 }
 .add{    
 	color: #FFFFFF;     
