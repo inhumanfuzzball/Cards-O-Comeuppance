@@ -21,7 +21,7 @@ button.disabled{
 	float: right;
 }
 /* Containing div */
-.score{
+.score,.score-readonly{
 	width:150px;      
 	height: 35px;
 	margin-bottom: 5px;
@@ -29,6 +29,15 @@ button.disabled{
 	margin-right: auto;
 	overflow: hidden; /* Clear floats */
 }
+
+.score{
+	width:150px;      
+}
+
+.score-readonly{
+	width:90px;      
+}
+
 /* Label for score item */
 .label{
 	color: #000000;
@@ -53,7 +62,8 @@ button.disabled{
     border-style: solid;
     height: 35px;
     width: 30px;
-	font-size: 18pt;
+	 font-size: 18pt;
+	 display: none;
 }
 .add{    
 	color: #FFFFFF;     

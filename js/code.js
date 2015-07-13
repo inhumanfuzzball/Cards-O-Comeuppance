@@ -99,10 +99,14 @@ function displayStats(data){
 
 function displayGame(data){
 	// Game info header
-	if(data.complete)
+	if(data.complete){
 		$("#game-details").text("Match: " + data.match);
-	else
+		$(".score").removeClass("score").addClass("score-readonly");
+	}
+	else{
 		$("#game-details").text("Match: " + data.match + " Game: " + data.game);
+		$(".score-readonly").removeClass("score-readonly").addClass("score");
+	}
 	
 	//Scores
 	jQuery.each(data.scores, function(index, value) {
