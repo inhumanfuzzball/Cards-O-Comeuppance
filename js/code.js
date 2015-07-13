@@ -65,30 +65,22 @@ function getMatches(){
 	$("#match-view").show();
 	
 	$.getJSON(SCRIPT_URL+"?callback=?&method=MATCHES", function (data) { 
-		 $("#match-list").find("tr:gt(0)").remove();
-	
-		jQuery.each(data.matches, function(index, value) {
-			$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+this.date+'\');"><td>'+this.date+'</td><td>'+this.sansom+'</td><td>'+this.cooper+'</td><td>'+this.table+'</td></tr>');
-		});
-		
-		gameDate = null;
+		 displayMatches(data);
+		 displayStats(data);
 	});
 }
 
-function displayGame(data){
-	// Game info header
-	if(data.complete)
-		$("#game-details").text("Match: " + data.match);
-	else
-		$("#game-details").text("Match: " + data.match + " Game: " + data.game);
+function displayMatches(data){
+	$("#match-list").find("tr:gt(0)").remove();
 	
-	//Scores
-	jQuery.each(data.scores, function(index, value) {
-		var control = "#" + this.column + " > :input";
-		$(control).val(this.value);
+	jQuery.each(data.matches, function(index, value) {
+		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+this.date+'\');"><td>'+this.date+'</td><td>'+this.sansom+'</td><td>'+this.cooper+'</td><td>'+this.table+'</td></tr>');
 	});
-	
-	// Statistics
+		
+	gameDate = null;
+}
+
+function displayStats(data){
 	$("#sansom-win").text(data.stats.Sansom_Matches_Won);
 	$("#cooper-win").text(data.stats.Cooper_Matches_Won);
 	$("#draws").text(data.stats.Draws);
@@ -103,6 +95,20 @@ function displayGame(data){
 	$("#table-briggs").text(data.stats.Table_Briggsings);
 	$("#games-played").text(data.stats.Games_Played);
 	$("#matches-played").text(data.stats.Matches_Played);
+}
+
+function displayGame(data){
+	// Game info header
+	if(data.complete)
+		$("#game-details").text("Match: " + data.match);
+	else
+		$("#game-details").text("Match: " + data.match + " Game: " + data.game);
+	
+	//Scores
+	jQuery.each(data.scores, function(index, value) {
+		var control = "#" + this.column + " > :input";
+		$(control).val(this.value);
+	});
 	
 	//Remove add and sub buttons if this game is complete
 	if(data.complete){
