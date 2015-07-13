@@ -74,7 +74,13 @@ function displayMatches(data){
 	$("#match-list").find("tr:gt(0)").remove();
 	
 	jQuery.each(data.matches, function(index, value) {
-		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+this.date+'\');"><td>'+this.date+'</td><td>'+this.sansom+'</td><td>'+this.cooper+'</td><td>'+this.table+'</td></tr>');
+		var sansomClass = this.sansom > this.cooper ? "win" : "lose";
+		var cooperClass = this.cooper > this.sansom ? "win" : "lose";
+		if(this.sansom == this.cooper){
+			sansomClass = "";
+			cooperClass = "";		
+		}
+		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+this.date+'\');"><td>'+this.date+'</td><td class="'+sansomClass+'">'+this.sansom+'</td><td class="'+cooperClass+'">'+this.cooper+'</td><td>'+this.table+'</td></tr>');
 	});
 		
 	gameDate = null;
