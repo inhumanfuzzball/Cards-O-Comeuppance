@@ -89,6 +89,7 @@ function displayMatches(data){
 function displayStats(data){
 	$("#sansom-win").text(data.stats.Sansom_Matches_Won);
 	$("#cooper-win").text(data.stats.Cooper_Matches_Won);
+	$("#table-win").text(data.stats.Table_Matches_Won);
 	$("#draws").text(data.stats.Draws);
 	$("#sansom-game-win").text(data.stats.Sansom_Games_Won);
 	$("#cooper-game-win").text(data.stats.Cooper_Games_Won);
