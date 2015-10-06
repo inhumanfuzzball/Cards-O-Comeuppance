@@ -62,9 +62,8 @@ button.disabled{
     border-style: solid;
     height: 35px;
     width: 30px;
-	 font-size: 14pt;
-	 display: none;
-	 padding-top: 3px;
+	font-size: 14pt;
+	padding-top: 3px;
 }
 .add{    
 	color: #FFFFFF;     
@@ -76,6 +75,15 @@ button.disabled{
 	background-color: #DB4D4D;
 	border-color: #DB4D4D;
 }
+
+.score-readonly > .add {
+	display: none;
+}
+
+.score-readonly > .sub {
+	display: none;
+}
+
 .win{
 	color: #006600;
 }
