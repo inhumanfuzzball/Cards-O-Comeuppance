@@ -53,7 +53,7 @@ function addGame(){
 }
 
 function getScores(date){
-	$("#game-view").show();
+	$("#game-view").hide();
 	$("#match-view").hide();
 	
 	if(date == null) date = gameDate;
@@ -123,11 +123,13 @@ function displayGame(data){
 	
 	//Remove add and sub buttons if this game is complete
 	if(data.complete){
-		$(".score > :button").hide();
+		$(".score-readonly > :button").hide();
 	}
 	else{
 		$(".score > :button").show();
 	}
+	
+	$("#game-view").show();
 	
 	//Store the current game
 	gameDate = data.gameDate;
