@@ -2,6 +2,8 @@ var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27R
 var gameDate;
 
 $(document).ready(function() {
+	$("#game-view").hide();
+	$("#match-view").hide();
 	getMatches();
 });
 
@@ -10,35 +12,67 @@ function refresh(){
 	else getScores();
 }
 
+function getScore(column){
+	var control = "#" + column + " > :input";
+	return $(control).val() * 1;
+}
+
+function  updateScore(column,method)
+{
+	var control = "#" + column + " > :input";
+	if(method === "add")
+	{
+		$(control).val(($(control).val() * 1) + 1);
+	}
+	else if(method === "sub")
+	{
+		if(($(control).val() * 1) > 0)
+		{
+			$(control).val(($(control).val() * 1) - 1);
+		}
+	}
+}
+
+function updateScores(){
+
+		var gameRow = [getScore("A"),getScore("B"),getScore("C"),getScore("D"),getScore("E"),getScore("F"),getScore("G"),getScore("H"),getScore("I")];
+		
+		// show some saving animation
+		$.ajax({url: SCRIPT_URL+"?method=SAVE&date="+gameDate,
+			type: "POST",
+			crossDomain: true,
+			data: JSON.stringify(gameRow),
+			dataType: "json"})
+		.done(function(data){
+
+        })
+		.fail(function(xhr,status,error){
+			// lets try this again
+			updateScores();
+        })
+		.always(function() {
+
+		});
+}
+
+
+
 function pushScore(element){
-	//Use the DOM to work out the column and method we need to call
+	
+	// Use the DOM to work out the column and method being updated
 	var column = element.parentElement.id;
 	var method = element.className;
 	
-	// Disable input button and display box
-	var control = "#" + column + " > :button, #" + column + " > :input";
-	$(control).attr("disabled", true).addClass("disabled");
+	// Update the score
+	updateScore(column,method)
 	
-	// Call WS
-	$.ajax({url: SCRIPT_URL+"?col="+column+"&method="+method,
-			type: "POST",
-			crossDomain: true,
-			dataType: "json"})
-		.done(function(data){
-            displayGame(data);
-        })
-		.fail(function(xhr,status,error){
-			alert("Error updating score");
-        })
-		.always(function() {
-			// Enable the button and display when done
-			$(control).attr("disabled", false).removeClass("disabled");
-		});
+	// Save back to server
+	updateScores();	
 }
 
 function addGame(){
 	// Call WS
-	$.ajax({url: SCRIPT_URL+"?method=NEW",
+	$.ajax({url: SCRIPT_URL+"?method=NEW&callback=?",
 			type: "POST",
 			crossDomain: true,
 			dataType: "json"})
@@ -120,15 +154,7 @@ function displayGame(data){
 		var control = "#" + this.column + " > :input";
 		$(control).val(this.value);
 	});
-	
-	//Remove add and sub buttons if this game is complete
-	if(data.complete){
-		$(".score-readonly > :button").hide();
-	}
-	else{
-		$(".score > :button").show();
-	}
-	
+
 	$("#game-view").show();
 	
 	//Store the current game
