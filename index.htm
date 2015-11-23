@@ -21,7 +21,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="javascript:getMatches();">Cards 'o' Comeuppance</a>
+          <a class="navbar-brand" href="javascript:getMatches();">Cards 'o' Comeuppance	 </a>
+
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -83,7 +84,6 @@
 			<div class="col-md-2">
 				<p>Cooper Briggsings: <span id="cooper-briggs"></span></p>
 			</div>
-
 		</div>
 		<div class="row">
 			<div class="col-md-2">
@@ -98,9 +98,15 @@
 			</div>
 		</div>
 	</div>
-	
 	<!-- Scores area -->
 	<div class="container-fluid" id="game-view">
+		<div id="error-box" class="alert alert-warning">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Error</strong>&nbsp;<span id="error-text"></span>
+		</div>
+		<div class="loader"></div>
+		<div class="success"><span class="glyphicon glyphicon-ok"></div>
+		<div class="failed"><span class="glyphicon glyphicon-exclamation-sign"></div>
 		<h2 id="game-details"></h2>
 		<form class="form">
 			<div class="row">

@@ -35,27 +35,32 @@ function  updateScore(column,method)
 
 function updateScores(){
 
-		var gameRow = [getScore("A"),getScore("B"),getScore("C"),getScore("D"),getScore("E"),getScore("F"),getScore("G"),getScore("H"),getScore("I")];
-		
-		// show some saving animation
-		$.ajax({url: SCRIPT_URL+"?method=SAVE&date="+gameDate,
-			type: "POST",
-			crossDomain: true,
-			data: JSON.stringify(gameRow),
-			dataType: "json"})
-		.done(function(data){
+	$(".loader").show();
+	$(".success,.failed").hide();
+	
+	var gameRow = [getScore("A"),getScore("B"),getScore("C"),getScore("D"),getScore("E"),getScore("F"),getScore("G"),getScore("H"),getScore("I")];
 
-        })
-		.fail(function(xhr,status,error){
-			// lets try this again
-			updateScores();
-        })
-		.always(function() {
-
-		});
+	// show some saving animation
+	$.ajax({url: SCRIPT_URL+"?method=SAVE&date="+gameDate,
+		type: "POST",
+		crossDomain: true,
+		data: JSON.stringify(gameRow),
+		dataType: "json"})
+	.done(function(data){
+		updateGameNumber(data);
+		$(".loader").hide();
+		$(".success").show();
+	})
+	.fail(function(xhr,status,error){
+		// show the error
+		$(".failed").show();		
+		$("#error-text").text("Unable to save scores. Reason: " + error);
+		$("#error-box").show();
+		$(".loader").hide();
+		// wait 10 seconds before trying again
+		setTimeout(updateScores, 10000);
+	});
 }
-
-
 
 function pushScore(element){
 	
@@ -72,7 +77,7 @@ function pushScore(element){
 
 function addGame(){
 	// Call WS
-	$.ajax({url: SCRIPT_URL+"?method=NEW&callback=?",
+	$.ajax({url: SCRIPT_URL+"?method=NEW",
 			type: "POST",
 			crossDomain: true,
 			dataType: "json"})
@@ -138,6 +143,10 @@ function displayStats(data){
 	$("#matches-played").text(data.stats.Matches_Played);
 }
 
+function updateGameNumber(data){
+	$("#game-details").text("Match: " + data.match + " Game: " + data.game);
+}
+
 function displayGame(data){
 	// Game info header
 	if(data.complete){
@@ -149,14 +158,16 @@ function displayGame(data){
 		$(".score-readonly").removeClass("score-readonly").addClass("score");
 	}
 	
-	//Scores
+	// Scores
 	jQuery.each(data.scores, function(index, value) {
 		var control = "#" + this.column + " > :input";
 		$(control).val(this.value);
 	});
 
+	// Show the game area and hide the loading circle
 	$("#game-view").show();
+	$(".loader,.success,.failed,#error-box").hide();
 	
-	//Store the current game
+	// Store the current game date as its the key for updating the game
 	gameDate = data.gameDate;
 }
