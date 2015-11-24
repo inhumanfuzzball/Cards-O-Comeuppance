@@ -93,20 +93,24 @@ function addGame(){
 }
 
 function getScores(date){
-	$("#game-view").hide();
-	$("#match-view").hide();
-	
+	$(".loading").fadeIn("slow");	
+	$("#game-view").fadeOut("slow");
+	$("#match-view").fadeOut("slow");
+
 	if(date == null) date = gameDate;
     $.getJSON(SCRIPT_URL+"?callback=?&date="+date, function (data) { displayGame(data); });
 }
 
 function getMatches(){
-	$("#game-view").hide();
-	$("#match-view").show();
+	$(".loading").fadeIn("slow");	
+	$("#game-view").fadeOut("slow");
+	$("#match-view").fadeOut("slow");
 	
 	$.getJSON(SCRIPT_URL+"?callback=?&method=MATCHES", function (data) { 
-		 displayMatches(data);
-		 displayStats(data);
+		displayMatches(data);
+		displayStats(data);
+		$("#match-view").fadeIn("slow");
+		$(".loading").fadeOut("slow");
 	});
 }
 
@@ -149,6 +153,9 @@ function updateGameNumber(data){
 }
 
 function displayGame(data){
+	// Show the game area and hide the loading circle
+	$(".loader,.success,.failed,#error-box").hide();	
+	
 	// Game info header
 	if(data.complete){
 		$("#game-details").text("Match: " + data.match);
@@ -164,11 +171,10 @@ function displayGame(data){
 		var control = "#" + this.column + " > :input";
 		$(control).val(this.value);
 	});
-
-	// Show the game area and hide the loading circle
-	$("#game-view").show();
-	$(".loader,.success,.failed,#error-box").hide();
 	
+	$(".loading").fadeOut("slow");
+	$("#game-view").fadeIn("slow");
+
 	// Store the current game date as its the key for updating the game
 	gameDate = data.gameDate;
 }
