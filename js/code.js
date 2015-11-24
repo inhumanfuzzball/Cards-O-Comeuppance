@@ -77,18 +77,25 @@ function pushScore(element){
 }
 
 function addGame(){
+	$(".loading").fadeIn("slow");	
+	$("#game-view").fadeOut("slow");
+	$("#match-view").fadeOut("slow");
+	
 	// Call WS
 	$.ajax({url: SCRIPT_URL+"?method=NEW",
 			type: "POST",
 			crossDomain: true,
 			dataType: "json"})
 		.done(function(data){
-			$("#game-view").show();
-			$("#match-view").hide();
+			$("#game-view").fadeIn("slow");
+			$(".loading").fadeOut("slow");	
             displayGame(data);
         })
 		.fail(function(xhr,status,error){
-			alert("Error creating game");
+			$(".loading").fadeOut("slow");	
+			$("#game-view").fadeIn("slow");
+			$("#error-text").text("Error creating game. Reason: " + error);		
+			$("#error-box").show();
         });
 }
 
