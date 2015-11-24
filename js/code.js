@@ -40,7 +40,7 @@ function updateScores(){
 	
 	var gameRow = [getScore("A"),getScore("B"),getScore("C"),getScore("D"),getScore("E"),getScore("F"),getScore("G"),getScore("H"),getScore("I")];
 
-	// show some saving animation
+	// Show some saving animation
 	$.ajax({url: SCRIPT_URL+"?method=SAVE&date="+gameDate,
 		type: "POST",
 		crossDomain: true,
@@ -50,12 +50,13 @@ function updateScores(){
 		updateGameNumber(data);
 		$(".loader").hide();
 		$(".success").show();
+		// After 10 seconds hide the success icon
+		setTimeout(function(){ $( ".success" ).fadeOut( "slow" ); }, 10000);
 	})
 	.fail(function(xhr,status,error){
-		// show the error
-		$(".failed").show();		
-		$("#error-text").text("Unable to save scores. Reason: " + error);
-		$("#error-box").show();
+		// Show the error
+		$("#error-text").text("Unable to save scores. Reason: " + error);		
+		$(".failed,#error-box").show();		
 		$(".loader").hide();
 		// wait 10 seconds before trying again
 		setTimeout(updateScores, 10000);
