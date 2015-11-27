@@ -1,5 +1,6 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
 var gameDate;
+var matches;
 
 $(document).ready(function() {
 	$("#game-view").hide();
@@ -121,9 +122,29 @@ function getMatches(){
 	});
 }
 
-function displayMatches(data){
+function displayMatches(data, allrows){
+	// Save the data
+	if(data != null) matches = data.matches;
+	
+	// Are we showing all rows
+	var count = 0;
+	if(!allrows)count = matches.length - 5;
+	
+	// Clear the table
 	$("#match-list").find("tr:gt(0)").remove();
 	
+	for(var i = matches.length - 1; i >= count; i--){
+		var match = matches[i];
+		var sansomClass = match.sansom > match.cooper ? "win" : "lose";
+		var cooperClass = match.cooper > match.sansom ? "win" : "lose";
+		if(match.sansom == match.cooper){
+			sansomClass = "";
+			cooperClass = "";		
+		}
+		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+match.date+'\');"><td>'+match.date+'</td><td class="'+sansomClass+'">'+match.sansom+'</td><td class="'+cooperClass+'">'+match.cooper+'</td><td>'+match.table+'</td></tr>');
+	}
+	
+	/*
 	jQuery.each(data.matches, function(index, value) {
 		var sansomClass = this.sansom > this.cooper ? "win" : "lose";
 		var cooperClass = this.cooper > this.sansom ? "win" : "lose";
@@ -133,7 +154,8 @@ function displayMatches(data){
 		}
 		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+this.date+'\');"><td>'+this.date+'</td><td class="'+sansomClass+'">'+this.sansom+'</td><td class="'+cooperClass+'">'+this.cooper+'</td><td>'+this.table+'</td></tr>');
 	});
-		
+	*/
+	
 	gameDate = null;
 }
 

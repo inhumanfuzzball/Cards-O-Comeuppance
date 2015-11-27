@@ -21,8 +21,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="javascript:getMatches();">Cards 'o' Comeuppance	 </a>
-
+        <a class="navbar-brand" href="javascript:getMatches();">Cards 'o' Comeuppance</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -40,6 +39,7 @@
 	</div>
 	
 	<div class="container-fluid" id="match-view">
+		
 		<!-- Matches table -->
 		<table class="table" id="match-list">
 			<thead>
@@ -48,6 +48,8 @@
 			<tbody id="match-rows">
 			</tbody>
 		</table>
+		<button type="submit" class="btn" onclick="displayMatches(null,true);"><span id="expand" class="glyphicon glyphicon-menu-down"></button>
+		
 		<!-- Statistics area -->
 		<h2>Statistics</h2>
 		<div class="row">
@@ -102,17 +104,23 @@
 				<p>Matches Played: <span id="matches-played"></span></p>
 			</div>
 		</div>
+
 	</div>
+	
+	
 	<!-- Scores area -->
 	<div class="container-fluid" id="game-view">
+		
+		<div class="loader"></div>
+		<div class="success"><span class="glyphicon glyphicon-ok"></div>
+		<div class="failed"><span class="glyphicon glyphicon-exclamation"></div>
+	
 		<div id="error-box" class="alert alert-warning">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Error</strong>&nbsp;<span id="error-text"></span>
 		</div>
 		<div class="topbox">
-			<div class="loader"></div>
-			<div class="success"><span class="glyphicon glyphicon-ok"></div>
-			<div class="failed"><span class="glyphicon glyphicon-exclamation-sign"></div>
+
 			<h2 id="game-details"></h2>
 		</div>
 		<form class="form">
@@ -122,20 +130,20 @@
 					<h3>Dan S</h3>
 					<div class="score" id="A">
 						<div class="label">Score</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus-sign"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus-sign"></span></button>
+						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="D">
 						<div class="label">Bridge</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus-sign"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus-sign"></span></button>				
+						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="G">
 						<div class="label">Briggs</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus-sign"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus-sign"></span></button>				
+						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
 						<input class="display" readonly></input>
 					</div>
 				</div>
@@ -144,20 +152,20 @@
 					<h3>Dan C</h3>
 					<div class="score" id="B">
 						<div class="label">Score</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus-sign"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus-sign"></span></button>				
+						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="E">
 						<div class="label">Bridge</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus-sign"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus-sign"></span></button>					
+						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>					
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="H">
 						<div class="label">Briggs</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus-sign"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus-sign"></span></button>					
+						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>					
 						<input class="display" readonly></input>
 					</div>
 				</div>
@@ -166,20 +174,20 @@
 					<h3>Table</h3>
 					<div class="score" id="C">
 						<div class="label">Score</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus-sign"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus-sign"></span></button>				
+						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="F">
 						<div class="label">Bridge</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus-sign"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus-sign"></span></button>				
+						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
 						<input class="display" readonly></input>
 					</div>
 					<div class="score" id="I">
 						<div class="label">Briggs</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus-sign"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus-sign"></span></button>			
+						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>			
 						<input class="display" readonly></input>
 					</div>
 				</div>

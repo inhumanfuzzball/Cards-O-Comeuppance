@@ -99,8 +99,8 @@ button.disabled{
   font-size: 25px;
   width: 25px;
   height: 25px;
-  top: 0px;
-  right: 0px;
+  top: 55px;
+  right: 5px;
 }
 
 .large-loader{
