@@ -1,6 +1,7 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
 var gameDate;
 var matches;
+var allrows = false;
 
 $(document).ready(function() {
 	$("#game-view").hide();
@@ -21,14 +22,10 @@ function getScore(column){
 function  updateScore(column,method)
 {
 	var control = "#" + column + " > :input";
-	if(method === "add")
-	{
+	if(method === "add"){
 		$(control).val(($(control).val() * 1) + 1);
-	}
-	else if(method === "sub")
-	{
-		if(($(control).val() * 1) > 0)
-		{
+	}else if(method === "sub"){
+		if(($(control).val() * 1) > 0){
 			$(control).val(($(control).val() * 1) - 1);
 		}
 	}
@@ -122,13 +119,22 @@ function getMatches(){
 	});
 }
 
-function displayMatches(data, allrows){
-	// Save the data
-	if(data != null) matches = data.matches;
+function toggleRows(){
+	allrows = !allrows;
 	
-	// Are we showing all rows
+	// Showing all rows to change glyph to retract
+	if(allrows){
+		$("#expand").removeClass("glyphicon glyphicon-menu-down").addClass("glyphicon glyphicon-menu-up");
+	}else{
+		$("#expand").removeClass("glyphicon glyphicon-menu-up").addClass("glyphicon glyphicon-menu-down");
+	}
+	
+	displayTable();
+}
+
+function displayTable(){
 	var count = 0;
-	if(!allrows)count = matches.length - 5;
+	if(!allrows) count = matches.length - 5;
 	
 	// Clear the table
 	$("#match-list").find("tr:gt(0)").remove();
@@ -143,20 +149,12 @@ function displayMatches(data, allrows){
 		}
 		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+match.date+'\');"><td>'+match.date+'</td><td class="'+sansomClass+'">'+match.sansom+'</td><td class="'+cooperClass+'">'+match.cooper+'</td><td>'+match.table+'</td></tr>');
 	}
-	
-	/*
-	jQuery.each(data.matches, function(index, value) {
-		var sansomClass = this.sansom > this.cooper ? "win" : "lose";
-		var cooperClass = this.cooper > this.sansom ? "win" : "lose";
-		if(this.sansom == this.cooper){
-			sansomClass = "";
-			cooperClass = "";		
-		}
-		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+this.date+'\');"><td>'+this.date+'</td><td class="'+sansomClass+'">'+this.sansom+'</td><td class="'+cooperClass+'">'+this.cooper+'</td><td>'+this.table+'</td></tr>');
-	});
-	*/
-	
+}
+
+function displayMatches(data){
+	matches = data.matches;
 	gameDate = null;
+	displayTable();
 }
 
 function displayStats(data){
@@ -189,8 +187,7 @@ function displayGame(data){
 	if(data.complete){
 		$("#game-details").text("Match: " + data.match);
 		$(".score").removeClass("score").addClass("score-readonly");
-	}
-	else{
+	}else{
 		$("#game-details").text("Match: " + data.match + " Game: " + data.game);
 		$(".score-readonly").removeClass("score-readonly").addClass("score");
 	}
