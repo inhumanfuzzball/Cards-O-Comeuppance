@@ -7,6 +7,7 @@
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="css/cu.css">
 </head>
@@ -27,6 +28,7 @@
           <ul class="nav navbar-nav">
 				<li data-toggle="collapse" data-target=".navbar-collapse" class="active"><a href="javascript:getMatches();">Matches</a></li>
 				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="javascript:addGame();">New</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="javascript:showTrophies();">Trophies</a></li>
 				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="javascript:refresh();">Refresh</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -104,9 +106,19 @@
 				<p>Matches Played: <span id="matches-played"></span></p>
 			</div>
 		</div>
-
 	</div>
 	
+	<!-- Trophies Area -->
+	<div class="container-fluid" id="trophy-view">
+		<div class="container">
+			<h2>Sansom Trophies</h2>
+			<div id="sansom-trophies"></div>
+		</div>
+		<div class="container">
+			<h2>Cooper Trophies</h2>
+			<div id="cooper-trophies"></div>
+		</div>
+	</div>
 	
 	<!-- Scores area -->
 	<div class="container-fluid" id="game-view">
@@ -128,6 +140,7 @@
 				<!-- Dan Sansom Scores -->
 				<div class="col-xs-6 col-md-4">
 					<h3>Dan S</h3>
+									
 					<div class="score" id="A">
 						<div class="label">Score</div>
 						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
@@ -195,13 +208,37 @@
 		</form>	
 	</div>
 	
+	<!-- trophy template -->
+	<script id="entry-template" type="text/x-handlebars-template">
+
+		  <div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+			  <div class="trophy" style="color: {{colour}}">
+				{{#if isFa}}
+					<i class="{{glyph}}"></i>
+				{{else}}
+					<span class="glyphicon glyphicon-{{glyph}}"></span>
+				{{/if}}
+			  </div>
+			  <div class="caption">
+				<h3>{{title}}</h3>
+				<p>{{desc}}</p>
+			  </div>
+			</div>
+		  </div>
+
+	</script>
+	
 	<!-- Java script -->
 	<!-- JQuery -->
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- Handlebars for templating -->
+	<script src="https://cdn.jsdelivr.net/handlebarsjs/4.0.5/handlebars.min.js"></script>
 	<!-- Main JS -->
+	<script src="js/trophies.js"></script>
 	<script src="js/code.js"></script>
 </body>
 </html>

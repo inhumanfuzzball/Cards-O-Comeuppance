@@ -4,14 +4,19 @@ var matches;
 var allrows = false;
 
 $(document).ready(function() {
-	$("#game-view").hide();
-	$("#match-view").hide();
+	$(".container-fluid").hide();
 	getMatches();
 });
 
 function refresh(){
 	if(gameDate == null) getMatches();
 	else getScores();
+}
+
+function showTrophies(){
+	$(".container-fluid").hide();
+	$("#trophy-view").show();
+	//$(".container-fluid").fadeOut("slow", function() { $("#trophy-view").fadeIn("slow");});
 }
 
 function getScore(column){
@@ -76,8 +81,7 @@ function pushScore(element){
 
 function addGame(){
 	$(".loading").fadeIn("slow");	
-	$("#game-view").fadeOut("slow");
-	$("#match-view").fadeOut("slow");
+	$(".container-fluid").fadeOut("slow");
 	
 	// Call WS
 	$.ajax({url: SCRIPT_URL+"?method=NEW",
@@ -99,21 +103,19 @@ function addGame(){
 
 function getScores(date){
 	$(".loading").fadeIn("slow");	
-	$("#game-view").fadeOut("slow");
-	$("#match-view").fadeOut("slow");
+	$(".container-fluid").fadeOut("slow");
 
 	if(date == null) date = gameDate;
     $.getJSON(SCRIPT_URL+"?callback=?&date="+date, function (data) { displayGame(data); });
 }
 
 function getMatches(){
-	$(".loading").fadeIn("slow");	
-	$("#game-view").fadeOut("slow");
-	$("#match-view").fadeOut("slow");
-	
+	$(".container-fluid").fadeOut("slow");
+	$(".loading").fadeIn("slow");
 	$.getJSON(SCRIPT_URL+"?callback=?&method=MATCHES", function (data) { 
 		displayMatches(data);
 		displayStats(data);
+		buildTrophies(data);
 		$("#match-view").fadeIn("slow");
 		$(".loading").fadeOut("slow");
 	});
@@ -204,3 +206,4 @@ function displayGame(data){
 	// Store the current game date as its the key for updating the game
 	gameDate = data.gameDate;
 }
+

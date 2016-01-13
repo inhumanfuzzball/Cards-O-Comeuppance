@@ -17,6 +17,23 @@ button.disabled{
 .display, .add, .sub{
 	float: right;
 }
+
+input.form-fixer, span.form-fixer {
+    padding: 2px;
+    font-size: 16px;
+}
+
+.trophy{
+	text-align: center;
+	font-size: 45pt; 
+}
+
+.thumbnail{
+	max-height: 250px;
+	min-height: 250px;
+}
+
+
 /* Containing div */
 .score,.score-readonly{
 	width:150px;      
