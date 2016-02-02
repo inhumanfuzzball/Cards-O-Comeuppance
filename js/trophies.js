@@ -96,7 +96,7 @@ function calculateLosingStreaks(data)
 
 function TrophyComeuppanceCup(player, template, data)
 {
-	var details = {glyph: "fa fa-trophy",  isFa: true, title: "The Comeuppance Cup", desc: "Awarded to the player who has won the most matches", colour: GOLD};
+	var details = {glyph: "fa fa-trophy", title: "The Comeuppance Cup", desc: "Awarded to the player who has won the most matches", colour: "gold"};
 	
 	if( player === "Sansom" && data.stats.Sansom_Matches_Won < data.stats.Cooper_Matches_Won) return "";
 	if( player === "Cooper" && data.stats.Sansom_Matches_Won > data.stats.Cooper_Matches_Won) return "";
@@ -107,7 +107,7 @@ function TrophyComeuppanceCup(player, template, data)
 
 function TrophyPingtarPlaque(player, template, data)
 {
-	var details = {glyph: "fa fa-shield", isFa: true, title: "The Pingtar Plaque", desc: "Awarded to the player who has won the most games", colour: GOLD};
+	var details = {glyph: "fa fa-shield",  title: "The Pingtar Plaque", desc: "Awarded to the player who has won the most games", colour: "gold"};
 	
 	if( player === "Sansom" && data.stats.Sansom_Games_Won < data.stats.Cooper_Games_Won) return "";
 	if( player === "Cooper" && data.stats.Sansom_Games_Won > data.stats.Cooper_Games_Won) return "";
@@ -118,7 +118,7 @@ function TrophyPingtarPlaque(player, template, data)
 
 function TrophyThomasTrophy(player, template, data)
 {
-	var details = {glyph: "fa fa-shield", isFa: true, title: "The Thomas Trophy", desc: "Awarded to the player for the dubious honour of being Briggsed the most times", colour: GASH};
+	var details = {glyph: "fa fa-shield",  title: "The Thomas Trophy", desc: "Awarded to the player for the dubious honour of being Briggsed the most times", colour: "rubbish"};
 	
 	if( player === "Sansom" && data.stats.Sansom_Briggsings < data.stats.Cooper_Briggsings) return "";
 	if( player === "Cooper" && data.stats.Sansom_Briggsings > data.stats.Cooper_Briggsings) return "";
@@ -129,7 +129,7 @@ function TrophyThomasTrophy(player, template, data)
 
 function TrophyKonigsbergCup(player, template, data)
 {
-	var details = {glyph: "fa fa-beer", isFa: true, title: "The Konigsberg Cup", desc: "Awarded to the player for the dubious honour of picking up the most Bridge cards", colour: GASH};
+	var details = {glyph: "fa fa-beer", title: "The Konigsberg Cup", desc: "Awarded to the player for the dubious honour of picking up the most Bridge cards", colour: "rubbish"};
 	
 	if( player === "Sansom" && data.stats.Sansom_Bridge_Cards < data.stats.Cooper_Bridge_Cards) return "";
 	if( player === "Cooper" && data.stats.Sansom_Bridge_Cards > data.stats.Cooper_Bridge_Cards) return "";
@@ -140,7 +140,7 @@ function TrophyKonigsbergCup(player, template, data)
 
 function TrophyShafted(player, template, data)
 {
-	var details = {glyph: "fa fa-hand-grab-o", isFa: true, title: "Shafted", desc: "Lost a match by over 5 games", colour: GASH};
+	var details = {glyph: "fa fa-hand-grab-o",  title: "Shafted", desc: "Lost a match by over 5 games", colour: "rubbish"};
 	
 	for(var i = 0; i < data.matches.length; i++)
 	{
@@ -155,7 +155,7 @@ function TrophyShafted(player, template, data)
 
 function TrophyBlackHoleOfComeuppance(player, template, data)
 {
-	var details = {glyph: "fa fa-circle", isFa: true, title: "Black Hole of Comeuppance", desc: "Has lost a match by ten or more games, forming a singularity of Comeuppance which even light cannot escape.", colour: "#000000"};
+	var details = {glyph: "fa fa-circle", title: "Black Hole of Comeuppance", desc: "Has lost a match by ten or more games, forming a singularity of Comeuppance which even light cannot escape.", colour: "rubbish"};
 	
 	for(var i = 0; i < data.matches.length; i++)
 	{
@@ -170,7 +170,7 @@ function TrophyBlackHoleOfComeuppance(player, template, data)
 
 function TrophyPingtarPrince(player, template, data)
 {
-	var details = {glyph: "fa fa-diamond", isFa: true, title: "Pingtar Prince", desc: "", colour: GOLD};
+	var details = {glyph: "fa fa-diamond", title: "Pingtar Prince", desc: "", colour: "silver"};
 	
 	var wonBy;
 	var winCount = 0;
@@ -210,7 +210,7 @@ function TrophyPingtarPrince(player, template, data)
 
 function TrophyBridgeTooFar(player, template, data)
 {
-	var details = {glyph: "fa fa-ban", isFa: true, title: "A Bridge too far!", desc: "Has had more than three quarters of the bridge cards in a game", colour: GASH};
+	var details = {glyph: "fa fa-ban", title: "A Bridge too far!", desc: "Has had more than three quarters of the bridge cards in a game", colour: "rubbish"};
 	
 	for(var i = 0; i < data.matches.length; i++)
 	{
@@ -225,7 +225,7 @@ function TrophyBridgeTooFar(player, template, data)
 
 function TrophyCloudOfComeuppance(player, template, data)
 {
-	var details = {glyph: "fa fa-cloud", isFa: true, title: "Under the cloud of Comeuppance", desc: "Was under a cloud of Comeuppance by loosing 4 consecutive games", colour: GASH};
+	var details = {glyph: "fa fa-cloud", title: "Under the cloud of Comeuppance", desc: "Was under a cloud of Comeuppance by loosing 4 consecutive games", colour: "rubbish"};
 
 	for(var i = 0; i < streaks.length; i++)
 	{
@@ -237,7 +237,7 @@ function TrophyCloudOfComeuppance(player, template, data)
 
 function TrophyShare(player, template, data)
 {
-	var details = {glyph: "fa fa-hand-stop-o", isFa: true, title: "The Kilroy Silk Award", desc: "Won the highest number of games in a match", colour: GOLD};
+	var details = {glyph: "fa fa-hand-stop-o", title: "The Kilroy Silk Award", desc: "Won the highest number of games in a match", colour: "silver"};
 
 	var maxPlayer = "";
 	var maxDate = "";
@@ -290,7 +290,7 @@ function TrophyShare(player, template, data)
 
 function TrophyILiedTwice(player, template, data)
 {
-	var details = {glyph: "fa fa-hand-peace-o", isFa: true, title: "But I lied... twice", desc: "Managed to go two matches without being Briggsed", colour: GOLD};
+	var details = {glyph: "fa fa-hand-peace-o", title: "But I lied... twice", desc: "Managed to go two matches without being Briggsed", colour: "silver"};
 
 	var count = 0;
 	var maxCount = 0;
@@ -321,7 +321,7 @@ function TrophyILiedTwice(player, template, data)
 
 function TrophyHastingsAward(player, template, data)
 {
-	var details = {glyph: "fa fa-diamond", isFa: true, title: "The Hastings Award", desc: "Won 12 games in a match.", colour: GASH};
+	var details = {glyph: "fa fa-diamond", title: "The Hastings Award", desc: "Won 12 games in a match.", colour: "rubbish"};
 
 	for(var i = 0; i < data.matches.length; i++)
 	{
@@ -335,7 +335,7 @@ function TrophyHastingsAward(player, template, data)
 
 function TrophyCrippled(player,template,data)
 {
-	var details = {glyph: "fa fa-ambulance", isFa: true, title: "Crippled", desc: "Had more than five briggsings in a match", colour: GASH};
+	var details = {glyph: "fa fa-ambulance", title: "Crippled", desc: "Had more than five briggsings in a match", colour: "rubbish"};
 
 	for(var i = 0; i < data.matches.length; i++)
 	{
@@ -349,7 +349,7 @@ function TrophyCrippled(player,template,data)
 
 function TrophyCrippledBurnt(player,template,data)
 {
-	var details = {glyph: "fa fa-fire-extinguisher", isFa: true, title: "Crippled and Burnt", desc: "Had more than eight briggsings in a match", colour: GOLD};
+	var details = {glyph: "fa fa-fire-extinguisher", title: "Crippled and Burnt", desc: "Had more than eight briggsings in a match", colour: "rubbish"};
 
 	for(var i = 0; i < data.matches.length; i++)
 	{
@@ -363,7 +363,7 @@ function TrophyCrippledBurnt(player,template,data)
 
 function TrophyPileOfComeuppance(player,template,data)
 {
-	var details = {glyph: "fa fa-bomb", isFa: true, title: "Pile of Comeuppance", desc: "Came third in a match", colour: GASH};
+	var details = {glyph: "fa fa-bomb", title: "Pile of Comeuppance", desc: "Came third in a match", colour: "rubbish"};
 
 	for(var i = 0; i < data.matches.length; i++)
 	{
@@ -379,8 +379,8 @@ function TrophyChampionYear(player,template,data,year)
 {
 	var html = "";
 	
-	var details = {glyph: "king", isFa: false, title: "Comeuppance King of " + year, desc: "Won the most matches in " + year, colour: GOLD};
-	var gameDetails = {glyph: "queen", isFa: false, title: "Comeuppance Qwa'ven of " + year, desc: "Won the most games in " + year, colour: GOLD};
+	var details = {glyph: "fa fa-trophy", title: "Comeuppance King of " + year, desc: "Won the most matches in " + year, colour: "gold"};
+	var gameDetails = {glyph: "fa fa-trophy", title: "Comeuppance Qwa'ven of " + year, desc: "Won the most games in " + year, colour: "gold"};
 	
 	var cooperWins = 0;
 	var sansomWins = 0;

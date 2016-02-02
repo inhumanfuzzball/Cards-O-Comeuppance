@@ -212,15 +212,11 @@
 	<script id="entry-template" type="text/x-handlebars-template">
 
 		  <div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-			  <div class="trophy" style="color: {{colour}}">
-				{{#if isFa}}
-					<i class="{{glyph}}"></i>
-				{{else}}
-					<span class="glyphicon glyphicon-{{glyph}}"></span>
-				{{/if}}
+			<div class="plaque {{colour}}">
+			  <div class="trophy">
+				<i class="{{glyph}}"></i>
 			  </div>
-			  <div class="caption">
+			  <div class="inscription">
 				<h3>{{title}}</h3>
 				<p>{{desc}}</p>
 			  </div>

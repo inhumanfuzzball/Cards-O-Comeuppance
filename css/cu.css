@@ -23,15 +23,95 @@ input.form-fixer, span.form-fixer {
     font-size: 16px;
 }
 
-.trophy{
+
+.plaque
+{
+	max-height: 250px;
+	min-height: 225px;
+	border-style: outset;
+	border-width: 5px;
+    margin-top: 25px;
+}
+
+.trophy
+{
 	text-align: center;
 	font-size: 45pt; 
 }
 
-.thumbnail{
+.trophy > i
+{
+	border-style: outset;
+	border-width: 3px;
+	padding: 5px;
+	background: #ffffff;
+}
+
+.inscription
+{
+	text-align: center;
+	font-size: 45pt; 
+	border-style: outset;
+	border-width: 3px;
+	background: #ffffff;
+	
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-right: 15px;
+	min-height: 120px;
+	max-height: 120px;
+}
+
+.inscription > h3
+{
+	font-size: 14pt;
+}
+
+.inscription > p
+{
+	font-size: 10pt;
+}
+
+.gold
+{
+	background: #ffff66;
+	border-color: #e5e600;	
+}
+
+.silver
+{
+	background: #C0C0C0;
+	border-color: #778899;
+}
+
+.rubbish
+{
+	background: repeating-linear-gradient(
+		45deg,
+		#ffff33,
+		#ffff33 40px,
+		#ff3333 40px,
+		#ff3333 80px);
+	border-color: #ff0000;
+}
+
+
+
+.thumbnail
+{
 	max-height: 250px;
 	min-height: 250px;
+	border-style: outset;
+	border-width: 5px;
+	color: #000000 !important;
 }
+
+.caption
+{
+	color: #000000 !important;
+}
+
+
 
 
 /* Containing div */
