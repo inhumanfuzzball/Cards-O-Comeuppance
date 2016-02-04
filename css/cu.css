@@ -95,6 +95,17 @@ input.form-fixer, span.form-fixer {
 	border-color: #ff0000;
 }
 
+.golden-rubbish
+{
+	background: repeating-linear-gradient(
+		45deg,
+		#ff9900,
+		#ff9900 40px,
+		#ffcc00 40px,
+		#ffcc00 80px);
+	border-color: #ff0000;
+}
+
 
 
 .thumbnail

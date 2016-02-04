@@ -10,6 +10,7 @@ function buildTrophies(data)
 	"TrophyPingtarPlaque",
 	"TrophyPingtarPrince",
 	"TrophyShare",
+	"TrophyNoComeuppance",
 	"TrophyILiedTwice",	
 	"TrophyHastingsAward",
 	"TrophyThomasTrophy",
@@ -90,6 +91,8 @@ function calculateLosingStreaks(data)
 			if(match.sansom > match.cooper) loser = "Cooper";
 		}	
 	}
+	streaks.push({player:loser, streak:currentLosingStreak});
+	
 }
 
 /* Functions for each trophy */
@@ -101,7 +104,6 @@ function TrophyComeuppanceCup(player, template, data)
 	if( player === "Sansom" && data.stats.Sansom_Matches_Won < data.stats.Cooper_Matches_Won) return "";
 	if( player === "Cooper" && data.stats.Sansom_Matches_Won > data.stats.Cooper_Matches_Won) return "";
 	
-	//Trophy won by player
 	return template(details);
 }
 
@@ -112,7 +114,6 @@ function TrophyPingtarPlaque(player, template, data)
 	if( player === "Sansom" && data.stats.Sansom_Games_Won < data.stats.Cooper_Games_Won) return "";
 	if( player === "Cooper" && data.stats.Sansom_Games_Won > data.stats.Cooper_Games_Won) return "";
 	
-	//Trophy won by player
 	return template(details);
 }
 
@@ -123,7 +124,6 @@ function TrophyThomasTrophy(player, template, data)
 	if( player === "Sansom" && data.stats.Sansom_Briggsings < data.stats.Cooper_Briggsings) return "";
 	if( player === "Cooper" && data.stats.Sansom_Briggsings > data.stats.Cooper_Briggsings) return "";
 	
-	//Trophy won by player
 	return template(details);
 }
 
@@ -134,23 +134,42 @@ function TrophyKonigsbergCup(player, template, data)
 	if( player === "Sansom" && data.stats.Sansom_Bridge_Cards < data.stats.Cooper_Bridge_Cards) return "";
 	if( player === "Cooper" && data.stats.Sansom_Bridge_Cards > data.stats.Cooper_Bridge_Cards) return "";
 	
-	//Trophy won by player
 	return template(details);
 }
 
 function TrophyShafted(player, template, data)
 {
-	var details = {glyph: "fa fa-hand-grab-o",  title: "Shafted", desc: "Lost a match by over 5 games", colour: "rubbish"};
+	var returnText = "";
+
+	var count = 0;
+	
 	
 	for(var i = 0; i < data.matches.length; i++)
 	{
 		var match = matches[i];
-		if(player === "Sansom" && match.cooper - match.sansom >= 5) return template(details);
-		if(player === "Cooper" && match.sansom - match.cooper >= 5) return template(details);
+		if(player === "Sansom" && match.cooper - match.sansom >= 5) count++ 
+		if(player === "Cooper" && match.sansom - match.cooper >= 5) count++;
 	}
-
-	//Trophy won by player
-	return "";
+	
+	if(count > 0)
+	{
+		var details = {glyph: "fa fa-hand-grab-o",  title: "Shafted", desc: "Lost a match by over 5 games. Awarded " + count + " times", colour: "rubbish"};
+		returnText = template(details);
+	}
+	
+	if(count > 5)
+	{
+		var details = {glyph: "fa fa-hand-grab-o",  title: "A Shaft of Shafts", desc: "Collected Five Shafted trophies", colour: "golden-rubbish"};
+		returnText += template(details);
+	}
+	
+	if(count > 10)
+	{
+		var details = {glyph: "fa fa-hand-grab-o",  title: "The Golden Shaft", desc: "Collected Ten Shafted trophies", colour: "golden-rubbish"};
+		returnText += template(details);
+	}
+	
+	return returnText;
 }
 
 function TrophyBlackHoleOfComeuppance(player, template, data)
@@ -164,7 +183,6 @@ function TrophyBlackHoleOfComeuppance(player, template, data)
 		if(player === "Cooper" && match.sansom - match.cooper >= 10) return template(details);
 	}
 
-	//Trophy won by player
 	return "";
 }
 
@@ -373,6 +391,57 @@ function TrophyPileOfComeuppance(player,template,data)
 	}
 		
 	return "";
+}
+
+function TrophyNoComeuppance(player,template,data)
+{
+	var count = 0;
+	var count3 = 0;
+	var count4 = 0;
+	var count5 = 0;
+	var count6 = 0;
+	for(var i = 0; i < streaks.length; i++)
+	{
+		if(streaks[i].streak >= 2 && player !== streaks[i].player) count++;
+		if(streaks[i].streak >= 3 && player !== streaks[i].player) count3++;
+		if(streaks[i].streak >= 4 && player !== streaks[i].player) count4++;
+		if(streaks[i].streak >= 5 && player !== streaks[i].player) count5++;	
+		if(streaks[i].streak >= 6 && player !== streaks[i].player) count6++;			
+	}
+	
+	var html = "";
+	
+	if(count > 0)
+	{
+		var details = {glyph: "fa fa-star-half-o", title: "Double Comeuppance", desc: "Won two matches in a row. Awarded " + count + " times", colour: "silver"};
+		html += template(details)
+	}
+	
+	if(count3 > 0)
+	{
+		var details = {glyph: "fa fa-star", title: "Multi Comeuppance", desc: "Won three matches in a row. Awarded " + count3 + " times", colour: "silver"};
+		html += template(details)
+	}
+	
+	if(count4 > 0)
+	{
+		var details = {glyph: "fa fa-fighter-jet", title: "Mega Comeuppance", desc: "Won four matches in a row. Awarded " + count4 + " times", colour: "gold"};
+		html += template(details)
+	}
+	
+	if(count5 > 0)
+	{
+		var details = {glyph: "fa fa-rocket", title: "ULTRA COMEUPPANCE!", desc: "Won five matches in a row. Awarded " + count5 + " times", colour: "gold"};
+		html += template(details)
+	}
+	
+	if(count6 > 0)
+	{
+		var details = {glyph: "fa fa-space-shuttle", title: "M-M-M-MONSTER COMEUPPANCE!!!", desc: "UNSTOPPABLE! Won six matches in a row. Awarded " + count6 + " times", colour: "gold"};
+		html += template(details)
+	}
+	
+	return html;
 }
 
 function TrophyChampionYear(player,template,data,year)
