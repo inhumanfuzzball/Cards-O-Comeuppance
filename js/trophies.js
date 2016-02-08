@@ -41,6 +41,12 @@ function buildTrophies(data)
 		$("#sansom-trophies").append(window[trophies[i]]("Sansom",template, data));
 		$("#cooper-trophies").append(window[trophies[i]]("Cooper",template, data));
 	}
+	
+	for(var i = 2014; i < new Date().getFullYear(); i++)
+	{
+		$("#sansom-trophies").append(TrophyLoserYear("Sansom",template, data, i));
+		$("#cooper-trophies").append(TrophyLoserYear("Cooper",template, data, i));
+	}	
 
 }
 
@@ -470,6 +476,36 @@ function TrophyChampionYear(player,template,data,year)
 	if(player==="Sansom" && sansomGames > cooperGames) html += template(gameDetails);
 	if(player==="Cooper" && cooperWins > sansomWins) html += template(details);
 	if(player==="Cooper" && cooperGames > sansomGames) html += template(gameDetails);
+	
+	return html;
+}
+
+function TrophyLoserYear(player,template,data,year)
+{
+	var html = "";
+	
+	var briggsDetails = {glyph: "fa fa-thumbs-o-down", title: "Comeuppance Briggs of" + year, desc: "Briggsed the most in " + year, colour: "rubbish"};
+	var bridgeDetails = {glyph: "fa fa-thumbs-o-down", title: "Comeuppance Kilroy of " + year, desc: "Had the most bridge cards in " + year, colour: "rubbish"};
+	
+	var cooperBridge = 0;
+	var sansomBridge = 0;
+	var cooperBriggs = 0;
+	var sansomBriggs = 0;
+	for(var i = 0; i < data.matches.length; i++)
+	{
+		var match = matches[i];
+		if( match.date.substring(match.date.length - 4, match.date.length)*1 != year*1) continue;
+
+		cooperBriggs += match.cooperbriggs;
+		sansomBriggs += match.sansombriggs;
+		cooperBridge += match.cooperbridge;
+		sansomBridge += match.sansombridge;
+	}
+	
+	if(player==="Sansom" && sansomBriggs > cooperBriggs) html += template(briggsDetails);
+	if(player==="Sansom" && sansomBridge > cooperBridge) html += template(bridgeDetails);
+	if(player==="Cooper" && cooperBriggs > sansomBriggs) html += template(briggsDetails);
+	if(player==="Cooper" && cooperBridge > sansomBridge) html += template(bridgeDetails);
 	
 	return html;
 }

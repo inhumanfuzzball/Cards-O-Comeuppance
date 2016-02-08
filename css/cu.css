@@ -19,24 +19,29 @@ button.disabled{
 }
 
 input.form-fixer, span.form-fixer {
-    padding: 2px;
-    font-size: 16px;
+	padding: 2px;
+   font-size: 16px;
 }
 
+/* Trophies */
 .plaque
 {
 	max-height: 250px;
 	min-height: 250px;
-    margin-top: 25px;
+   margin-top: 25px;
 	border-radius: 25px;
 }
 .plaque h3
 {
 	margin-top: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
 	font-size: 20pt;
 }
 .plaque p
 {
+	margin-left: 5px;
+	margin-right: 5px;
 	font-size: 14pt;
 }
 .plaque .trophy 
@@ -49,66 +54,52 @@ input.form-fixer, span.form-fixer {
 	margin-top:10px;
 	margin-bottom:10px;
 }
-
+/* Gold trophy */
 .gold
 {
 	background-image: url("../img/wood1.jpg");
 }
 .gold i, .gold h3, .gold p 
 {
-	background:url('../img/gold1.jpg');
-	background-repeat:repeat-x;
-    background-position:0 0;
-    color:transparent;
-    background-clip:text;	
-    -webkit-font-smoothing:antialiased;
-    -webkit-background-clip:text;
-    -moz-background-clip:text;
-    -webkit-text-fill-color:transparent;
+	color: #DAA520;
+ 	background: -webkit-linear-gradient(transparent, transparent), url(../img/gold1.jpg) repeat;   
+	-webkit-text-fill-color: transparent;
+ 	background: -o-linear-gradient(transparent, transparent);
+ 	-webkit-background-clip: text;                       
 }
-
 .gold h3, .gold p 
 {
 	font-family: 'Lobster', cursive;
 }
-
-
+/* Silver trophy */
 .silver
 {
 	background-image: url("../img/vellum1.jpg");
 }
 .silver i, .silver h3, .silver p 
 {
-	background:url('../img/ink1.jpg');
-	background-repeat:repeat-x;
-    background-position:0 0;
-    color:transparent;
-    background-clip:text;	
-    -webkit-font-smoothing:antialiased;
-    -webkit-background-clip:text;
-    -moz-background-clip:text;
-    -webkit-text-fill-color:transparent;
+	color: #000000;
+ 	background: -webkit-linear-gradient(transparent, transparent), url(../img/ink1.jpg) repeat;
+   -webkit-text-fill-color: transparent;
+ 	background: -o-linear-gradient(transparent, transparent);
+ 	-webkit-background-clip: text;
 }
 .silver h3, .silver p 
 {
 	font-family: 'Slabo 27px', serif;
 }
-
+/* Rubbish trophy */
 .rubbish
 {
 	background-image: url("../img/paper1.jpg");
 }
 .rubbish i, .rubbish h3, .rubbish p 
 {
-	background:url('../img/redfelttip.jpg');
-	background-repeat:repeat-x;
-    background-position:0 0;
-    color:transparent;
-    background-clip:text;	
-    -webkit-font-smoothing:antialiased;
-    -webkit-background-clip:text;
-    -moz-background-clip:text;
-    -webkit-text-fill-color:transparent;
+	color: #ff0000;
+ 	background: -webkit-linear-gradient(transparent, transparent), url(../img/redfelttip.jpg) repeat;
+	-webkit-text-fill-color: transparent;
+ 	background: -o-linear-gradient(transparent, transparent);
+ 	-webkit-background-clip: text;
 }
 .rubbish h3, .rubbish p 
 {
@@ -124,8 +115,6 @@ input.form-fixer, span.form-fixer {
 		#ffcc00 80px);
 	border-color: #ff0000;
 }
-
-
 
 .thumbnail
 {
