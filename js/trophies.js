@@ -153,7 +153,7 @@ function TrophyShafted(player, template, data)
 	
 	if(count > 0)
 	{
-		var details = {glyph: "fa fa-hand-grab-o",  title: "Shafted", desc: "Lost a match by over five games. Awarded " +  + NumberToWords(count), colour: "rubbish"};
+		var details = {glyph: "fa fa-hand-grab-o",  title: "Shafted", desc: "Lost a match by over five games. Awarded " + NumberToWords(count), colour: "rubbish"};
 		returnText = template(details);
 	}
 	
