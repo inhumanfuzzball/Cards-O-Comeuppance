@@ -159,13 +159,13 @@ function TrophyShafted(player, template, data)
 	
 	if(count > 5)
 	{
-		var details = {glyph: "fa fa-hand-grab-o",  title: "A Shaft of Shafts", desc: "Collected Five Shafted trophies", colour: "golden-rubbish"};
+		var details = {glyph: "fa fa-hand-grab-o",  title: "A Shaft of Shafts", desc: "Collected Five Shafted trophies", colour: "rubbish"};
 		returnText += template(details);
 	}
 	
 	if(count > 10)
 	{
-		var details = {glyph: "fa fa-hand-grab-o",  title: "The Golden Shaft", desc: "Collected Ten Shafted trophies", colour: "golden-rubbish"};
+		var details = {glyph: "fa fa-hand-grab-o",  title: "The Golden Shaft", desc: "Collected Ten Shafted trophies", colour: "rubbish"};
 		returnText += template(details);
 	}
 	

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="css/cu.css">
+	
+	<!-- Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Patrick+Hand+SC' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+	
+</head>
+<body>
+	<!-- Navigation bar -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:getMatches();">Cards 'o' Comeuppance</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+				<li data-toggle="collapse" data-target=".navbar-collapse" class="active"><a href="javascript:getMatches();">Matches</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="javascript:addGame();">New</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="javascript:showTrophies();">Trophies</a></li>
+				<li data-toggle="collapse" data-target=".navbar-collapse"><a href="javascript:refresh();">Refresh</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+	
+
+	<!-- Trophies Area -->
+	<div class="container-fluid" id="trophy-view">
+		<div class="container">
+			<h2>Sansom Trophies</h2>
+			<div id="sansom-trophies">
+				<div class="col-sm-6 col-md-4">
+					<div class="plaque gold">
+					  <div class="trophy">
+						<i class="fa fa-rocket"></i>
+					  </div>
+					  <div class="inscription">
+						<h3>The test award</h3>
+						<p>Getting the test award means comeuppance</p>
+					  </div>
+					</div>
+			  </div>
+			</div>
+			
+			<div id="sansom-trophies">
+				<div class="col-sm-6 col-md-4">
+					<div class="plaque silver">
+					  <div class="trophy">
+						<i class="fa fa-rocket"></i>
+					  </div>
+					  <div class="inscription">
+						<h3>The test award</h3>
+						<p>Getting the test award means comeuppance</p>
+					  </div>
+					</div>
+			  </div>
+			</div>
+			
+			<div id="sansom-trophies">
+				<div class="col-sm-6 col-md-4">
+					<div class="plaque rubbish">
+					  <div class="trophy">
+						<i class="fa fa-rocket"></i>
+					  </div>
+					  <div class="inscription">
+						<h3>The test award</h3>
+						<p>Getting the test award means comeuppance</p>
+					  </div>
+					</div>
+			  </div>
+			</div>
+			
+		</div>
+		<div class="container">
+			<h2>Cooper Trophies</h2>
+			<div id="cooper-trophies"></div>
+		</div>
+	</div>
+	
+
+	
+	<!-- trophy template -->
+	<script id="entry-template" type="text/x-handlebars-template">
+
+		  <div class="col-sm-6 col-md-4">
+			<div class="plaque {{colour}}">
+			  <div class="trophy">
+				<i class="{{glyph}}"></i>
+			  </div>
+			  <div class="inscription">
+				<h3>{{title}}</h3>
+				<p>{{desc}}</p>
+			  </div>
+			</div>
+		  </div>
+
+	</script>
+	
+	<!-- Java script -->
+	<!-- JQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</body>
+</html>
