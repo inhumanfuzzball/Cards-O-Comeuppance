@@ -153,19 +153,19 @@ function TrophyShafted(player, template, data)
 	
 	if(count > 0)
 	{
-		var details = {glyph: "fa fa-hand-grab-o",  title: "Shafted", desc: "Lost a match by over 5 games. Awarded " + count + " times", colour: "rubbish"};
+		var details = {glyph: "fa fa-hand-grab-o",  title: "Shafted", desc: "Lost a match by over five games. Awarded " +  + NumberToWords(count), colour: "rubbish"};
 		returnText = template(details);
 	}
 	
 	if(count > 5)
 	{
-		var details = {glyph: "fa fa-hand-grab-o",  title: "A Shaft of Shafts", desc: "Collected Five Shafted trophies", colour: "rubbish"};
+		var details = {glyph: "fa fa-hand-grab-o",  title: "A Shaft of Shafts", desc: "Collected five Shafted trophies", colour: "rubbish"};
 		returnText += template(details);
 	}
 	
 	if(count > 10)
 	{
-		var details = {glyph: "fa fa-hand-grab-o",  title: "The Golden Shaft", desc: "Collected Ten Shafted trophies", colour: "rubbish"};
+		var details = {glyph: "fa fa-hand-grab-o",  title: "The Golden Shaft", desc: "Collected ten Shafted trophies", colour: "rubbish"};
 		returnText += template(details);
 	}
 	
@@ -413,31 +413,31 @@ function TrophyNoComeuppance(player,template,data)
 	
 	if(count > 0)
 	{
-		var details = {glyph: "fa fa-star-half-o", title: "Double Comeuppance", desc: "Won two matches in a row. Awarded " + count + " times", colour: "silver"};
+		var details = {glyph: "fa fa-star-half-o", title: "Double Comeuppance", desc: "Won two matches in a row. Awarded " + NumberToWords(count), colour: "silver"};
 		html += template(details)
 	}
 	
 	if(count3 > 0)
 	{
-		var details = {glyph: "fa fa-star", title: "Multi Comeuppance", desc: "Won three matches in a row. Awarded " + count3 + " times", colour: "silver"};
+		var details = {glyph: "fa fa-star", title: "Multi Comeuppance", desc: "Won three matches in a row. Awarded "  + NumberToWords(count3), colour: "silver"};
 		html += template(details)
 	}
 	
 	if(count4 > 0)
 	{
-		var details = {glyph: "fa fa-fighter-jet", title: "Mega Comeuppance", desc: "Won four matches in a row. Awarded " + count4 + " times", colour: "gold"};
+		var details = {glyph: "fa fa-fighter-jet", title: "Mega Comeuppance", desc: "Won four matches in a row. Awarded "  + NumberToWords(count4), colour: "gold"};
 		html += template(details)
 	}
 	
 	if(count5 > 0)
 	{
-		var details = {glyph: "fa fa-rocket", title: "ULTRA COMEUPPANCE!", desc: "Won five matches in a row. Awarded " + count5 + " times", colour: "gold"};
+		var details = {glyph: "fa fa-rocket", title: "ULTRA COMEUPPANCE!", desc: "Won five matches in a row. Awarded " + NumberToWords(count5), colour: "gold"};
 		html += template(details)
 	}
 	
 	if(count6 > 0)
 	{
-		var details = {glyph: "fa fa-space-shuttle", title: "M-M-M-MONSTER COMEUPPANCE!!!", desc: "UNSTOPPABLE! Won six matches in a row. Awarded " + count6 + " times", colour: "gold"};
+		var details = {glyph: "fa fa-space-shuttle", title: "M-M-M-MONSTER COMEUPPANCE!!!", desc: "UNSTOPPABLE! Won six matches in a row. Awarded " + NumberToWords(count6), colour: "gold"};
 		html += template(details)
 	}
 	
@@ -472,6 +472,15 @@ function TrophyChampionYear(player,template,data,year)
 	if(player==="Cooper" && cooperGames > sansomGames) html += template(gameDetails);
 	
 	return html;
+}
+
+function NumberToWords(number)
+{
+	if (number === 1) return "once";
+	
+	if (number === 2) return "twice";
+	
+	if (number > 2) return number + " times";
 }
 
 
