@@ -484,7 +484,7 @@ function TrophyLoserYear(player,template,data,year)
 {
 	var html = "";
 	
-	var briggsDetails = {glyph: "fa fa-thumbs-o-down", title: "Comeuppance Briggs of" + year, desc: "Briggsed the most in " + year, colour: "rubbish"};
+	var briggsDetails = {glyph: "fa fa-thumbs-o-down", title: "Comeuppance Briggs of " + year, desc: "Briggsed the most in " + year, colour: "rubbish"};
 	var bridgeDetails = {glyph: "fa fa-thumbs-o-down", title: "Comeuppance Kilroy of " + year, desc: "Had the most bridge cards in " + year, colour: "rubbish"};
 	
 	var cooperBridge = 0;

@@ -1,0 +1,116 @@
+/* Trophies */
+.plaque
+{
+	max-height: 250px;
+	min-height: 250px;
+    margin-top: 25px;
+	border-radius: 25px;
+}
+.plaque h3
+{
+	margin-top: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 20pt;
+}
+.plaque p
+{
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 14pt;
+}
+.plaque .trophy 
+{
+	text-align: center;
+}
+.plaque i
+{
+	font-size: 70pt;  
+	margin-top:10px;
+	margin-bottom:10px;
+}
+/* Gold trophy */
+.gold
+{
+	background-image: url("../img/wood1.jpg");
+}
+.gold i, .gold h3, .gold p 
+{
+	color: #DAA520;
+ 	background: -webkit-linear-gradient(transparent, transparent), url(../img/gold1.jpg) repeat;   
+	-webkit-text-fill-color: transparent;
+ 	background: -o-linear-gradient(transparent, transparent);
+ 	-webkit-background-clip: text;                       
+}
+.gold h3, .gold p 
+{
+	font-family: 'Lobster', cursive;
+}
+/* Silver trophy */
+.silver
+{
+	background-image: url("../img/vellum1.jpg");
+}
+.silver i, .silver h3, .silver p 
+{
+	color: #000000;
+ 	background: -webkit-linear-gradient(transparent, transparent), url(../img/ink1.jpg) repeat;
+   -webkit-text-fill-color: transparent;
+ 	background: -o-linear-gradient(transparent, transparent);
+ 	-webkit-background-clip: text;
+}
+.silver h3, .silver p 
+{
+	font-family: 'Slabo 27px', serif;
+}
+/* Rubbish trophy */
+.rubbish
+{
+	background-image: url("../img/paper1.jpg");
+}
+.rubbish i, .rubbish h3, .rubbish p 
+{
+	color: #ff0000;
+ 	background: -webkit-linear-gradient(transparent, transparent), url(../img/redfelttip.jpg) repeat;
+	-webkit-text-fill-color: transparent;
+ 	background: -o-linear-gradient(transparent, transparent);
+ 	-webkit-background-clip: text;
+}
+.rubbish h3, .rubbish p 
+{
+	font-family: 'Patrick Hand', cursive;
+}
+/* Max Power trophy */
+.max
+{
+	background-image: url("../img/carbonfiber1.jpg");
+}
+.max i, .max h3, .max p 
+{
+	color: #c0c0c0;
+ 	background: -webkit-linear-gradient(transparent, transparent), url(../img/metal1.jpg) repeat;
+	-webkit-text-fill-color: transparent;
+ 	background: -o-linear-gradient(transparent, transparent);
+ 	-webkit-background-clip: text;
+}
+.max h3, .max p 
+{
+	font-family: 'Audiowide', cursive;
+}
+/* Army trophy */
+.army
+{
+	background-image: url("../img/wood2.jpg");
+}
+.army i, .army h3, .army p 
+{
+	color: #c0c0c0;
+ 	background: -webkit-linear-gradient(transparent, transparent), url(../img/paint1.jpg) repeat;
+	-webkit-text-fill-color: transparent;
+ 	background: -o-linear-gradient(transparent, transparent);
+ 	-webkit-background-clip: text;
+}
+.army h3, .army p 
+{
+	font-family: 'Black Ops One', cursive;
+}
