@@ -1,6 +1,19 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
 var gameDate;
 var matches;
+
+var sansomYearGames;
+var sansomYearMatches;
+var cooperYearGame;
+var cooperYearMatches;
+var cooperGames;
+var sansomGames;
+var sansomMatches;
+var cooperMatches;
+var matchNumber;
+var gameNumber;
+
+var showyear = false;
 var allrows = false;
 
 $(document).ready(function() {
@@ -16,7 +29,6 @@ function refresh(){
 function showTrophies(){
 	$(".container-fluid").hide();
 	$("#trophy-view").show();
-	//$(".container-fluid").fadeOut("slow", function() { $("#trophy-view").fadeIn("slow");});
 }
 
 function getScore(column){
@@ -28,12 +40,31 @@ function  updateScore(column,method)
 {
 	var control = "#" + column + " > :input";
 	if(method === "add"){
+		gameNumber++;
 		$(control).val(($(control).val() * 1) + 1);
-	}else if(method === "sub"){
-		if(($(control).val() * 1) > 0){
-			$(control).val(($(control).val() * 1) - 1);
+		if(column === "A"){
+			sansomYearGames++;
+			sansomGames++;
+		}
+		if(column === "B"){
+			cooperYearGames++;
+			cooperGames++;
 		}
 	}
+	else if(method === "sub"){
+		if(($(control).val() * 1) > 0){
+			$(control).val(($(control).val() * 1) - 1);
+			if(column === "A"){
+				sansomYearGames--;
+				sansomGames--;
+			}
+			if(column === "B"){
+				cooperYearGames--;
+				cooperGames--;
+			}
+		}
+	}
+	displayScores();
 }
 
 function updateScores(){
@@ -73,7 +104,7 @@ function pushScore(element){
 	var method = element.className;
 	
 	// Update the score
-	updateScore(column,method)
+	updateScore(column,method);
 	
 	// Save back to server
 	updateScores();	
@@ -153,10 +184,44 @@ function displayTable(){
 	}
 }
 
-function displayMatches(data){
+function calculateYearScores()
+{
+	var currentYear = new Date().getFullYear();
+	sansomYearMatches = cooperYearMatches = sansomYearGames = cooperYearGames = sansomMatches = cooperMatches = sansomGames = cooperGames = 0;
+	
+	for(var i = 0; i < matches.length; i++)
+	{
+		var match = matches[i];
+		
+		if(match.date === new Date()) continue;
+		
+		if( match.date.substring(match.date.length - 4, match.date.length)*1 === currentYear*1)
+		{
+			// Year matches
+			if(match.sansom > match.cooper && match.sansom > match.table) sansomYearMatches++;
+			else if(match.cooper > match.sansom && match.cooper > match.table) cooperYearMatches++;
+			
+			// Year games
+			cooperYearGames += match.cooper;
+			sansomYearGames += match.sansom;			
+		}
+		
+		if(match.sansom > match.cooper && match.sansom > match.table) sansomMatches++;
+		else if(match.cooper > match.sansom && match.cooper > match.table) cooperMatches++;
+		
+		cooperGames += match.cooper;
+		sansomGames += match.sansom;
+		
+	}
+}
+
+function displayMatches(data)
+{
 	matches = data.matches;
 	gameDate = null;
 	displayTable();
+	calculateYearScores();
+	displayScores();
 }
 
 function displayStats(data){
@@ -178,7 +243,40 @@ function displayStats(data){
 }
 
 function updateGameNumber(data){
-	$("#game-details").text("Match: " + data.match + " Game: " + data.game);
+	matchNumber = data.match;
+	gameNumber = data.game;
+	displayScores();
+}
+
+function toggleYearDisplay(){
+	showyear = !showyear;
+	displayScores();
+	
+	$("#toggleYear").text(showyear ? "Current Season" : "All Time" );
+}
+
+function displayScores()
+{
+	$("#match").text(matchNumber);
+	$("#game").text(gameNumber);
+	$("#sansomMatchScore").text(sansomYearMatches + " (" + sansomMatches+ ")");
+	$("#sansomGameScore").text(sansomYearGames + " (" + sansomGames + ")");
+	$("#cooperMatchScore").text(cooperYearMatches + " (" + cooperMatches+ ")");
+	$("#cooperGameScore").text(cooperYearGames + " (" + cooperGames + ")");
+	
+	if(showyear){
+		$("#sansomGames").text(sansomYearGames);
+		$("#cooperGames").text(cooperYearGames);
+		$("#sansomMatches").text(sansomYearMatches);
+		$("#cooperMatches").text(cooperYearMatches);		
+
+	}
+	else{
+		$("#sansomGames").text(sansomGames);
+		$("#cooperGames").text(cooperGames);
+		$("#sansomMatches").text(sansomMatches);
+		$("#cooperMatches").text(cooperMatches);		
+	}
 }
 
 function displayGame(data){
@@ -193,6 +291,8 @@ function displayGame(data){
 		$("#game-details").text("Match: " + data.match + " Game: " + data.game);
 		$(".score-readonly").removeClass("score-readonly").addClass("score");
 	}
+	
+	updateGameNumber(data)
 	
 	// Scores
 	jQuery.each(data.scores, function(index, value) {

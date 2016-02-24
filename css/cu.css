@@ -37,6 +37,22 @@ input.form-fixer, span.form-fixer {
 .score-readonly{
 	width:90px;      
 }
+
+.table h3
+{
+	font-size: 14pt;
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.table h4
+{
+	font-size: 10pt;
+	text-align: center;
+	margin-top: 2px;
+	margin-bottom: 0px;
+}
+
 /* Label for score item */
 .label{
 	color: #000000;

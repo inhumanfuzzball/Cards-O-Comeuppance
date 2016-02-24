@@ -52,6 +52,7 @@ function buildTrophies(data)
 
 function calculateLosingStreaks(data)
 {
+	streaks = []
 	var loser = "";
 	var currentLosingStreak = 0;
 
@@ -388,12 +389,64 @@ function TrophyCrippledBurnt(player,template,data)
 function TrophyPileOfComeuppance(player,template,data)
 {
 	var details = {glyph: "fa fa-bomb", title: "Pile of Comeuppance", desc: "Came third in a match", colour: "rubbish"};
-
+	var count = 0;
+	var dates = "";
 	for(var i = 0; i < data.matches.length; i++)
 	{
 		var match = matches[i];
-		if(player === "Sansom" && match.sansom < match.cooper && match.sansom < match.table) return template(details)
-		if(player === "Cooper" && match.cooper < match.sansom && match.cooper < match.table) return template(details)
+		if(player === "Sansom" && match.sansom < match.cooper && match.sansom < match.table)
+		{
+			count++;
+			dates = dates + match.date + " ";
+		}
+		if(player === "Cooper" && match.cooper < match.sansom && match.cooper < match.table) count++;
+	}
+		
+	if(count > 0)
+	{
+		switch(count)
+		{
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+				details.title = count + (count === 1 ? " pile " : " piles ") + "of comeuppance";
+				break;
+			case 5:
+				details.title = "A mound of comeuppance";
+				break;
+			case 6:
+				details.title = "A hill of comeuppance";
+				break;
+			case 7:
+				details.title = "A mountain of comeuppance";
+				break;
+			case 8:
+				details.title = "A island of comeuppance";
+				break;
+			case 9:
+				details.title = "An continent of comeuppance";
+				break;
+			case 10:
+				details.title = "A super-continent of comeuppance";
+				break;
+			case 11:
+				details.title = "A planet of comeuppance";
+				break;
+			case 12:
+				details.title = "A star of comeuppance";
+				break;
+			case 13:
+				details.title = "A galaxy of comeuppance";
+				break;
+			default:
+				details.title = "A universe of comeuppance";
+				details.glyph = "fa fa-sun-o fa-spin";
+				break;
+		}
+		
+		details.desc = "Has come third in a match " +  NumberToWords(count);	
+		return template(details);
 	}
 		
 	return "";
