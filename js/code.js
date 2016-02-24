@@ -251,7 +251,6 @@ function updateGameNumber(data){
 function toggleYearDisplay(){
 	showyear = !showyear;
 	displayScores();
-	
 	$("#toggleYear").text(showyear ? "Current Season" : "All Time" );
 }
 

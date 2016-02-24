@@ -18,6 +18,11 @@ button.disabled{
 	float: right;
 }
 
+/* align the toggle year view button */
+.toggleYear{
+	text-align: center; 
+}
+
 input.form-fixer, span.form-fixer {
 	padding: 2px;
    font-size: 16px;
