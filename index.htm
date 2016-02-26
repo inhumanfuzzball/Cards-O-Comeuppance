@@ -47,24 +47,10 @@
 	<div class="container-fluid" id="match-view">
 		
 		<div class="jumbotron">
-			<table class="table">
-				<thead>
-					<tr>
-						<td><h2>Sansom</h2></td>
-						<td><h2>Cooper</h2></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><h3><span id="sansomMatches">0</span></h3></td>
-						<td><h3><span id="cooperMatches">0</span></h3></td>
-					</tr>
-					<tr>
-						<td><h4><span id="sansomGames">0</span></h4></td>
-						<td><h4><span id="cooperGames">0</span></h4></td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="row">
+			<div class="col-xs-6"><div class="scorebox"><h1>Sansom</h1><h2><span id="sansomMatches">0</span></h2><h3><span id="sansomGames">0</span></h3></div></div>
+			<div class="col-xs-6"><div class="scorebox"><h1>Cooper</h1><h2><span id="cooperMatches">0</span></h2><h3><span id="cooperGames">0</span></h3></div></div>
+		</div>
 			<div class="toggleYear">
 				<button id="toggleYear" type="submit" class="btn" onclick="toggleYearDisplay();">All Time</button>			
 			</div>

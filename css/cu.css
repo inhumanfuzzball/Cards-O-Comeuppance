@@ -43,6 +43,32 @@ input.form-fixer, span.form-fixer {
 	width:90px;      
 }
 
+/* scores table */
+.scorebox
+{
+	text-align: center;
+}
+
+.scorebox h1
+{
+	font-size: 28pt;
+	margin-top: 10px;
+	margin-bottom: 0px;
+
+}
+.scorebox h2
+{
+	font-size: 20pt;
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+.scorebox h3
+{
+	font-size: 16pt;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
 .table h3
 {
 	font-size: 14pt;
