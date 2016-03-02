@@ -1,11 +1,23 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
 var gameDate;
 var matches;
+var stats;
 
 var sansomYearGames;
 var sansomYearMatches;
-var cooperYearGame;
+var sansomYearBridge;
+var sansomYearBriggs;
+
+var cooperYearGames;
 var cooperYearMatches;
+var cooperYearBridge;
+var cooperYearBriggs;
+
+var tableYearGames;
+var tableYearMatches;
+var tableYearBridge;
+var tableYearBriggs;
+
 var cooperGames;
 var sansomGames;
 var sansomMatches;
@@ -29,6 +41,12 @@ function refresh(){
 function showTrophies(){
 	$(".container-fluid").hide();
 	$("#trophy-view").show();
+}
+
+function showCharts(){
+	$(".container-fluid").hide();
+	$("#chart-view").show();
+	$(window).trigger('resize');
 }
 
 function getScore(column){
@@ -187,7 +205,25 @@ function displayTable(){
 function calculateYearScores()
 {
 	var currentYear = new Date().getFullYear();
-	sansomYearMatches = cooperYearMatches = sansomYearGames = cooperYearGames = sansomMatches = cooperMatches = sansomGames = cooperGames = 0;
+	sansomYearMatches = 
+	cooperYearMatches = 
+	tableYearMatches =
+	sansomYearGames = 
+	cooperYearGames = 
+	tableYearGames =
+	sansomMatches = 
+	cooperMatches = 
+	sansomGames = 
+	cooperGames = 
+	cooperYearGames =
+	cooperYearBridge =
+	cooperYearBriggs = 
+	sansomYearGames =
+	sansomYearBridge =
+	sansomYearBriggs =
+	tableYearGames =
+	tableYearBridge =
+	tableYearBriggs = 0;
 	
 	for(var i = 0; i < matches.length; i++)
 	{
@@ -200,10 +236,19 @@ function calculateYearScores()
 			// Year matches
 			if(match.sansom > match.cooper && match.sansom > match.table) sansomYearMatches++;
 			else if(match.cooper > match.sansom && match.cooper > match.table) cooperYearMatches++;
-			
-			// Year games
+			else if(match.table > match.sansom && match.table > match.cooper) tableYearMatches++;
+
 			cooperYearGames += match.cooper;
-			sansomYearGames += match.sansom;			
+			cooperYearBridge += match.cooperbridge;	
+			cooperYearBriggs += match.cooperbriggs;			
+			
+			sansomYearGames += match.sansom;	
+			sansomYearBridge += match.sansombridge;
+			sansomYearBriggs += match.sansombriggs;
+			
+			tableYearGames += match.table;	
+			tableYearBridge += match.tablebridge;
+			tableYearBriggs += match.tablebriggs;
 		}
 		
 		if(match.sansom > match.cooper && match.sansom > match.table) sansomMatches++;
@@ -218,10 +263,12 @@ function calculateYearScores()
 function displayMatches(data)
 {
 	matches = data.matches;
+	stats = data.stats;
 	gameDate = null;
 	displayTable();
 	calculateYearScores();
 	displayScores();
+	doCharts();
 }
 
 function displayStats(data){

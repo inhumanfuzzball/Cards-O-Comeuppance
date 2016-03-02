@@ -1,5 +1,5 @@
 // Spreadsheet
-var SPREADSHEET_ID = "12NqoRTIg1Pq-BqV2elt32fjHFpMbLskuvxR1MGlgm7U";
+var SPREADSHEET_ID = "###";
 var cols = ["A","B","C","D","E","F","G","H","I"]
 var sheet;
 var values;

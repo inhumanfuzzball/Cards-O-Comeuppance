@@ -104,13 +104,44 @@
 }
 .army i, .army h3, .army p 
 {
-	color: #c0c0c0;
- 	background: -webkit-linear-gradient(transparent, transparent), url(../img/paint1.jpg) repeat;
-	-webkit-text-fill-color: transparent;
- 	background: -o-linear-gradient(transparent, transparent);
- 	-webkit-background-clip: text;
+	color: #f1f1f1;
 }
 .army h3, .army p 
 {
 	font-family: 'Black Ops One', cursive;
 }
+/* Chalk board trophy */
+.chalk
+{
+	background-image: url("../img/chalkboard1.jpg");
+}
+.chalk i, .chalk h3, .chalk p 
+{
+	color: #d5d5d5;
+}
+.chalk h3, .chalk p 
+{
+	font-family: 'Patrick Hand', cursive;
+}
+
+/* wall board trophy */
+.wall
+{
+	background-image: url("../img/brick1.jpg");
+}
+.wall i, .wall h3, .wall p 
+{
+	color: #c0c0c0;
+ 	background: -webkit-linear-gradient(transparent, transparent), url(../img/graffiti1.jpg) repeat;
+	-webkit-text-fill-color: transparent;
+ 	background: -o-linear-gradient(transparent, transparent);
+ 	-webkit-background-clip: text;
+}
+.wall h3, .wall p 
+{
+	font-family: 'Patrick Hand', cursive;
+
+}
+
+
+
