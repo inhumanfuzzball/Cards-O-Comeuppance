@@ -4,13 +4,22 @@ function doCharts()
     var cooperGames = ['Cooper'];
 	var tableGames = ['Table'];
 	
-	var sansomCumulativeGames = ['Sansom'];
-    var cooperCumulativeGames = ['Cooper'];
-	var tableCumulativeGames = ['Table'];
+	var sansomCumulativeGames = ['Sansom', null];
+    var cooperCumulativeGames = ['Cooper', null];
+	var tableCumulativeGames = ['Table', null];
+	
+	var sansomCumulativeMatches = ['Sansom', null];
+    var cooperCumulativeMatches = ['Cooper', null];
+	var tableCumulativeMatches = ['Table', null];
     
 	var sansomCounter = 0;
 	var cooperCounter = 0;
 	var tableCounter = 0;
+	
+	var sansomMatchCounter = 0;
+	var cooperMatchCounter = 0;
+	var tableMatchCounter = 0;
+	
     for(var i = 0; i < matches.length; i++){
     	sansomGames.push(matches[i].sansom);
 		cooperGames.push(matches[i].cooper);
@@ -23,18 +32,19 @@ function doCharts()
 		sansomCumulativeGames.push(sansomCounter);
 		cooperCumulativeGames.push(cooperCounter);
 		tableCumulativeGames.push(tableCounter);
+		
+		if(matches[i].sansom > matches[i].cooper && matches[i].sansom > matches[i].table) sansomMatchCounter++;
+		else if(matches[i].cooper > matches[i].sansom && matches[i].cooper > matches[i].table) cooperMatchCounter++;
+		else if(matches[i].table > matches[i].sansom && matches[i].table > matches[i].cooper) tableMatchCounter++;
+		
+		sansomCumulativeMatches.push(sansomMatchCounter);
+		cooperCumulativeMatches.push(cooperMatchCounter);
+		tableCumulativeMatches.push(tableMatchCounter);
     }
     
-	var chart = c3.generate({
-		bindto: "#chartCumulativeGames",	
-		data: {
-			columns: [
-				sansomCumulativeGames,
-				cooperCumulativeGames,
-				tableCumulativeGames
-			]
-		}
-	});
+	renderLine('#chartCumulativeGames', [sansomCumulativeGames,cooperCumulativeGames,tableCumulativeGames]);
+	
+	renderLine('#chartCumulativeMatches', [sansomCumulativeMatches,cooperCumulativeMatches,tableCumulativeMatches]);
 	
 	// All time scores
 	renderPie('#chartMatches', [['Sansom', stats.Sansom_Matches_Won],
@@ -74,8 +84,24 @@ function doCharts()
 
 }
 
-function renderPie(id, columns){
+function renderLine(id, columns){
+	var chart = c3.generate({
+		bindto: id,	
+		data: {
+			columns: columns
+		},
+		axis: {
+			x: {
+				min: 1
+			}
+		},
+		zoom: {
+			enabled: true
+		}
+	});
+}
 
+function renderPie(id, columns){
 	var chart = c3.generate({
 		bindto: id,	
 		data: {		
