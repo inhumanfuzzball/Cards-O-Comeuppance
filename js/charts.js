@@ -1,5 +1,24 @@
 function doCharts()
 {
+	/*
+	var gameStats = 
+	{
+		sansomGames: ['Sansom'], 
+		cooperGames: ['Cooper'],  
+		tableGames: ['Table'],
+		
+		sansomCumulativeGames: ['Sansom', null],
+		cooperCumulativeGames: ['Cooper', null],
+		tableCumulativeGames:  ['Table', null],
+		
+		sansomCumulativeMatches: ['Sansom', null],
+		cooperCumulativeMatches: ['Cooper', null],
+		tableCumulativeMatches: ['Table', null],
+		
+	};*/
+	
+	var gameStats;
+	
     var sansomGames = ['Sansom'];
     var cooperGames = ['Cooper'];
 	var tableGames = ['Table'];
@@ -11,6 +30,14 @@ function doCharts()
 	var sansomCumulativeMatches = ['Sansom', null];
     var cooperCumulativeMatches = ['Cooper', null];
 	var tableCumulativeMatches = ['Table', null];
+	
+	var sansomCumulativeBriggs = ['Sansom', null];
+    var cooperCumulativeBriggs = ['Cooper', null];
+	var _tableCumulativeBriggs = ['Table', null];
+	
+	var sansomCumulativeBridge = ['Sansom', null];
+    var cooperCumulativeBridge = ['Cooper', null];
+	var _tableCumulativeBridge = ['Table', null];
     
 	var sansomCounter = 0;
 	var cooperCounter = 0;
@@ -19,8 +46,17 @@ function doCharts()
 	var sansomMatchCounter = 0;
 	var cooperMatchCounter = 0;
 	var tableMatchCounter = 0;
+
+	var sansomBriggsCounter = 0;
+	var cooperBriggsCounter = 0;
+	var _tableBriggsCounter = 0;
+	
+	var sansomBridgeCounter = 0;
+	var cooperBridgeCounter = 0;
+	var _tableBridgeCounter = 0;
 	
     for(var i = 0; i < matches.length; i++){
+
     	sansomGames.push(matches[i].sansom);
 		cooperGames.push(matches[i].cooper);
 		tableGames.push(matches[i].table);
@@ -28,11 +64,25 @@ function doCharts()
 		sansomCounter += matches[i].sansom;
 		cooperCounter += matches[i].cooper;
 		tableCounter += matches[i].table;
-		
 		sansomCumulativeGames.push(sansomCounter);
 		cooperCumulativeGames.push(cooperCounter);
-		tableCumulativeGames.push(tableCounter);
+		tableCumulativeGames.push(tableCounter);		
 		
+		console.log(sansomBriggsCounter);
+		sansomBriggsCounter += (matches[i].sansombriggs * 1);
+		cooperBriggsCounter += (matches[i].cooperbriggs * 1);
+		_tableBriggsCounter += (matches[i].tablebriggs * 1);
+		sansomCumulativeBriggs.push(sansomBriggsCounter);
+		cooperCumulativeBriggs.push(cooperBriggsCounter);
+		_tableCumulativeBriggs.push(_tableBriggsCounter);	
+		
+		sansomBridgeCounter += (matches[i].sansombridge * 1);
+		cooperBridgeCounter += (matches[i].cooperbridge * 1);
+		_tableBridgeCounter += (matches[i].tablebridge * 1);
+		sansomCumulativeBridge.push(sansomBridgeCounter);
+		cooperCumulativeBridge.push(cooperBridgeCounter);
+		_tableCumulativeBridge.push(_tableBridgeCounter);	
+
 		if(matches[i].sansom > matches[i].cooper && matches[i].sansom > matches[i].table) sansomMatchCounter++;
 		else if(matches[i].cooper > matches[i].sansom && matches[i].cooper > matches[i].table) cooperMatchCounter++;
 		else if(matches[i].table > matches[i].sansom && matches[i].table > matches[i].cooper) tableMatchCounter++;
@@ -45,6 +95,11 @@ function doCharts()
 	renderLine('#chartCumulativeGames', [sansomCumulativeGames,cooperCumulativeGames,tableCumulativeGames]);
 	
 	renderLine('#chartCumulativeMatches', [sansomCumulativeMatches,cooperCumulativeMatches,tableCumulativeMatches]);
+	
+	renderLine('#chartCumulativeBriggs', [sansomCumulativeBriggs,cooperCumulativeBriggs,_tableCumulativeBriggs]);
+		
+	renderLine('#chartCumulativeBridge', [sansomCumulativeBridge,cooperCumulativeBridge,_tableCumulativeBridge]);
+			
 	
 	// All time scores
 	renderPie('#chartMatches', [['Sansom', stats.Sansom_Matches_Won],
