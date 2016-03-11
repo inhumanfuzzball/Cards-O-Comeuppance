@@ -91,7 +91,8 @@ function doCharts()
 		cooperCumulativeMatches.push(cooperMatchCounter);
 		tableCumulativeMatches.push(tableMatchCounter);
     }
-    
+    renderBar('#chartGamesBar', [sansomGames,cooperGames,tableGames]);
+	
 	renderLine('#chartCumulativeGames', [sansomCumulativeGames,cooperCumulativeGames,tableCumulativeGames]);
 	
 	renderLine('#chartCumulativeMatches', [sansomCumulativeMatches,cooperCumulativeMatches,tableCumulativeMatches]);
@@ -137,6 +138,19 @@ function doCharts()
 							      ['Table',    tableYearBriggs],]);
 	
 
+}
+
+function renderBar(id, columns){
+	var chart = c3.generate({
+		bindto: id,	
+		data: {
+			columns: columns,
+			type: 'bar'
+		},
+		zoom: {
+			enabled: true
+		}
+	});
 }
 
 function renderLine(id, columns){
