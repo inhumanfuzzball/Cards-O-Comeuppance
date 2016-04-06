@@ -211,6 +211,10 @@ function TrophyPingtarPrince(player, template, data)
 				winCount = match.cooper - match.sansom;
 				date = match.date;
 			}
+			if(match.cooper - match.sansom === winCount)
+			{
+				wonBy = "Both";
+			}
 		}
 		
 		if(match.sansom > match.cooper)
@@ -221,6 +225,10 @@ function TrophyPingtarPrince(player, template, data)
 				winCount = match.cooper - match.sansom;
 				date = match.date;
 			}
+			if(match.sansom - match.cooper === winCount)
+			{
+				wonBy = "Both";
+			}
 		}
 	}
 	
@@ -230,20 +238,38 @@ function TrophyPingtarPrince(player, template, data)
 		return template(details);
 	}
 	
+	if(wonBy === "Both")
+	{
+		if(player === "Cooper") details.title = "Pingtar Prince (Shafted)"
+		if(player === "Sansom") details.title = "Pingtar Prince (Shared)"
+		details.desc = "Joint winner by the highest winning margin. Winning by " + winCount + " matches.";
+		return template(details);
+	}
+	
 	return "";
 }
 
 function TrophyBridgeTooFar(player, template, data)
 {
-	var details = {glyph: "fa fa-ban", title: "A Bridge too far!", desc: "Has had more than three quarters of the bridge cards in a game", colour: "rubbish"};
+	var details = {glyph: "fa fa-ban", title: "A Bridge too far!", desc: "Has had more than 3/4 of the bridge cards in a game.", colour: "rubbish"};
+	
+	var count = 0;
 	
 	for(var i = 0; i < data.matches.length; i++)
 	{
 		var match = matches[i];
+		// Ignore games with no bridge cards
 		if(match.sansombridge === "") continue;
+		
 		var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
-		if(player === "Sansom" && match.sansombridge/totalBridge > 0.75) return template(details);
-		if(player === "Cooper" && match.cooperbridge/totalBridge > 0.75) return template(details);
+		if(player === "Sansom" && match.sansombridge/totalBridge > 0.75) count++;
+		if(player === "Cooper" && match.cooperbridge/totalBridge > 0.75) count++; 
+	}
+	
+	if(count > 0)
+	{
+		details.desc = "Has had more than 3/4 of the bridge cards in a game. Awarded " + NumberToWords(count);
+		return template(details);
 	}
 	return "";
 }
