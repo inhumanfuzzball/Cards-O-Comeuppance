@@ -172,9 +172,6 @@ function renderBar(id, columns){
 		data: {
 			columns: columns,
 			type: 'bar'
-		},
-		zoom: {
-			enabled: true
 		}
 	});
 }
@@ -189,9 +186,6 @@ function renderLine(id, columns){
 			x: {
 				min: 1
 			}
-		},
-		zoom: {
-			enabled: true
 		}
 	});
 }
