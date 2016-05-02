@@ -23,6 +23,13 @@ function doCharts()
     var cooperGames = ['Cooper'];
 	var tableGames = ['Table'];
 	
+	var sansomMatchBriggs = 0;
+	var sansomMatchBridge = 0;
+	var cooperMatchBriggs = 0;
+	var cooperMatchBridge = 0;
+	var _tableMatchBriggs = 0;
+	var _tableMatchBridge = 0;
+	
 	var sansomCumulativeGames = ['Sansom', null];
     var cooperCumulativeGames = ['Cooper', null];
 	var tableCumulativeGames = ['Table', null];
@@ -68,7 +75,6 @@ function doCharts()
 		cooperCumulativeGames.push(cooperCounter);
 		tableCumulativeGames.push(tableCounter);		
 		
-		console.log(sansomBriggsCounter);
 		sansomBriggsCounter += (matches[i].sansombriggs * 1);
 		cooperBriggsCounter += (matches[i].cooperbriggs * 1);
 		_tableBriggsCounter += (matches[i].tablebriggs * 1);
@@ -90,6 +96,20 @@ function doCharts()
 		sansomCumulativeMatches.push(sansomMatchCounter);
 		cooperCumulativeMatches.push(cooperMatchCounter);
 		tableCumulativeMatches.push(tableMatchCounter);
+		
+		if(matches[i].sansombriggs > matches[i].cooperbriggs && matches[i].sansombriggs > matches[i].tablebriggs)
+			sansomMatchBriggs++;
+		if(matches[i].cooperbriggs > matches[i].sansombriggs && matches[i].cooperbriggs > matches[i].tablebriggs)
+			cooperMatchBriggs++;
+		if(matches[i].tablerbriggs > matches[i].sansombriggs && matches[i].tablebriggs > matches[i].cooperbriggs)
+			_tableMatchBriggs++;
+		
+		if(matches[i].sansombridge > matches[i].cooperbridge && matches[i].sansombridge > matches[i].tablebridge)
+			sansomMatchBridge++;
+		if(matches[i].cooperbridge > matches[i].sansombridge && matches[i].cooperbridge > matches[i].tablebridge)
+			cooperMatchBridge++;
+		if(matches[i].tablerbridge > matches[i].sansombridge && matches[i].tablebridge > matches[i].cooperbridge)
+			_tableMatchBridge++;
     }
     renderBar('#chartGamesBar', [sansomGames,cooperGames,tableGames]);
 	
@@ -101,7 +121,6 @@ function doCharts()
 		
 	renderLine('#chartCumulativeBridge', [sansomCumulativeBridge,cooperCumulativeBridge,_tableCumulativeBridge]);
 			
-	
 	// All time scores
 	renderPie('#chartMatches', [['Sansom', stats.Sansom_Matches_Won],
 								['Cooper', stats.Cooper_Matches_Won],
@@ -137,7 +156,14 @@ function doCharts()
 							      ['Cooper',   cooperYearBriggs],
 							      ['Table',    tableYearBriggs],]);
 	
-
+	// Special Pseudo matches
+	renderPie('#chartPseudoBriggs', [['Sansom', sansomMatchBriggs],
+								    ['Cooper',  cooperMatchBriggs],
+								    ['Table',   _tableMatchBriggs],]);
+	
+	renderPie('#chartPseudoBridge', [['Sansom',  sansomMatchBridge],
+							        ['Cooper',   cooperMatchBridge],
+							        ['Table',    _tableMatchBridge],]);
 }
 
 function renderBar(id, columns){

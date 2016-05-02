@@ -11,7 +11,8 @@ function buildTrophies(data)
 	"TrophyPingtarPrince",
 	"TrophyShare",
 	"TrophyNoComeuppance",
-	"TrophyILiedTwice",	
+	"TrophyILiedTwice",
+	"TrophyHatTrick",	
 	"TrophyHastingsAward",
 	"TrophyThomasTrophy",
 	"TrophyKonigsbergCup",
@@ -372,7 +373,7 @@ function TrophyILiedTwice(player, template, data)
 
 function TrophyHastingsAward(player, template, data)
 {
-	var details = {glyph: "fa fa-diamond", title: "The Hastings Award", desc: "Won 12 games in a match.", colour: "rubbish"};
+	var details = {glyph: "fa fa-diamond", title: "The Hastings Award", desc: "Won 12 games in a match.", colour: "silver"};
 
 	for(var i = 0; i < data.matches.length; i++)
 	{
@@ -527,6 +528,39 @@ function TrophyNoComeuppance(player,template,data)
 	}
 	
 	return html;
+}
+
+function TrophyHatTrick(player,template,data)
+{
+	var details = {glyph: "fa fa-magic", title: "Hat-trick", desc: "Won the most games, had the most bridge cards and the most Briggsings in a match. ", colour: "silver"};
+
+	var count = 0;
+	for(var i = 0; i < data.matches.length; i++)
+	{
+		var match = matches[i];
+		if(	player === "Sansom" && 
+			(match.sansom > match.cooper && match.sansom > match.table) &&
+			(match.sansombriggs > match.cooperbriggs && match.sansombriggs > match.tablebriggs) &&
+			(match.sansombridge > match.cooperbridge && match.sansombridge > match.tablebridge) )
+		{
+			count++;
+		}
+		
+		if(	player === "Cooper" && 
+			(match.cooper > match.sansom && match.cooper > match.table) &&
+			(match.cooperbriggs > match.sansombriggs && match.cooperbriggs > match.tablebriggs) &&
+			(match.cooperbridge > match.sansombridge && match.cooperbridge > match.tablebridge) )
+		{
+			count++;
+		}
+	}
+	
+	if(count > 0){
+		details.desc += "Awarded " + NumberToWords(count);
+		return template(details)
+	}
+	
+	return "";
 }
 
 function TrophyChampionYear(player,template,data,year)
