@@ -234,8 +234,8 @@ function calculateYearScores()
 		if( match.date.substring(match.date.length - 4, match.date.length)*1 === currentYear*1)
 		{
 			// Year matches
-			if(match.sansom > match.cooper && match.sansom > match.table) sansomYearMatches++;
-			else if(match.cooper > match.sansom && match.cooper > match.table) cooperYearMatches++;
+			if(match.sansom > match.cooper && match.sansom >= match.table) sansomYearMatches++;
+			else if(match.cooper > match.sansom && match.cooper >= match.table) cooperYearMatches++;
 			else if(match.table > match.sansom && match.table > match.cooper) tableYearMatches++;
 
 			cooperYearGames += match.cooper;
@@ -251,8 +251,8 @@ function calculateYearScores()
 			tableYearBriggs += match.tablebriggs;
 		}
 		
-		if(match.sansom > match.cooper && match.sansom > match.table) sansomMatches++;
-		else if(match.cooper > match.sansom && match.cooper > match.table) cooperMatches++;
+		if(match.sansom > match.cooper && match.sansom >= match.table) sansomMatches++;
+		else if(match.cooper > match.sansom && match.cooper >= match.table) cooperMatches++;
 		
 		cooperGames += match.cooper;
 		sansomGames += match.sansom;
