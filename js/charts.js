@@ -1,22 +1,5 @@
 function doCharts()
 {
-	/*
-	var gameStats = 
-	{
-		sansomGames: ['Sansom'], 
-		cooperGames: ['Cooper'],  
-		tableGames: ['Table'],
-		
-		sansomCumulativeGames: ['Sansom', null],
-		cooperCumulativeGames: ['Cooper', null],
-		tableCumulativeGames:  ['Table', null],
-		
-		sansomCumulativeMatches: ['Sansom', null],
-		cooperCumulativeMatches: ['Cooper', null],
-		tableCumulativeMatches: ['Table', null],
-		
-	};*/
-	
 	var gameStats;
 	
     var sansomGames = ['Sansom'];
@@ -111,6 +94,7 @@ function doCharts()
 		if(matches[i].tablerbridge > matches[i].sansombridge && matches[i].tablebridge > matches[i].cooperbridge)
 			_tableMatchBridge++;
     }
+	
     renderBar('#chartGamesBar', [sansomGames,cooperGames,tableGames]);
 	
 	renderLine('#chartCumulativeGames', [sansomCumulativeGames,cooperCumulativeGames,tableCumulativeGames]);

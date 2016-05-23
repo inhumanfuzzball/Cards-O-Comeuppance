@@ -42,10 +42,17 @@
  	background: -o-linear-gradient(transparent, transparent);
  	-webkit-background-clip: text;                       
 }
-.gold h3, .gold p 
+.gold h3, .gold p , .gold .circle
 {
 	font-family: 'Lobster', cursive;
 }
+.gold .circle
+{
+	font-size: 35px;
+	color: brown;
+ 	background: url(../img/gold1.jpg) repeat; 	
+}
+
 /* Silver trophy */
 .silver
 {
@@ -59,9 +66,15 @@
  	background: -o-linear-gradient(transparent, transparent);
  	-webkit-background-clip: text;
 }
-.silver h3, .silver p 
+.silver h3, .silver p , .silver .circle
 {
-	font-family: 'Slabo 27px', serif;
+	font-family: "Georgia"
+}
+.silver  .circle
+{
+	font-size: 30px;
+	color: white;
+ 	background: url(../img/ink1.jpg) repeat; 	
 }
 /* Rubbish trophy */
 .rubbish
@@ -76,9 +89,15 @@
  	background: -o-linear-gradient(transparent, transparent);
  	-webkit-background-clip: text;
 }
-.rubbish h3, .rubbish p 
+.rubbish h3, .rubbish p , .rubbish .circle
 {
 	font-family: 'Patrick Hand', cursive;
+}
+.rubbish .circle
+{
+	font-size: 35px;
+	color: white;
+ 	background: url(../img/redfelttip.jpg) repeat; 	
 }
 /* Max Power trophy */
 .max
@@ -140,7 +159,20 @@
 .wall h3, .wall p 
 {
 	font-family: 'Patrick Hand', cursive;
+}
 
+.circle {
+    color: #000000;
+    left: 20px;
+    top: 30px;
+    position: absolute;
+    text-align:center;
+    width: 50px;
+    height: 50px;
+    background: silver;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
 }
 
 

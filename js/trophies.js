@@ -161,19 +161,37 @@ function TrophyShafted(player, template, data)
 	
 	if(count > 0)
 	{
-		var details = {glyph: "fa fa-hand-grab-o",  title: "Shafted", desc: "Lost a match by over five games. Awarded " + NumberToWords(count), colour: "rubbish"};
+		var details = {
+			glyph: "fa fa-hand-grab-o",  
+			title: "Shafted", 
+			desc: "Lost a match by over five games.", 
+			colour: "rubbish",
+			counter: true,
+			count: count};
 		returnText = template(details);
 	}
 	
 	if(count > 5)
 	{
-		var details = {glyph: "fa fa-hand-grab-o",  title: "A Shaft of Shafts", desc: "Collected five Shafted trophies", colour: "rubbish"};
+		var details = {
+			glyph: "fa fa-hand-grab-o",  
+			title: "A Shaft of Shafts", 
+			desc: "Collected five Shafted trophies", 
+			colour: "rubbish",
+			counter: true,
+			count: count};
 		returnText += template(details);
 	}
 	
 	if(count > 10)
 	{
-		var details = {glyph: "fa fa-hand-grab-o",  title: "The Golden Shaft", desc: "Collected ten Shafted trophies", colour: "rubbish"};
+		var details = {
+			glyph: "fa fa-hand-grab-o",  
+			title: "The Golden Shaft", 
+			desc: "Collected ten Shafted trophies", 
+			colour: "rubbish",
+			counter: true,
+			count: count};
 		returnText += template(details);
 	}
 	
@@ -472,7 +490,9 @@ function TrophyPileOfComeuppance(player,template,data)
 				break;
 		}
 		
-		details.desc = "Has come third in a match " +  NumberToWords(count);	
+		details.desc = "Has come third in a match";
+		details.counter = true;
+		details.count = count;
 		return template(details);
 	}
 		
@@ -499,31 +519,41 @@ function TrophyNoComeuppance(player,template,data)
 	
 	if(count > 0)
 	{
-		var details = {glyph: "fa fa-star-half-o", title: "Double Comeuppance", desc: "Won two matches in a row. Awarded " + NumberToWords(count), colour: "silver"};
+		var details = {glyph: "fa fa-star-half-o", title: "Double Comeuppance", desc: "Won two matches in a row", colour: "silver"};
+		details.counter = true;
+		details.count = count;
 		html += template(details)
 	}
 	
 	if(count3 > 0)
 	{
-		var details = {glyph: "fa fa-star", title: "Multi Comeuppance", desc: "Won three matches in a row. Awarded "  + NumberToWords(count3), colour: "silver"};
+		var details = {glyph: "fa fa-star", title: "Multi Comeuppance", desc: "Won three matches in a row", colour: "silver"};
+		details.counter = true;
+		details.count = count3;
 		html += template(details)
 	}
 	
 	if(count4 > 0)
 	{
-		var details = {glyph: "fa fa-fighter-jet", title: "Mega Comeuppance", desc: "Won four matches in a row. Awarded "  + NumberToWords(count4), colour: "gold"};
+		var details = {glyph: "fa fa-fighter-jet", title: "Mega Comeuppance", desc: "Won four matches in a row", colour: "gold"};
+		details.counter = true;
+		details.count = count4;
 		html += template(details)
 	}
 	
 	if(count5 > 0)
 	{
-		var details = {glyph: "fa fa-rocket", title: "ULTRA COMEUPPANCE!", desc: "Won five matches in a row. Awarded " + NumberToWords(count5), colour: "gold"};
+		var details = {glyph: "fa fa-rocket", title: "ULTRA COMEUPPANCE!", desc: "Won five matches in a row", colour: "gold"};
+		details.counter = true;
+		details.count = count5;
 		html += template(details)
 	}
 	
 	if(count6 > 0)
 	{
-		var details = {glyph: "fa fa-space-shuttle", title: "M-M-M-MONSTER COMEUPPANCE!!!", desc: "UNSTOPPABLE! Won six matches in a row. Awarded " + NumberToWords(count6), colour: "gold"};
+		var details = {glyph: "fa fa-space-shuttle", title: "M-M-M-MONSTER COMEUPPANCE!!!", desc: "UNSTOPPABLE! Won six matches in a row", colour: "gold"};
+		details.counter = true;
+		details.count = count6;
 		html += template(details)
 	}
 	
@@ -532,7 +562,7 @@ function TrophyNoComeuppance(player,template,data)
 
 function TrophyHatTrick(player,template,data)
 {
-	var details = {glyph: "fa fa-magic", title: "Hat-trick", desc: "Won the most games, had the most bridge cards and the most Briggsings in a match. ", colour: "silver"};
+	var details = {glyph: "fa fa-magic", title: "Hat-trick", desc: "Won the most games, had the most bridge cards and the most Briggsings in a match", colour: "silver"};
 
 	var count = 0;
 	for(var i = 0; i < data.matches.length; i++)
@@ -556,7 +586,8 @@ function TrophyHatTrick(player,template,data)
 	}
 	
 	if(count > 0){
-		details.desc += "Awarded " + NumberToWords(count);
+		details.counter = true;
+		details.count = count;
 		return template(details)
 	}
 	
