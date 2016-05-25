@@ -1,8 +1,8 @@
 /* Trophies */
 .plaque
 {
-	max-height: 250px;
-	min-height: 250px;
+	max-height: 260px;
+	min-height: 260px;
     margin-top: 25px;
 	border-radius: 25px;
 }
