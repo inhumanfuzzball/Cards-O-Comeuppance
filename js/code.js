@@ -237,6 +237,12 @@ function displayTable(){
 		if(match.cooperbriggs >= 5) 		
 			cooperFlair += "&nbsp;<i class=\"fa fa-ambulance\" title=\"Crippled (5 Briggsings)\"></i>";
 		
+		// 888 award (no briggsings
+		if(match.sansombriggs === 0)
+			sansomFlair += "&nbsp;<i class=\"fa fa-cc\" title=\"888 Award (No Briggsings)\"></i>";
+		if(match.cooperbriggs === 0)
+			cooperFlair += "&nbsp;<i class=\"fa fa-cc\" title=\"888 Award (No Briggsings)\"></i>";
+		
 		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+match.date+'\');"><td>'+match.date+'</td><td class="'+sansomClass+'">'+match.sansom+sansomFlair+'</td><td class="'+cooperClass+'">'+match.cooper+cooperFlair+'</td><td>'+match.table+'</td></tr>');
 	}
 }

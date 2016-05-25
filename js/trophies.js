@@ -11,6 +11,8 @@ function buildTrophies(data)
 	"TrophyPingtarPrince",
 	"TrophyShare",
 	"TrophyNoComeuppance",
+	"TrophyTeletext",
+	"TrophyTollFree",
 	"TrophyILiedTwice",
 	"TrophyHatTrick",	
 	"TrophyHastingsAward",
@@ -356,6 +358,60 @@ function TrophyShare(player, template, data)
 	}
 	
 	return "";
+}
+
+function TrophyTeletext(player, template, data)
+{
+	var details = {glyph: "fa fa-cc", title: "888 Teletext Award", desc: "Got no Briggsings in a match.", colour: "silver"};
+	var count = 0;
+	for(var i = 0; i < data.matches.length; i++)
+	{
+		var match = matches[i];
+		if(player === "Sansom")
+		{
+			if(match.sansombriggs === 0){
+				count++;
+			}
+		}			
+		else if(player === "Cooper")
+		{
+			if(match.cooperbriggs === 0){
+				count++;
+			}
+		}	
+	}
+	
+	details.counter = true;
+	details.count = count;
+	if(count > 0) return template(details);
+	else return "";
+}
+
+function TrophyTollFree(player, template, data)
+{
+	var details = {glyph: "fa fa-smile-o", title: "Toll Free", desc: "Got no bridge cards in a match.", colour: "silver"};
+	var count = 0;
+	for(var i = 0; i < data.matches.length; i++)
+	{
+		var match = matches[i];
+		if(player === "Sansom")
+		{
+			if(match.sansombridge === 0){
+				count++;
+			}
+		}			
+		else if(player === "Cooper")
+		{
+			if(match.cooperbridge === 0){
+				count++;
+			}
+		}	
+	}
+	
+	details.counter = true;
+	details.count = count;
+	if(count > 0) return template(details);
+	else return "";
 }
 
 function TrophyILiedTwice(player, template, data)
