@@ -1,8 +1,8 @@
 /* Trophies */
 .plaque
 {
-	max-height: 275px;
-	min-height: 275px;
+	max-height: 250px;
+	min-height: 250px;
     margin-top: 25px;
 	border-radius: 25px;
 }
@@ -68,11 +68,11 @@
 }
 .silver h3, .silver p , .silver .circle
 {
-	font-family: "Georgia"
+	
 }
 .silver  .circle
 {
-	font-size: 30px;
+	font-size: 35px;
 	color: white;
  	background: url(../img/ink1.jpg) repeat; 	
 }
@@ -165,6 +165,8 @@
     color: #000000;
 	position: absolute;
     text-align:center;
+	margin-top: 5px;
+	margin-left: 5px;
     width: 50px;
     height: 50px;
     -moz-border-radius: 50px;

@@ -198,7 +198,46 @@ function displayTable(){
 			sansomClass = "";
 			cooperClass = "";		
 		}
-		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+match.date+'\');"><td>'+match.date+'</td><td class="'+sansomClass+'">'+match.sansom+'</td><td class="'+cooperClass+'">'+match.cooper+'</td><td>'+match.table+'</td></tr>');
+		
+		var sansomFlair = "";
+		var cooperFlair = "";
+		
+		// pile of comeuppance (came third)
+		if(match.sansom > match.cooper && match.table > match.cooper)
+			cooperFlair += "&nbsp;<i class=\"fa fa-bomb\" title=\"Pile of Comeuppance\"></i>";
+		if(match.cooper > match.sansom && match.table > match.sansom)
+			sansomFlair += "&nbsp;<i class=\"fa fa-bomb\" title=\"Pile of Comeuppance\"></i>";
+		
+		// shafted (lost by 5 or more games)
+		if(match.sansom - match.cooper >= 5)
+			cooperFlair += "&nbsp;<i class=\"fa fa-hand-grab-o\" title=\"Shafted\"></i>";
+		if(match.cooper - match.sansom >= 5)
+			sansomFlair += "&nbsp;<i class=\"fa fa-hand-grab-o\" title=\"Shafted\"></i>";
+		
+		// hat trick (won all 3)
+		if( (match.sansom > match.cooper && match.sansom > match.table) &&
+			(match.sansombriggs > match.cooperbriggs && match.sansombriggs > match.tablebriggs) &&
+			(match.sansombridge > match.cooperbridge && match.sansombridge > match.tablebridge) )
+			sansomFlair += "&nbsp;<i class=\"fa fa-magic\" title=\"Hat-Trick\"></i>";
+		if(	(match.cooper > match.sansom && match.cooper > match.table) &&
+			(match.cooperbriggs > match.sansombriggs && match.cooperbriggs > match.tablebriggs) &&
+			(match.cooperbridge > match.sansombridge && match.cooperbridge > match.tablebridge) )
+			cooperFlair += "&nbsp;<i class=\"fa fa-magic\" title=\"Hat-Trick\"></i>";
+		
+		// bridge too far (3/4 of bridge cards)
+		var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
+		if(match.sansombridge/totalBridge > 0.75)
+			sansomFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";
+		if(match.cooperbridge/totalBridge > 0.75)
+			cooperFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";		
+
+		// crippled (5 or more briggsings)
+		if(match.sansombriggs >= 5) 
+			sansomFlair += "&nbsp;<i class=\"fa fa-ambulance\" title=\"Crippled (5 Briggsings)\"></i>";
+		if(match.cooperbriggs >= 5) 		
+			cooperFlair += "&nbsp;<i class=\"fa fa-ambulance\" title=\"Crippled (5 Briggsings)\"></i>";
+		
+		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+match.date+'\');"><td>'+match.date+'</td><td class="'+sansomClass+'">'+match.sansom+sansomFlair+'</td><td class="'+cooperClass+'">'+match.cooper+cooperFlair+'</td><td>'+match.table+'</td></tr>');
 	}
 }
 

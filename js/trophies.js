@@ -562,7 +562,7 @@ function TrophyNoComeuppance(player,template,data)
 
 function TrophyHatTrick(player,template,data)
 {
-	var details = {glyph: "fa fa-magic", title: "Hat-trick", desc: "Won the most games, had the most bridge cards and the most Briggsings in a match", colour: "silver"};
+	var details = {glyph: "fa fa-magic", title: "Hat-trick", desc: "Had the most game winds, bridge cards and Briggsings in a match", colour: "silver"};
 
 	var count = 0;
 	for(var i = 0; i < data.matches.length; i++)
