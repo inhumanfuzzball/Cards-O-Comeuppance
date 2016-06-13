@@ -394,7 +394,7 @@ function TrophyShare(player, template, data)
 	if(shared)
 	{
 		details.desc = "Tied for most number of wins in a match, winning " + maxGames + " games";
-		details.title = "The Kilroy Silk Share award (Shared)"
+		details.title = "The Kilroy award (Shared)"
 		return template(details); 
 	}
 	
