@@ -119,7 +119,6 @@
 			<div class="col-md-2">
 				<p>Games Played: <span id="games-played"></span></p>
 			</div>
-
 			<div class="col-md-2">
 				<p>Matches Played: <span id="matches-played"></span></p>
 			</div>
@@ -319,9 +318,9 @@
 	<div class="col-sm-6 col-md-4">
 			<div class="plaque {{colour}}">
 				<div class="trophy">
-					{{#counter}}
+					{{#if count}}
 					<div class="circle"><span>{{count}}</span></div>
-					{{/counter}}
+					{{/if}}
 					<i class="{{glyph}}"></i>
 				</div>
 				<div class="inscription">

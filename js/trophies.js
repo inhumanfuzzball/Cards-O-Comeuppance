@@ -19,6 +19,7 @@ function buildTrophies(data)
 	"TrophyThomasTrophy",
 	"TrophyKonigsbergCup",
 	"TrophyShafted",
+	"TrophyBeelzebuerkStrikes",
 	"TrophyBlackHoleOfComeuppance",
 	"TrophyBridgeTooFar",
 	"TrophyCloudOfComeuppance",
@@ -168,32 +169,27 @@ function TrophyShafted(player, template, data)
 			title: "Shafted", 
 			desc: "Lost a match by over five games.", 
 			colour: "rubbish",
-			counter: true,
 			count: count};
 		returnText = template(details);
 	}
 	
-	if(count > 5)
+	if(count > 4)
 	{
 		var details = {
 			glyph: "fa fa-hand-grab-o",  
 			title: "A Shaft of Shafts", 
 			desc: "Collected five Shafted trophies", 
-			colour: "rubbish",
-			counter: true,
-			count: count};
+			colour: "rubbish"};
 		returnText += template(details);
 	}
 	
-	if(count > 10)
+	if(count > 9)
 	{
 		var details = {
 			glyph: "fa fa-hand-grab-o",  
 			title: "The Golden Shaft", 
 			desc: "Collected ten Shafted trophies", 
-			colour: "rubbish",
-			counter: true,
-			count: count};
+			colour: "rubbish"};
 		returnText += template(details);
 	}
 	
@@ -367,21 +363,10 @@ function TrophyTeletext(player, template, data)
 	for(var i = 0; i < data.matches.length; i++)
 	{
 		var match = matches[i];
-		if(player === "Sansom")
-		{
-			if(match.sansombriggs === 0){
-				count++;
-			}
-		}			
-		else if(player === "Cooper")
-		{
-			if(match.cooperbriggs === 0){
-				count++;
-			}
-		}	
+		if(player === "Sansom" && match.sansombriggs === 0) count++	
+		else if(player === "Cooper" && match.cooperbriggs === 0) count++;	
 	}
 	
-	details.counter = true;
 	details.count = count;
 	if(count > 0) return template(details);
 	else return "";
@@ -394,21 +379,10 @@ function TrophyTollFree(player, template, data)
 	for(var i = 0; i < data.matches.length; i++)
 	{
 		var match = matches[i];
-		if(player === "Sansom")
-		{
-			if(match.sansombridge === 0){
-				count++;
-			}
-		}			
-		else if(player === "Cooper")
-		{
-			if(match.cooperbridge === 0){
-				count++;
-			}
-		}	
+		if(player === "Sansom" && match.sansombridge === 0) count++;
+		else if(player === "Cooper" && match.cooperbridge === 0) count++;
 	}
-	
-	details.counter = true;
+
 	details.count = count;
 	if(count > 0) return template(details);
 	else return "";
@@ -495,11 +469,7 @@ function TrophyPileOfComeuppance(player,template,data)
 	for(var i = 0; i < data.matches.length; i++)
 	{
 		var match = matches[i];
-		if(player === "Sansom" && match.sansom < match.cooper && match.sansom < match.table)
-		{
-			count++;
-			dates = dates + match.date + " ";
-		}
+		if(player === "Sansom" && match.sansom < match.cooper && match.sansom < match.table) count++;
 		if(player === "Cooper" && match.cooper < match.sansom && match.cooper < match.table) count++;
 	}
 		
@@ -547,7 +517,6 @@ function TrophyPileOfComeuppance(player,template,data)
 		}
 		
 		details.desc = "Has come third in a match";
-		details.counter = true;
 		details.count = count;
 		return template(details);
 	}
@@ -576,7 +545,6 @@ function TrophyNoComeuppance(player,template,data)
 	if(count > 0)
 	{
 		var details = {glyph: "fa fa-star-half-o", title: "Double Comeuppance", desc: "Won two matches in a row", colour: "silver"};
-		details.counter = true;
 		details.count = count;
 		html += template(details)
 	}
@@ -584,7 +552,6 @@ function TrophyNoComeuppance(player,template,data)
 	if(count3 > 0)
 	{
 		var details = {glyph: "fa fa-star", title: "Multi Comeuppance", desc: "Won three matches in a row", colour: "silver"};
-		details.counter = true;
 		details.count = count3;
 		html += template(details)
 	}
@@ -592,7 +559,6 @@ function TrophyNoComeuppance(player,template,data)
 	if(count4 > 0)
 	{
 		var details = {glyph: "fa fa-fighter-jet", title: "Mega Comeuppance", desc: "Won four matches in a row", colour: "gold"};
-		details.counter = true;
 		details.count = count4;
 		html += template(details)
 	}
@@ -600,7 +566,6 @@ function TrophyNoComeuppance(player,template,data)
 	if(count5 > 0)
 	{
 		var details = {glyph: "fa fa-rocket", title: "ULTRA COMEUPPANCE!", desc: "Won five matches in a row", colour: "gold"};
-		details.counter = true;
 		details.count = count5;
 		html += template(details)
 	}
@@ -608,7 +573,6 @@ function TrophyNoComeuppance(player,template,data)
 	if(count6 > 0)
 	{
 		var details = {glyph: "fa fa-space-shuttle", title: "M-M-M-MONSTER COMEUPPANCE!!!", desc: "UNSTOPPABLE! Won six matches in a row", colour: "gold"};
-		details.counter = true;
 		details.count = count6;
 		html += template(details)
 	}
@@ -642,12 +606,28 @@ function TrophyHatTrick(player,template,data)
 	}
 	
 	if(count > 0){
-		details.counter = true;
 		details.count = count;
 		return template(details)
 	}
 	
 	return "";
+}
+
+function TrophyBeelzebuerkStrikes(player,template,data)
+{
+	var details = {glyph: "fa fa-bolt", title: "Beelzebuerk Strikes", desc: "Didn't win a single game!", colour: "rubbish"};
+	var count = 0;
+	for(var i = 0; i < data.matches.length; i++)
+	{
+		var match = matches[i];
+		if(player === "Sansom" && match.sansom === 0) count++;
+		if(player === "Cooper" && match.cooper === 0) count++;
+	}
+	
+	if(count > 0){
+		details.count = count;
+		return template(details)
+	}
 }
 
 function TrophyChampionYear(player,template,data,year)
@@ -713,9 +693,7 @@ function TrophyLoserYear(player,template,data,year)
 function NumberToWords(number)
 {
 	if (number === 1) return "once";
-	
 	if (number === 2) return "twice";
-	
 	if (number > 2) return number + " times";
 }
 

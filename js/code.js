@@ -25,6 +25,9 @@ var cooperMatches;
 var matchNumber;
 var gameNumber;
 
+var yearMatchNumber;
+var yearGameNumber;
+
 var showyear = false;
 var allrows = false;
 
@@ -237,7 +240,7 @@ function displayTable(){
 		if(match.cooperbriggs >= 5) 		
 			cooperFlair += "&nbsp;<i class=\"fa fa-ambulance\" title=\"Crippled (5 Briggsings)\"></i>";
 		
-		// 888 award (no briggsings
+		// 888 award (no briggsings)
 		if(match.sansombriggs === 0)
 			sansomFlair += "&nbsp;<i class=\"fa fa-cc\" title=\"888 Award (No Briggsings)\"></i>";
 		if(match.cooperbriggs === 0)
@@ -268,7 +271,9 @@ function calculateYearScores()
 	sansomYearBriggs =
 	tableYearGames =
 	tableYearBridge =
-	tableYearBriggs = 0;
+	tableYearBriggs = 
+	yearGameNumber =
+	yearMatchNumber = 0;
 	
 	for(var i = 0; i < matches.length; i++)
 	{
@@ -294,6 +299,9 @@ function calculateYearScores()
 			tableYearGames += match.table;	
 			tableYearBridge += match.tablebridge;
 			tableYearBriggs += match.tablebriggs;
+			
+			yearMatchNumber++;
+			yearGameNumber += (match.cooper + match.sansom + match.table);
 		}
 		
 		if(match.sansom > match.cooper && match.sansom >= match.table) sansomMatches++;
@@ -348,8 +356,8 @@ function toggleYearDisplay(){
 
 function displayScores()
 {
-	$("#match").text(matchNumber);
-	$("#game").text(gameNumber);
+	$("#match").text(yearMatchNumber + " (" + matchNumber + ")");
+	$("#game").text(yearGameNumber + " (" + gameNumber + ")");
 	$("#sansomMatchScore").text(sansomYearMatches + " (" + sansomMatches+ ")");
 	$("#sansomGameScore").text(sansomYearGames + " (" + sansomGames + ")");
 	$("#cooperMatchScore").text(cooperYearMatches + " (" + cooperMatches+ ")");
@@ -360,7 +368,6 @@ function displayScores()
 		$("#cooperGames").text(cooperYearGames);
 		$("#sansomMatches").text(sansomYearMatches);
 		$("#cooperMatches").text(cooperYearMatches);		
-
 	}
 	else{
 		$("#sansomGames").text(sansomGames);
