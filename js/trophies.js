@@ -330,7 +330,8 @@ function TrophyBridgeTooFar(player, template, data)
 	
 	if(count > 0)
 	{
-		details.desc = "Has had more than 3/4 of the bridge cards in a game. Awarded " + NumberToWords(count);
+		details.desc = "Has had more than 3/4 of the bridge cards in a game.";
+		details.count = count;
 		return template(details);
 	}
 	return "";
