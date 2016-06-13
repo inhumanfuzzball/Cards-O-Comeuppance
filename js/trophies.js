@@ -5,6 +5,7 @@ var GASH = "#737373";
 //Trophies
 function buildTrophies(data)
 {
+	/*
 	var trophies = [
 	"TrophyComeuppanceCup",
 	"TrophyPingtarPlaque",
@@ -26,32 +27,76 @@ function buildTrophies(data)
 	"TrophyCrippled",
 	"TrophyCrippledBurnt",
 	"TrophyPileOfComeuppance"];
+	*/	
+	
+	var trophies = [
+	"TrophyComeuppanceCup",
+	"TrophyPingtarPlaque"];
+	
+	var trophiesShare = [
+	"TrophyPingtarPrince",
+	"TrophyShare",
+	"TrophyNoComeuppance",
+	"TrophyTeletext",
+	"TrophyTollFree",
+	"TrophyILiedTwice",
+	"TrophyHatTrick",	
+	"TrophyHastingsAward"];
+	
+	var trophiesShaft = [
+	"TrophyThomasTrophy",
+	"TrophyKonigsbergCup",
+	"TrophyShafted",
+	"TrophyBeelzebuerkStrikes",
+	"TrophyBlackHoleOfComeuppance",
+	"TrophyBridgeTooFar",
+	"TrophyCloudOfComeuppance",
+	"TrophyCrippled",
+	"TrophyCrippledBurnt",
+	"TrophyPileOfComeuppance"];
+	
+	
 	var source = $("#entry-template").html();
 	var template = Handlebars.compile(source);
 	
 	calculateLosingStreaks(data);
 	
-	$("#sansom-trophies").empty();
-	$("#cooper-trophies").empty();
-	
 	for(var i = 2014; i < new Date().getFullYear(); i++)
 	{
-		$("#sansom-trophies").append(TrophyChampionYear("Sansom",template, data, i));
-		$("#cooper-trophies").append(TrophyChampionYear("Cooper",template, data, i));
+		$("#sansom-trophies-year").append(TrophyChampionYear("Sansom",template, data, i));
+		$("#cooper-trophies-year").append(TrophyChampionYear("Cooper",template, data, i));
 	}		
 	
-	for(var i = 0; i < trophies.length; i++)
-	{
-		$("#sansom-trophies").append(window[trophies[i]]("Sansom",template, data));
-		$("#cooper-trophies").append(window[trophies[i]]("Cooper",template, data));
-	}
-	
 	for(var i = 2014; i < new Date().getFullYear(); i++)
 	{
-		$("#sansom-trophies").append(TrophyLoserYear("Sansom",template, data, i));
-		$("#cooper-trophies").append(TrophyLoserYear("Cooper",template, data, i));
-	}	
-
+		$("#sansom-trophies-year").append(TrophyLoserYear("Sansom",template, data, i));
+		$("#cooper-trophies-year").append(TrophyLoserYear("Cooper",template, data, i));
+	}
+	
+	var sansomHtml = "";
+	var cooperHtml = "";
+	for(var i = 0; i < trophies.length; i++)
+	{
+		sansomHtml += window[trophies[i]]("Sansom",template, data);
+		cooperHtml += window[trophies[i]]("Cooper",template, data);
+	}
+	if(sansomHtml === "") sansomHtml = "Nothing to see here";
+	if(cooperHtml === "") cooperHtml = "Nothing to see here";
+		
+	$("#sansom-trophies-alltime").append(sansomHtml);
+	$("#cooper-trophies-alltime").append(cooperHtml);
+	
+	for(var i = 0; i < trophiesShare.length; i++)
+	{
+		$("#sansom-trophies-share").append(window[trophiesShare[i]]("Sansom",template, data));
+		$("#cooper-trophies-share").append(window[trophiesShare[i]]("Cooper",template, data));
+	}
+	
+	for(var i = 0; i < trophiesShaft.length; i++)
+	{
+		$("#sansom-trophies-shaft").append(window[trophiesShaft[i]]("Sansom",template, data));
+		$("#cooper-trophies-shaft").append(window[trophiesShaft[i]]("Cooper",template, data));
+	}
 }
 
 function calculateLosingStreaks(data)
