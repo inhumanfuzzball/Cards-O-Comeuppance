@@ -7,7 +7,9 @@ function buildTrophies(data)
 {
 	var trophies = [
 	"TrophyComeuppanceCup",
-	"TrophyPingtarPlaque"];
+	"TrophyPingtarPlaque",
+	"TrophyThomasTrophy",	
+	"TrophyKonigsbergCup"];
 	
 	var trophiesShare = [
 	"TrophyPingtarPrince",
@@ -20,8 +22,6 @@ function buildTrophies(data)
 	"TrophyHastingsAward"];
 	
 	var trophiesShaft = [
-	"TrophyThomasTrophy",
-	"TrophyKonigsbergCup",
 	"TrophyShafted",
 	"TrophyBeelzebuerkStrikes",
 	"TrophyBlackHoleOfComeuppance",
