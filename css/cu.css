@@ -1,5 +1,5 @@
 /* Centre all the headers */
-h2,h3,p{
+h1,h2,h3,p{
 	text-align: center;
 }
 /* Padding to space out items and avoid collision with nav bar */

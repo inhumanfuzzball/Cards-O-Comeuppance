@@ -5,30 +5,6 @@ var GASH = "#737373";
 //Trophies
 function buildTrophies(data)
 {
-	/*
-	var trophies = [
-	"TrophyComeuppanceCup",
-	"TrophyPingtarPlaque",
-	"TrophyPingtarPrince",
-	"TrophyShare",
-	"TrophyNoComeuppance",
-	"TrophyTeletext",
-	"TrophyTollFree",
-	"TrophyILiedTwice",
-	"TrophyHatTrick",	
-	"TrophyHastingsAward",
-	"TrophyThomasTrophy",
-	"TrophyKonigsbergCup",
-	"TrophyShafted",
-	"TrophyBeelzebuerkStrikes",
-	"TrophyBlackHoleOfComeuppance",
-	"TrophyBridgeTooFar",
-	"TrophyCloudOfComeuppance",
-	"TrophyCrippled",
-	"TrophyCrippledBurnt",
-	"TrophyPileOfComeuppance"];
-	*/	
-	
 	var trophies = [
 	"TrophyComeuppanceCup",
 	"TrophyPingtarPlaque"];
@@ -61,6 +37,16 @@ function buildTrophies(data)
 	
 	calculateLosingStreaks(data);
 	
+	$("#sansom-trophies-year").empty();
+	$("#cooper-trophies-year").empty();
+	$("#sansom-trophies-alltime").empty();
+	$("#cooper-trophies-alltime").empty();
+	$("#sansom-trophies-share").empty();
+	$("#cooper-trophies-share").empty();
+	$("#sansom-trophies-shaft").empty();
+	$("#cooper-trophies-shaft").empty();
+	
+	
 	for(var i = 2014; i < new Date().getFullYear(); i++)
 	{
 		$("#sansom-trophies-year").append(TrophyChampionYear("Sansom",template, data, i));
@@ -80,8 +66,8 @@ function buildTrophies(data)
 		sansomHtml += window[trophies[i]]("Sansom",template, data);
 		cooperHtml += window[trophies[i]]("Cooper",template, data);
 	}
-	if(sansomHtml === "") sansomHtml = "Nothing to see here";
-	if(cooperHtml === "") cooperHtml = "Nothing to see here";
+	if(sansomHtml === "") sansomHtml = "<p>Nothing to see here</p>";
+	if(cooperHtml === "") cooperHtml = "<p>Nothing to see here</p>";
 		
 	$("#sansom-trophies-alltime").append(sansomHtml);
 	$("#cooper-trophies-alltime").append(cooperHtml);
