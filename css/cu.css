@@ -1,5 +1,5 @@
 /* Centre all the headers */
-h1,h2,h3,p{
+h1,h2,h3,h4,p{
 	text-align: center;
 }
 /* Padding to space out items and avoid collision with nav bar */
@@ -69,6 +69,12 @@ input.form-fixer, span.form-fixer {
 	margin-bottom: 10px;
 }
 
+.table h2
+{
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 0px;	
+}
 .table h3
 {
 	font-size: 14pt;
@@ -82,6 +88,20 @@ input.form-fixer, span.form-fixer {
 	text-align: center;
 	margin-top: 2px;
 	margin-bottom: 0px;
+}
+
+.table .rowDescription
+{
+	vertical-align: middle;
+	max-width: 75px;
+	padding: 5px;
+}
+
+.table .rowScore
+{
+	vertical-align: middle;
+	width: 50%;
+	padding: 5px;
 }
 
 /* Label for score item */

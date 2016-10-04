@@ -22,11 +22,20 @@ var cooperGames;
 var sansomGames;
 var sansomMatches;
 var cooperMatches;
+var cooperBriggs;
+var sansomBriggs;
+var cooperBridge;
+var sansomBridge;
+
 var matchNumber;
 var gameNumber;
+var briggsNumber;
+var bridgeNumber;
 
 var yearMatchNumber;
 var yearGameNumber;
+var yearBriggsNumber;
+var yearBridgeNumber;
 
 var showyear = false;
 var allrows = false;
@@ -253,6 +262,7 @@ function displayTable(){
 function calculateYearScores()
 {
 	var currentYear = new Date().getFullYear();
+	
 	sansomYearMatches = 
 	cooperYearMatches = 
 	tableYearMatches =
@@ -266,50 +276,76 @@ function calculateYearScores()
 	cooperYearGames =
 	cooperYearBridge =
 	cooperYearBriggs = 
+	cooperBridge =
+	cooperBriggs = 
+	sansomBridge =
+	sansomBriggs = 
 	sansomYearGames =
+	sansomYearBridge =
+	sansomYearBriggs =
 	sansomYearBridge =
 	sansomYearBriggs =
 	tableYearGames =
 	tableYearBridge =
-	tableYearBriggs = 
+	tableYearBriggs =
+	gameNumber =
 	yearGameNumber =
-	yearMatchNumber = 0;
+	matchNumber =
+	yearMatchNumber = 
+	briggsNumber =
+	yearBriggsNumber =
+	bridgeNumber =
+	yearBridgeNumber = 0;
+	
 	
 	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
-		
+			
 		if(match.date === new Date()) continue;
 		
-		if( match.date.substring(match.date.length - 4, match.date.length)*1 === currentYear*1)
+		if(match.date.substring(match.date.length - 4, match.date.length)*1 === currentYear*1)
 		{
 			// Year matches
-			if(match.sansom > match.cooper && match.sansom >= match.table) sansomYearMatches++;
-			else if(match.cooper > match.sansom && match.cooper >= match.table) cooperYearMatches++;
-			else if(match.table > match.sansom && match.table > match.cooper) tableYearMatches++;
+			if(match.sansom*1 > match.cooper*1 && match.sansom*1 >= match.table*1) sansomYearMatches++;
+			else if(match.cooper*1 > match.sansom*1 && match.cooper*1 >= match.table*1) cooperYearMatches++;
+			else if(match.table*1 > match.sansom*1 && match.table*1 > match.cooper*1) tableYearMatches++;
 
-			cooperYearGames += match.cooper;
-			cooperYearBridge += match.cooperbridge;	
-			cooperYearBriggs += match.cooperbriggs;			
+			cooperYearGames += match.cooper*1;
+			cooperYearBridge += match.cooperbridge*1;	
+			cooperYearBriggs += match.cooperbriggs*1;			
 			
-			sansomYearGames += match.sansom;	
-			sansomYearBridge += match.sansombridge;
-			sansomYearBriggs += match.sansombriggs;
+			sansomYearGames += match.sansom*1;	
+			sansomYearBridge += match.sansombridge*1;
+			sansomYearBriggs += match.sansombriggs*1;
 			
-			tableYearGames += match.table;	
-			tableYearBridge += match.tablebridge;
-			tableYearBriggs += match.tablebriggs;
+			tableYearGames += match.table*1;	
+			tableYearBridge += match.tablebridge*1;
+			tableYearBriggs += match.tablebriggs*1;
 			
 			yearMatchNumber++;
-			yearGameNumber += (match.cooper + match.sansom + match.table);
+			yearGameNumber += (match.cooper*1 + match.sansom*1 + match.table*1);
+			yearBridgeNumber += (match.cooperbridge*1 + match.sansombridge*1 + match.tablebridge*1);
+			yearBriggsNumber += (match.cooperbriggs*1 + match.sansombriggs*1 + match.tablebriggs*1);
 		}
 		
-		if(match.sansom > match.cooper && match.sansom >= match.table) sansomMatches++;
-		else if(match.cooper > match.sansom && match.cooper >= match.table) cooperMatches++;
+		if(match.sansom*1 > match.cooper*1 && match.sansom*1 >= match.table*1) sansomMatches++;
+		else if(match.cooper*1 > match.sansom*1 && match.cooper*1 >= match.table*1) cooperMatches++;
 		
-		cooperGames += match.cooper;
-		sansomGames += match.sansom;
+		cooperGames += match.cooper*1;
+		sansomGames += match.sansom*1;
 		
+		cooperBridge += match.cooperbridge*1;
+		sansomBridge += match.sansombridge*1;
+		cooperBriggs += match.cooperbriggs*1;
+		sansomBriggs += match.sansombriggs*1;
+		
+		matchNumber++;
+
+		gameNumber += (match.cooper*1 + match.sansom*1 + match.table*1);
+		bridgeNumber += (match.cooperbridge*1 + match.sansombridge*1 + match.tablebridge*1);
+		briggsNumber += (match.cooperbriggs*1 + match.sansombriggs*1 + match.tablebriggs*1);
+
 	}
 }
 
@@ -343,15 +379,15 @@ function displayStats(data){
 }
 
 function updateGameNumber(data){
-	matchNumber = data.match;
-	gameNumber = data.game;
+	//matchNumber = data.match;
+	//gameNumber = data.game;
 	displayScores();
 }
 
 function toggleYearDisplay(){
 	showyear = !showyear;
 	displayScores();
-	$("#toggleYear").text(showyear ? "Current Season" : "All Time" );
+	$("#scoresHeader").text(showyear ? "Current Season" : "All Time" );
 }
 
 function displayScores()
@@ -367,13 +403,29 @@ function displayScores()
 		$("#sansomGames").text(sansomYearGames);
 		$("#cooperGames").text(cooperYearGames);
 		$("#sansomMatches").text(sansomYearMatches);
-		$("#cooperMatches").text(cooperYearMatches);		
+		$("#cooperMatches").text(cooperYearMatches);	
+		$("#sansomBridge").text(sansomYearBridge);
+		$("#cooperBridge").text(cooperYearBridge);
+		$("#sansomBriggs").text(sansomYearBriggs);
+		$("#cooperBriggs").text(cooperYearBriggs);
+		$("#totalMatches").text(yearMatchNumber);
+		$("#totalGames").text(yearGameNumber);
+		$("#totalBridge").text(yearBridgeNumber);
+		$("#totalBriggs").text(yearBriggsNumber);
 	}
 	else{
 		$("#sansomGames").text(sansomGames);
 		$("#cooperGames").text(cooperGames);
 		$("#sansomMatches").text(sansomMatches);
-		$("#cooperMatches").text(cooperMatches);		
+		$("#cooperMatches").text(cooperMatches);
+		$("#sansomBridge").text(sansomBridge);
+		$("#cooperBridge").text(cooperBridge);
+		$("#sansomBriggs").text(sansomBriggs);
+		$("#cooperBriggs").text(cooperBriggs);	
+		$("#totalMatches").text(matchNumber);
+		$("#totalGames").text(gameNumber);
+		$("#totalBridge").text(bridgeNumber);
+		$("#totalBriggs").text(briggsNumber);		
 	}
 }
 

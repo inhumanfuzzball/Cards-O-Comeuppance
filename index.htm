@@ -51,12 +51,41 @@
 	<div class="container-fluid" id="match-view">
 		
 		<div class="jumbotron">
-			<div class="row">
-			<div class="col-xs-6"><div class="scorebox"><h1>Sansom</h1><h2><span id="sansomMatches">0</span></h2><h3><span id="sansomGames">0</span></h3></div></div>
-			<div class="col-xs-6"><div class="scorebox"><h1>Cooper</h1><h2><span id="cooperMatches">0</span></h2><h3><span id="cooperGames">0</span></h3></div></div>
-		</div>
+			<h1><span id="scoresHeader">Season Scores</span></h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<td class="rowScore"><h2>Sansom</h2></td>
+						<td class="rowDescription"></td>
+						<td class="rowScore"><h2>Cooper</td></h2>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="rowScore"><h2><span id="sansomMatches">0</span></h2></td>
+						<td class="rowDescription"><h4>Matches<br/><span id="totalMatches">0</span></h4></td>
+						<td class="rowScore"><h2><span id="cooperMatches">0</span></h2>
+					</tr>
+					<tr>
+						<td class="rowScore"><h3><span id="sansomGames">0</span></h3></td>
+						<td class="rowDescription"><h4>Games<br/><span id="totalGames">0</span></h4></td>
+						<td class="rowScore"><h3><span id="cooperGames">0</span></h3>
+					</tr>
+					<tr>
+						<td class="rowScore"><h4><span id="sansomBridge">0</span></h4></td>
+						<td class="rowDescription"><h4>Bridge<br/><span id="totalBridge">0</span></h4></td>
+						<td class="rowScore"><h4><span id="cooperBridge">0</span></h4>
+					</tr>
+					<tr>
+						<td class="rowScore"><h4><span id="sansomBriggs">0</span></h4></td>
+						<td class="rowDescription"><h4>Briggs<br/><span id="totalBriggs">0</span></h4></td>
+						<td class="rowScore"><h4><span id="cooperBriggs">0</span></h4>
+					</tr>
+				</tbody>
+			</table>
+		
 			<div class="toggleYear">
-				<button id="toggleYear" type="submit" class="btn" onclick="toggleYearDisplay();">All Time</button>			
+				<button id="toggleYear" type="submit" class="btn" onclick="toggleYearDisplay();">Switch</button>			
 			</div>
 		</div>
 		
