@@ -1,4 +1,5 @@
 var streaks = [];
+var winningStreaks = [];
 var GOLD = "#ff9900";
 var GASH = "#737373";
 
@@ -15,6 +16,7 @@ function buildTrophies(data)
 	"TrophyPingtarPrince",
 	"TrophyShare",
 	"TrophyNoComeuppance",
+	"TrophyComeuppanceSpree",
 	"TrophyTeletext",
 	"TrophyTollFree",
 	"TrophyILiedTwice",
@@ -36,6 +38,7 @@ function buildTrophies(data)
 	var template = Handlebars.compile(source);
 	
 	calculateLosingStreaks(data);
+	calculateWinningStreaks(data);
 	
 	$("#sansom-trophies-year").empty();
 	$("#cooper-trophies-year").empty();
@@ -83,6 +86,57 @@ function buildTrophies(data)
 		$("#sansom-trophies-shaft").append(window[trophiesShaft[i]]("Sansom",template, data));
 		$("#cooper-trophies-shaft").append(window[trophiesShaft[i]]("Cooper",template, data));
 	}
+}
+
+function calculateWinningStreaks(data)
+{
+	winningStreaks = [];
+	var winner = "";
+	var currentWinningStreak = 0;
+	
+	for(var i = 0; i < data.matches.length; i++)
+	{
+		var match = matches[i];
+		if(winner === "Cooper")
+		{
+			if(match.cooper > match.sansom && match.cooper > match.table) {
+				currentWinningStreak++;
+			}
+			if(match.sansom > match.cooper){
+				winningStreaks.push({player:"Cooper", streak:currentWinningStreak});
+				winner = "Sansom";
+				currentWinningStreak = 1;
+			}
+			if(match.sansom === match.cooper || match.table > match.cooper){
+				streaks.push({player:"Cooper", streak:currentWinningStreak});
+				currentWinningStreak = 0;
+				winner = "";
+			}
+		}
+		else if(winner === "Sansom")
+		{
+			if(match.sansom > match.cooper && match.sansom > match.table) {
+				currentWinningStreak++;
+			}
+			if(match.cooper > match.sansom){
+				winningStreaks.push({player:"Sansom", streak:currentWinningStreak});
+				winner = "Cooper";
+				currentWinningStreak = 1;
+			}
+			if(match.sansom === match.cooper || match.table > match.sansom){
+				winningStreaks.push({player:"Sansom", streak:currentWinningStreak});
+				currentWinningStreak = 0;
+				winner = "";
+			}
+		}
+		else if(winner === "")
+		{
+			currentWinningStreak = 1;
+			if(match.cooper > match.sansom && match.cooper >= match.table) winner = "Cooper";
+			if(match.sansom > match.cooper && match.sansom >= match.table) winner = "Sansom";
+		}	
+	}
+	winningStreaks.push({player:winner, streak:currentWinningStreak});
 }
 
 function calculateLosingStreaks(data)
@@ -556,6 +610,63 @@ function TrophyPileOfComeuppance(player,template,data)
 	return "";
 }
 
+function TrophyComeuppanceSpree(player,template,data)
+{
+	var count = 0;
+	var count3 = 0;
+	var count4 = 0;
+	var count5 = 0;
+	var count6 = 0
+	
+	for(var i = 0; i < winningStreaks.length; i++)
+	{
+		if(winningStreaks[i].streak >= 2 && player !== streaks[i].player) count++;
+		if(winningStreaks[i].streak >= 3 && player !== streaks[i].player) count3++;
+		if(winningStreaks[i].streak >= 4 && player !== streaks[i].player) count4++;
+		if(winningStreaks[i].streak >= 5 && player !== streaks[i].player) count5++;	
+		if(winningStreaks[i].streak >= 6 && player !== streaks[i].player) count6++;			
+	}
+	
+	var html = "";
+	
+	if(count > 0)
+	{
+		var details = {glyph: "fa fa-fire", title: "Comeuppance Spree", desc: "Won two matches in a row", colour: "silver"};
+		details.count = count;
+		html += template(details)
+	}
+	
+	if(count3 > 0)
+	{
+		var details = {glyph: "fa fa-fire", title: "Comeuppance Rampage", desc: "Won three matches in a row", colour: "silver"};
+		details.count = count3;
+		html += template(details)
+	}
+	
+	if(count4 > 0)
+	{
+		var details = {glyph: "fa fa-fire", title: "Dominating", desc: "Won four matches in a row", colour: "silver"};
+		details.count = count4;
+		html += template(details)
+	}
+	
+	if(count5 > 0)
+	{
+		var details = {glyph: "fa fa-fire", title: "Unstoppable", desc: "Won five matches in a row", colour: "silver"};
+		details.count = count5;
+		html += template(details)
+	}
+	
+	if(count6 > 0)
+	{
+		var details = {glyph: "fa fa-fire", title: "GODLIKE!", desc: "Won six matches in a row", colour: "silver"};
+		details.count = count6;
+		html += template(details)
+	}
+	
+	return html;
+}
+
 function TrophyNoComeuppance(player,template,data)
 {
 	var count = 0;
@@ -576,35 +687,35 @@ function TrophyNoComeuppance(player,template,data)
 	
 	if(count > 0)
 	{
-		var details = {glyph: "fa fa-star-half-o", title: "Double Comeuppance", desc: "Won two matches in a row", colour: "silver"};
+		var details = {glyph: "fa fa-star-half-o", title: "Double Comeuppance", desc: "Beat their opponent two matches in a row", colour: "silver"};
 		details.count = count;
 		html += template(details)
 	}
 	
 	if(count3 > 0)
 	{
-		var details = {glyph: "fa fa-star", title: "Multi Comeuppance", desc: "Won three matches in a row", colour: "silver"};
+		var details = {glyph: "fa fa-star", title: "Multi Comeuppance", desc: "Beat their opponent three matches in a row", colour: "silver"};
 		details.count = count3;
 		html += template(details)
 	}
 	
 	if(count4 > 0)
 	{
-		var details = {glyph: "fa fa-fighter-jet", title: "Mega Comeuppance", desc: "Won four matches in a row", colour: "gold"};
+		var details = {glyph: "fa fa-fighter-jet", title: "Mega Comeuppance", desc: "Beat their opponent four matches in a row", colour: "silver"};
 		details.count = count4;
 		html += template(details)
 	}
 	
 	if(count5 > 0)
 	{
-		var details = {glyph: "fa fa-rocket", title: "ULTRA COMEUPPANCE!", desc: "Won five matches in a row", colour: "gold"};
+		var details = {glyph: "fa fa-rocket", title: "ULTRA COMEUPPANCE!", desc: "Beat their opponent five matches in a row", colour: "gold"};
 		details.count = count5;
 		html += template(details)
 	}
 	
 	if(count6 > 0)
 	{
-		var details = {glyph: "fa fa-space-shuttle", title: "M-M-M-MONSTER COMEUPPANCE!!!", desc: "UNSTOPPABLE! Won six matches in a row", colour: "gold"};
+		var details = {glyph: "fa fa-space-shuttle", title: "M-M-M-MONSTER COMEUPPANCE!!!", desc: "UNSTOPPABLE! Beat their opponent six matches in a row", colour: "gold"};
 		details.count = count6;
 		html += template(details)
 	}
