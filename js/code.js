@@ -216,6 +216,16 @@ function displayTable(){
 		var sansomFlair = "";
 		var cooperFlair = "";
 		
+		// Killroy Shares and shafts (lost to and beat their opponent)
+		if(match.cooper > match.sansom){
+			cooperFlair += "&nbsp;<i class=\"fa fa-thumbs-up\" title=\"Killroy Shares\"></i>";
+			sansomFlair += "&nbsp;<i class=\"fa fa-thumbs-down\" title=\"Killroy Shafts\"></i>";			
+		} 
+		if(match.sansom > match.cooper) {
+			sansomFlair += "&nbsp;<i class=\"fa fa-thumbs-up\" title=\"Killroy Shares\"></i>";
+			cooperFlair += "&nbsp;<i class=\"fa fa-thumbs-down\" title=\"Killroy Shafts\"></i>";	
+		}
+			
 		// pile of comeuppance (came third)
 		if(match.sansom > match.cooper && match.table > match.cooper)
 			cooperFlair += "&nbsp;<i class=\"fa fa-bomb\" title=\"Pile of Comeuppance\"></i>";
