@@ -204,9 +204,11 @@ function displayTable(){
 	
 	for(var i = matches.length - 1; i >= count; i--){
 		var match = matches[i];
-		var sansomClass = match.sansom > match.cooper ? "win" : "lose";
-		var cooperClass = match.cooper > match.sansom ? "win" : "lose";
-		if(match.sansom == match.cooper){
+
+		var sansomClass = match.sansom > match.cooper && match.sansom >= match.table ? "win" : "lose";
+		var cooperClass = match.cooper > match.sansom && match.cooper >= match.table ? "win" : "lose";
+		var tableClass = match.table > match.cooper && match.table > match.sansom ? "win" : "lose"; 
+		if(match.sansom == match.cooper && match.sansom >= match.table && match.cooper >= match.table ){
 			sansomClass = "";
 			cooperClass = "";		
 		}
@@ -255,39 +257,16 @@ function displayTable(){
 		if(match.cooperbriggs === 0)
 			cooperFlair += "&nbsp;<i class=\"fa fa-cc\" title=\"888 Award (No Briggsings)\"></i>";
 		
-		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+match.date+'\');"><td>'+match.date+'</td><td class="'+sansomClass+'">'+match.sansom+sansomFlair+'</td><td class="'+cooperClass+'">'+match.cooper+cooperFlair+'</td><td>'+match.table+'</td></tr>');
+		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+match.date+'\');"><td>'+match.date+'</td><td class="'+sansomClass+'"><b>'+match.sansom+sansomFlair+'</b></td><td class="'+cooperClass+'"><b>'+match.cooper+cooperFlair+'</b></td><td class="'+tableClass+'"><b>'+match.table+'</b></td></tr>');
 	}
 }
 
 function calculateYearScores()
 {
 	var currentYear = new Date().getFullYear();
-	
-	sansomYearMatches = 
-	cooperYearMatches = 
-	tableYearMatches =
-	sansomYearGames = 
-	cooperYearGames = 
-	tableYearGames =
-	sansomMatches = 
-	cooperMatches = 
-	sansomGames = 
-	cooperGames = 
-	cooperYearGames =
-	cooperYearBridge =
-	cooperYearBriggs = 
-	cooperBridge =
-	cooperBriggs = 
-	sansomBridge =
-	sansomBriggs = 
-	sansomYearGames =
-	sansomYearBridge =
-	sansomYearBriggs =
-	sansomYearBridge =
-	sansomYearBriggs =
-	tableYearGames =
-	tableYearBridge =
-	tableYearBriggs =
+	cooperMatches = cooperYearMatches = cooperGames = cooperYearGames = cooperYearGames = cooperYearBridge = cooperYearBriggs = cooperBridge = cooperBriggs = 
+	sansomMatches = sansomYearMatches = sansomGames = sansomYearGames = sansomYearGames = sansomYearBridge = sansomYearBriggs = sansomBridge = sansomBriggs = 
+	tableYearMatches = tableYearGames = tableYearBridge = tableYearBriggs =
 	gameNumber =
 	yearGameNumber =
 	matchNumber =
@@ -345,7 +324,6 @@ function calculateYearScores()
 		gameNumber += (match.cooper*1 + match.sansom*1 + match.table*1);
 		bridgeNumber += (match.cooperbridge*1 + match.sansombridge*1 + match.tablebridge*1);
 		briggsNumber += (match.cooperbriggs*1 + match.sansombriggs*1 + match.tablebriggs*1);
-
 	}
 }
 

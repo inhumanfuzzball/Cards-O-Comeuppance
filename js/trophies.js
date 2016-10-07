@@ -652,14 +652,14 @@ function TrophyComeuppanceSpree(player,template,data)
 	
 	if(count5 > 0)
 	{
-		var details = {glyph: "fa fa-fire", title: "Unstoppable", desc: "Won five matches in a row", colour: "silver"};
+		var details = {glyph: "fa fa-fire", title: "Unstoppable", desc: "Won five matches in a row", colour: "gold"};
 		details.count = count5;
 		html += template(details)
 	}
 	
 	if(count6 > 0)
 	{
-		var details = {glyph: "fa fa-fire", title: "GODLIKE!", desc: "Won six matches in a row", colour: "silver"};
+		var details = {glyph: "fa fa-fire", title: "GODLIKE!", desc: "Won six matches in a row", colour: "gold"};
 		details.count = count6;
 		html += template(details)
 	}
