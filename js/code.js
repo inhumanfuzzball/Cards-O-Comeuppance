@@ -3,39 +3,16 @@ var gameDate;
 var matches;
 var stats;
 
-var sansomYearGames;
-var sansomYearMatches;
-var sansomYearBridge;
-var sansomYearBriggs;
+var sansomMatches; var sansomGames; var sansomYearGames; var sansomYearMatches; var sansomYearBridge; var sansomBridge; var sansomYearBriggs; var sansomBriggs;
+var cooperMatches; var cooperGames; var cooperYearGames; var cooperYearMatches; var cooperYearBridge; var cooperBridge; var cooperYearBriggs; var cooperBriggs;
+var tableMatches; var tableGames;   var tableYearGames;  var tableYearMatches;  var tableYearBridge;  var tableBridge;  var tableYearBriggs;  var tableBriggs;
 
-var cooperYearGames;
-var cooperYearMatches;
-var cooperYearBridge;
-var cooperYearBriggs;
+var drawMatches; var drawYearMatches;
 
-var tableYearGames;
-var tableYearMatches;
-var tableYearBridge;
-var tableYearBriggs;
-
-var cooperGames;
-var sansomGames;
-var sansomMatches;
-var cooperMatches;
-var cooperBriggs;
-var sansomBriggs;
-var cooperBridge;
-var sansomBridge;
-
-var matchNumber;
-var gameNumber;
-var briggsNumber;
-var bridgeNumber;
-
-var yearMatchNumber;
-var yearGameNumber;
-var yearBriggsNumber;
-var yearBridgeNumber;
+var matchNumber; var yearMatchNumber;
+var gameNumber; var yearGameNumber;
+var briggsNumber; var yearBriggsNumber;
+var bridgeNumber; var yearBridgeNumber;
 
 var showyear = false;
 var allrows = false;
@@ -275,7 +252,8 @@ function calculateYearScores()
 	var currentYear = new Date().getFullYear();
 	cooperMatches = cooperYearMatches = cooperGames = cooperYearGames = cooperYearGames = cooperYearBridge = cooperYearBriggs = cooperBridge = cooperBriggs = 
 	sansomMatches = sansomYearMatches = sansomGames = sansomYearGames = sansomYearGames = sansomYearBridge = sansomYearBriggs = sansomBridge = sansomBriggs = 
-	tableYearMatches = tableYearGames = tableYearBridge = tableYearBriggs =
+	tableMatches  = tableYearMatches  = tableGames  = tableYearGames  = tableYearGames  = tableYearBridge  = tableYearBriggs  = tableBridge = tableBriggs = 
+	drawMatches = drawYearMatches =
 	matchNumber = gameNumber = briggsNumber = bridgeNumber =
 	yearMatchNumber = yearGameNumber = yearBriggsNumber = yearBridgeNumber = 0;
 	
@@ -291,6 +269,7 @@ function calculateYearScores()
 			if(match.sansom*1 > match.cooper*1 && match.sansom*1 >= match.table*1) sansomYearMatches++;
 			else if(match.cooper*1 > match.sansom*1 && match.cooper*1 >= match.table*1) cooperYearMatches++;
 			else if(match.table*1 > match.sansom*1 && match.table*1 > match.cooper*1) tableYearMatches++;
+			else if(match.cooper*1 === match.sansom*1) drawYearMatches++;
 
 			cooperYearGames += match.cooper*1;
 			cooperYearBridge += match.cooperbridge*1;	
@@ -312,14 +291,20 @@ function calculateYearScores()
 		
 		if(match.sansom*1 > match.cooper*1 && match.sansom*1 >= match.table*1) sansomMatches++;
 		else if(match.cooper*1 > match.sansom*1 && match.cooper*1 >= match.table*1) cooperMatches++;
-		
-		cooperGames += match.cooper*1;
+		else if(match.table*1 > match.sansom*1 && match.table*1 > match.cooper*1) tableMatches++;
+		else if(match.cooper*1 === match.sansom*1) drawMatches++;
+			
 		sansomGames += match.sansom*1;
-		
-		cooperBridge += match.cooperbridge*1;
 		sansomBridge += match.sansombridge*1;
-		cooperBriggs += match.cooperbriggs*1;
 		sansomBriggs += match.sansombriggs*1;
+
+		cooperGames += match.cooper*1;
+		cooperBridge += match.cooperbridge*1;
+		cooperBriggs += match.cooperbriggs*1;
+		
+		tableGames += match.table*1;
+		tableBridge += match.tablebridge*1;
+		tableBriggs += match.tablebriggs*1;
 		
 		matchNumber++;
 

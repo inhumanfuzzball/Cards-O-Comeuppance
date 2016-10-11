@@ -2,9 +2,9 @@ function doCharts()
 {
 	var gameStats;
 	
-    var sansomGames = ['Sansom'];
-    var cooperGames = ['Cooper'];
-	var tableGames = ['Table'];
+    var sansomGamesChart = ['Sansom'];
+    var cooperGamesChart = ['Cooper'];
+	var tableGamesChart = ['Table'];
 	
 	var sansomMatchBriggs = 0;
 	var sansomMatchBridge = 0;
@@ -20,6 +20,7 @@ function doCharts()
 	var sansomCumulativeMatches = ['Sansom', null];
     var cooperCumulativeMatches = ['Cooper', null];
 	var tableCumulativeMatches = ['Table', null];
+	var drawCumulativeMatches = ['Draw', null];
 	
 	var sansomCumulativeBriggs = ['Sansom', null];
     var cooperCumulativeBriggs = ['Cooper', null];
@@ -36,6 +37,7 @@ function doCharts()
 	var sansomMatchCounter = 0;
 	var cooperMatchCounter = 0;
 	var tableMatchCounter = 0;
+	var drawMatchCounter = 0;
 
 	var sansomBriggsCounter = 0;
 	var cooperBriggsCounter = 0;
@@ -47,9 +49,9 @@ function doCharts()
 	
     for(var i = 0; i < matches.length; i++){
 
-    	sansomGames.push(matches[i].sansom);
-		cooperGames.push(matches[i].cooper);
-		tableGames.push(matches[i].table);
+    	sansomGamesChart.push(matches[i].sansom);
+		cooperGamesChart.push(matches[i].cooper);
+		tableGamesChart.push(matches[i].table);
 		
 		sansomCounter += matches[i].sansom;
 		cooperCounter += matches[i].cooper;
@@ -75,10 +77,12 @@ function doCharts()
 		if(matches[i].sansom > matches[i].cooper && matches[i].sansom > matches[i].table) sansomMatchCounter++;
 		else if(matches[i].cooper > matches[i].sansom && matches[i].cooper > matches[i].table) cooperMatchCounter++;
 		else if(matches[i].table > matches[i].sansom && matches[i].table > matches[i].cooper) tableMatchCounter++;
+		else if(matches[i].sansom === matches[i].cooper) drawMatchCounter++;
 		
 		sansomCumulativeMatches.push(sansomMatchCounter);
 		cooperCumulativeMatches.push(cooperMatchCounter);
 		tableCumulativeMatches.push(tableMatchCounter);
+		drawCumulativeMatches.push(drawMatchCounter);
 		
 		if(matches[i].sansombriggs > matches[i].cooperbriggs && matches[i].sansombriggs > matches[i].tablebriggs)
 			sansomMatchBriggs++;
@@ -95,38 +99,39 @@ function doCharts()
 			_tableMatchBridge++;
     }
 	
-    renderBar('#chartGamesBar', [sansomGames,cooperGames,tableGames]);
-	
+    renderBar('#chartGamesBar', [sansomGamesChart,cooperGamesChart,tableGamesChart]);
+
 	renderLine('#chartCumulativeGames', [sansomCumulativeGames,cooperCumulativeGames,tableCumulativeGames]);
 	
-	renderLine('#chartCumulativeMatches', [sansomCumulativeMatches,cooperCumulativeMatches,tableCumulativeMatches]);
+	renderLine('#chartCumulativeMatches', [sansomCumulativeMatches,cooperCumulativeMatches,tableCumulativeMatches,drawCumulativeMatches]);
 	
 	renderLine('#chartCumulativeBriggs', [sansomCumulativeBriggs,cooperCumulativeBriggs,_tableCumulativeBriggs]);
 		
 	renderLine('#chartCumulativeBridge', [sansomCumulativeBridge,cooperCumulativeBridge,_tableCumulativeBridge]);
-			
+		
 	// All time scores
-	renderPie('#chartMatches', [['Sansom', stats.Sansom_Matches_Won],
-								['Cooper', stats.Cooper_Matches_Won],
-								['Table', stats.Table_Matches_Won],]);
-	
-	renderPie('#chartGames', [['Sansom', stats.Sansom_Games_Won],
-							  ['Cooper', stats.Cooper_Games_Won],
-							  ['Table', stats.Table_Games_Won],]);
+	renderPie('#chartMatches', [['Sansom', sansomMatches],
+								['Cooper', cooperMatches],
+								['Table', tableMatches],
+							    ['Draw', drawMatches]]);
+		
+	renderPie('#chartGames', [['Sansom', sansomGames],
+							  ['Cooper', cooperGames],
+							  ['Table', tableGames]]);
 							  
-	renderPie('#chartBridge', [['Sansom', stats.Sansom_Bridge_Cards],
-								['Cooper', stats.Cooper_Bridge_Cards],
-								['Table', stats.Table_Bridge_Cards],]);
-	
-	renderPie('#chartBriggs', [['Sansom', stats.Sansom_Briggsings],
-							  ['Cooper', stats.Cooper_Briggsings],
-							  ['Table', stats.Table_Briggsings],]);
-				
-				
+	renderPie('#chartBridge', [['Sansom', sansomBridge],
+								['Cooper', cooperBridge],
+								['Table', tableBridge]]);
+
+	renderPie('#chartBriggs', [['Sansom', sansomBriggs],
+							  ['Cooper', cooperBriggs],
+							  ['Table', tableBriggs]]);
+					
 	// Year scores						
 	renderPie('#chartYearMatches',  [['Sansom', sansomYearMatches],
 									['Cooper',  cooperYearMatches],
-									['Table',   tableYearMatches],]);
+									['Table',   tableYearMatches],
+									['Draw',    drawYearMatches],]);
 
 	renderPie('#chartYearGames', [['Sansom', sansomYearGames],
 								 ['Cooper',  cooperYearGames],
