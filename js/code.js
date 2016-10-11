@@ -175,7 +175,6 @@ function getMatches(){
 	$(".loading").fadeIn("slow");
 	$.getJSON(SCRIPT_URL+"?callback=?&method=MATCHES", function (data) { 
 		displayMatches(data);
-		displayStats(data);
 		buildTrophies(data);
 		$("#match-view").fadeIn("slow");
 		$(".loading").fadeOut("slow");
@@ -277,15 +276,8 @@ function calculateYearScores()
 	cooperMatches = cooperYearMatches = cooperGames = cooperYearGames = cooperYearGames = cooperYearBridge = cooperYearBriggs = cooperBridge = cooperBriggs = 
 	sansomMatches = sansomYearMatches = sansomGames = sansomYearGames = sansomYearGames = sansomYearBridge = sansomYearBriggs = sansomBridge = sansomBriggs = 
 	tableYearMatches = tableYearGames = tableYearBridge = tableYearBriggs =
-	gameNumber =
-	yearGameNumber =
-	matchNumber =
-	yearMatchNumber = 
-	briggsNumber =
-	yearBriggsNumber =
-	bridgeNumber =
-	yearBridgeNumber = 0;
-	
+	matchNumber = gameNumber = briggsNumber = bridgeNumber =
+	yearMatchNumber = yearGameNumber = yearBriggsNumber = yearBridgeNumber = 0;
 	
 	for(var i = 0; i < matches.length; i++)
 	{
@@ -348,24 +340,6 @@ function displayMatches(data)
 	doCharts();
 }
 
-function displayStats(data){
-	$("#sansom-win").text(data.stats.Sansom_Matches_Won);
-	$("#cooper-win").text(data.stats.Cooper_Matches_Won);
-	$("#table-win").text(data.stats.Table_Matches_Won);
-	$("#draws").text(data.stats.Draws);
-	$("#sansom-game-win").text(data.stats.Sansom_Games_Won);
-	$("#cooper-game-win").text(data.stats.Cooper_Games_Won);
-	$("#table-game-win").text(data.stats.Table_Games_Won);
-	$("#sansom-bridge").text(data.stats.Sansom_Bridge_Cards);
-	$("#cooper-bridge").text(data.stats.Cooper_Bridge_Cards);
-	$("#table-bridge").text(data.stats.Table_Bridge_Cards);
-	$("#sansom-briggs").text(data.stats.Sansom_Briggsings);
-	$("#cooper-briggs").text(data.stats.Cooper_Briggsings);
-	$("#table-briggs").text(data.stats.Table_Briggsings);
-	$("#games-played").text(data.stats.Games_Played);
-	$("#matches-played").text(data.stats.Matches_Played);
-}
-
 function updateGameNumber(data){
 	//matchNumber = data.match;
 	//gameNumber = data.game;
@@ -388,34 +362,49 @@ function displayScores()
 	$("#cooperGameScore").text(cooperYearGames + " (" + cooperGames + ")");
 	
 	if(showyear){
-		$("#sansomGames").text(sansomYearGames);
-		$("#cooperGames").text(cooperYearGames);
-		$("#sansomMatches").text(sansomYearMatches);
-		$("#cooperMatches").text(cooperYearMatches);	
-		$("#sansomBridge").text(sansomYearBridge);
-		$("#cooperBridge").text(cooperYearBridge);
-		$("#sansomBriggs").text(sansomYearBriggs);
-		$("#cooperBriggs").text(cooperYearBriggs);
+		displayScore("#sansomGames",sansomYearGames,cooperYearGames, true);
+		displayScore("#cooperGames",cooperYearGames,sansomYearGames, false);
+		displayScore("#sansomMatches",sansomYearMatches,cooperYearMatches, true);
+		displayScore("#cooperMatches",cooperYearMatches,sansomYearMatches, false);	
+		displayScore("#sansomBridge",sansomYearBridge,cooperYearBridge, true);
+		displayScore("#cooperBridge",cooperYearBridge,sansomYearBridge, false);
+		displayScore("#sansomBriggs",sansomYearBriggs,cooperYearBriggs, true);
+		displayScore("#cooperBriggs",cooperYearBriggs,sansomYearBriggs, false);
 		$("#totalMatches").text(yearMatchNumber);
 		$("#totalGames").text(yearGameNumber);
 		$("#totalBridge").text(yearBridgeNumber);
 		$("#totalBriggs").text(yearBriggsNumber);
 	}
 	else{
-		$("#sansomGames").text(sansomGames);
-		$("#cooperGames").text(cooperGames);
-		$("#sansomMatches").text(sansomMatches);
-		$("#cooperMatches").text(cooperMatches);
-		$("#sansomBridge").text(sansomBridge);
-		$("#cooperBridge").text(cooperBridge);
-		$("#sansomBriggs").text(sansomBriggs);
-		$("#cooperBriggs").text(cooperBriggs);	
+		displayScore("#sansomGames",sansomGames,cooperGames, true);
+		displayScore("#cooperGames",cooperGames,sansomGames, false);
+		displayScore("#sansomMatches",sansomMatches,cooperMatches, true);
+		displayScore("#cooperMatches",cooperMatches,sansomMatches, false);	
+		displayScore("#sansomBridge",sansomBridge,cooperBridge, true);
+		displayScore("#cooperBridge",cooperBridge,sansomBridge, false);
+		displayScore("#sansomBriggs",sansomBriggs,cooperBriggs, true);
+		displayScore("#cooperBriggs",cooperBriggs,sansomBriggs, false);
 		$("#totalMatches").text(matchNumber);
 		$("#totalGames").text(gameNumber);
 		$("#totalBridge").text(bridgeNumber);
 		$("#totalBriggs").text(briggsNumber);		
 	}
 }
+
+function displayScore(tag,score,compareScore,left)
+{
+	var diff = score - compareScore;
+	var line = "";
+	
+	if(left) line += " " + score;
+	if(diff === 0) line += " <small class='darw'><i class='fa fa-sort' aria-hidden='true'></i> 0</small>";
+	if(diff > 0) line += " <small class='win'><i class='fa fa-caret-up' aria-hidden='true'></i> " + diff + "</small>";
+	if(diff < 0) line += " <small class='lose'><i class='fa fa-caret-down' aria-hidden='true'></i> " + diff * -1 + "</small>";
+	if(!left) line += " " + score;
+	
+	$(tag).html(line);
+}
+
 
 function displayGame(data){
 	// Show the game area and hide the loading circle

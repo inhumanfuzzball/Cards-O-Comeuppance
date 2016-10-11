@@ -154,6 +154,9 @@ input.form-fixer, span.form-fixer {
 .lose{
 	color: #E60000;
 }
+.draw{
+	color: #A3A375;
+}
 
 .loading{
 	position: fixed;
