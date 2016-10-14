@@ -419,3 +419,35 @@ function displayGame(data){
 	gameDate = data.gameDate;
 }
 
+/* youtube player */
+
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+function PlayVideo(videoId, startTime, endTime){
+	var player = new YT.Player('player', {
+		videoId: videoId,
+		events: {
+			'onReady': 
+			function(event) 
+			{
+				$(".ytVideo").slideDown();
+				event.target.playVideo();
+			},
+			'onStateChange': 
+			function(event) { 
+				if(event.data == YT.PlayerState.ENDED)
+				{ 
+					$(".ytVideo").slideUp();
+					$("#playerParent").html("<div id='player'></div>");			
+				} 
+			}
+		},
+		playerVars: {
+			start: startTime,
+			end: endTime
+		}
+	});
+}

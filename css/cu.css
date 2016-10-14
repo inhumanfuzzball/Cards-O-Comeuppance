@@ -147,6 +147,9 @@ input.form-fixer, span.form-fixer {
 .score-readonly > .sub {
 	display: none;
 }
+.ytVideo{
+	display: none;
+}
 /* win and lose colours */
 .win{
 	color: #006600;

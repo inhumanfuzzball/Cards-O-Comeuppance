@@ -94,6 +94,7 @@ function calculateWinningStreaks(data)
 	var winner = "";
 	var currentWinningStreak = 0;
 	
+	
 	for(var i = 0; i < data.matches.length; i++)
 	{
 		var match = matches[i];
