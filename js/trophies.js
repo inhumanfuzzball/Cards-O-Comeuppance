@@ -50,13 +50,13 @@ function buildTrophies(data)
 	$("#cooper-trophies-shaft").empty();
 	
 	
-	for(var i = 2014; i < new Date().getFullYear(); i++)
+	for(var i = START_YEAR; i < new Date().getFullYear(); i++)
 	{
 		$("#sansom-trophies-year").append(TrophyChampionYear("Sansom",template, data, i));
 		$("#cooper-trophies-year").append(TrophyChampionYear("Cooper",template, data, i));
 	}		
 	
-	for(var i = 2014; i < new Date().getFullYear(); i++)
+	for(var i = START_YEAR; i < new Date().getFullYear(); i++)
 	{
 		$("#sansom-trophies-year").append(TrophyLoserYear("Sansom",template, data, i));
 		$("#cooper-trophies-year").append(TrophyLoserYear("Cooper",template, data, i));
@@ -781,26 +781,12 @@ function TrophyChampionYear(player,template,data,year)
 	var details = {glyph: "fa fa-trophy", title: "Comeuppance King of " + year, desc: "Won the most matches in " + year, colour: "gold"};
 	var gameDetails = {glyph: "fa fa-trophy", title: "Comeuppance Qwa'ven of " + year, desc: "Won the most games in " + year, colour: "gold"};
 	
-	var cooperWins = 0;
-	var sansomWins = 0;
-	var cooperGames = 0;
-	var sansomGames = 0;
-	for(var i = 0; i < data.matches.length; i++)
-	{
-		var match = matches[i];
-		if( match.date.substring(match.date.length - 4, match.date.length)*1 != year*1) continue;
+	if(player==="Sansom" && yearScores[year].sansomWins > yearScores[year].cooperWins) html += template(details);
+	if(player==="Cooper" && yearScores[year].cooperWins > yearScores[year].sansomWins) html += template(details);	
+	
+	if(player==="Sansom" && yearScores[year].sansomGames > yearScores[year].cooperGames) html += template(gameDetails);
+	if(player==="Cooper" && yearScores[year].cooperGames > yearScores[year].sansomGames) html += template(gameDetails);
 
-		if(match.cooper > match.sansom) cooperWins++;
-		else if(match.cooper < match.sansom) sansomWins++;
-		cooperGames += match.cooper;
-		sansomGames += match.sansom;
-	}
-	
-	if(player==="Sansom" && sansomWins > cooperWins) html += template(details);
-	if(player==="Sansom" && sansomGames > cooperGames) html += template(gameDetails);
-	if(player==="Cooper" && cooperWins > sansomWins) html += template(details);
-	if(player==="Cooper" && cooperGames > sansomGames) html += template(gameDetails);
-	
 	return html;
 }
 
@@ -811,26 +797,13 @@ function TrophyLoserYear(player,template,data,year)
 	var briggsDetails = {glyph: "fa fa-thumbs-o-down", title: "Comeuppance Briggs of " + year, desc: "Briggsed the most in " + year, colour: "rubbish"};
 	var bridgeDetails = {glyph: "fa fa-thumbs-o-down", title: "Comeuppance Kilroy of " + year, desc: "Had the most bridge cards in " + year, colour: "rubbish"};
 	
-	var cooperBridge = 0;
-	var sansomBridge = 0;
-	var cooperBriggs = 0;
-	var sansomBriggs = 0;
-	for(var i = 0; i < data.matches.length; i++)
-	{
-		var match = matches[i];
-		if( match.date.substring(match.date.length - 4, match.date.length)*1 != year*1) continue;
+	if(player==="Sansom" && yearScores[year].sansomBridge > yearScores[year].cooperBridge) html += template(bridgeDetails);
+	if(player==="Cooper" && yearScores[year].cooperBridge > yearScores[year].sansomBridge) html += template(bridgeDetails);
+	
+	if(player==="Sansom" && yearScores[year].sansomBriggs > yearScores[year].cooperBriggs) html += template(briggsDetails);
+	if(player==="Cooper" && yearScores[year].cooperBriggs > yearScores[year].sansomBriggs) html += template(briggsDetails);
+	
 
-		cooperBriggs += match.cooperbriggs;
-		sansomBriggs += match.sansombriggs;
-		cooperBridge += match.cooperbridge;
-		sansomBridge += match.sansombridge;
-	}
-	
-	if(player==="Sansom" && sansomBriggs > cooperBriggs) html += template(briggsDetails);
-	if(player==="Sansom" && sansomBridge > cooperBridge) html += template(bridgeDetails);
-	if(player==="Cooper" && cooperBriggs > sansomBriggs) html += template(briggsDetails);
-	if(player==="Cooper" && cooperBridge > sansomBridge) html += template(bridgeDetails);
-	
 	return html;
 }
 

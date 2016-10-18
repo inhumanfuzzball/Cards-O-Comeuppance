@@ -110,41 +110,66 @@ function doCharts()
 	renderLine('#chartCumulativeBridge', [sansomCumulativeBridge,cooperCumulativeBridge,_tableCumulativeBridge]);
 		
 	// All time scores
-	renderPie('#chartMatches', [['Sansom', sansomMatches],
-								['Cooper', cooperMatches],
-								['Table', tableMatches],
-							    ['Draw', drawMatches]]);
+	renderPie('#chartMatches', [['Sansom', scores.sansomMatches],
+								['Cooper', scores.cooperMatches],
+								['Table', scores.tableMatches],
+							    ['Draw', scores.drawMatches]]);
 		
-	renderPie('#chartGames', [['Sansom', sansomGames],
-							  ['Cooper', cooperGames],
-							  ['Table', tableGames]]);
+	renderPie('#chartGames', [['Sansom', scores.sansomGames],
+							  ['Cooper', scores.cooperGames],
+							  ['Table', scores.tableGames]]);
 							  
-	renderPie('#chartBridge', [['Sansom', sansomBridge],
-								['Cooper', cooperBridge],
-								['Table', tableBridge]]);
+	renderPie('#chartBridge', [['Sansom', scores.sansomBridge],
+								['Cooper', scores.cooperBridge],
+								['Table', scores.tableBridge]]);
 
-	renderPie('#chartBriggs', [['Sansom', sansomBriggs],
-							  ['Cooper', cooperBriggs],
-							  ['Table', tableBriggs]]);
-					
-	// Year scores						
-	renderPie('#chartYearMatches',  [['Sansom', sansomYearMatches],
-									['Cooper',  cooperYearMatches],
-									['Table',   tableYearMatches],
-									['Draw',    drawYearMatches],]);
-
-	renderPie('#chartYearGames', [['Sansom', sansomYearGames],
-								 ['Cooper',  cooperYearGames],
-							     ['Table',   tableYearGames],]);
+	renderPie('#chartBriggs', [['Sansom', scores.sansomBriggs],
+							  ['Cooper', scores.cooperBriggs],
+							  ['Table', scores.tableBriggs]]);
 							  
-	renderPie('#chartYearBridge', [['Sansom', sansomYearBridge],
-								  ['Cooper',  cooperYearBridge],
-								  ['Table',   tableYearBridge],]);
+		
+	var source = $("#year-chart-template").html();
+	var template = Handlebars.compile(source);
+	$('#YearCharts').empty();
 	
-	renderPie('#chartYearBriggs', [['Sansom',  sansomYearBriggs],
-							      ['Cooper',   cooperYearBriggs],
-							      ['Table',    tableYearBriggs],]);
-	
+	var currentYear = new Date().getFullYear()*1;
+	for(var year = currentYear; year >= START_YEAR; year--)
+	{
+		$("#YearCharts").append(template({year: year}));
+		
+		renderPie('#chart'+year+'Matches',  [['Sansom', yearScores[year].sansomMatches],
+											['Cooper',  yearScores[year].cooperMatches],
+											['Table',   yearScores[year].tableMatches],
+											['Draw',    yearScores[year].drawMatches],]);
+
+		renderPie('#chart'+year+'Games', 	[['Sansom', yearScores[year].sansomGames],
+											['Cooper',  yearScores[year].cooperGames],
+											['Table',   yearScores[year].tableGames],]);
+		
+		if(yearScores[year].sansomBridge > 0 || yearScores[year].cooperBridge > 0 || yearScores[year].tableBridge > 0)
+		{
+			renderPie('#chart'+year+'Bridge', 	[['Sansom', yearScores[year].sansomBridge],
+												['Cooper',  yearScores[year].cooperBridge],
+												['Table',   yearScores[year].tableBridge],]);
+		}
+		else
+		{
+			$('#chart'+year+'Bridge').html("<p>Nothing to see here.</p>");
+		}	
+
+		if(yearScores[year].sansomBriggs > 0 || yearScores[year].cooperBriggs > 0 || yearScores[year].tableBriggs > 0)
+		{
+			renderPie('#chart'+year+'Briggs', 	[['Sansom',  yearScores[year].sansomBriggs],
+												['Cooper',   yearScores[year].cooperBriggs],
+												['Table',    yearScores[year].tableBriggs],]);
+		}
+		else
+		{
+			$('#chart'+year+'Briggs').html("<p>Nothing to see here.</p>");			
+		}
+						  
+	}						  
+
 	// Special Pseudo matches
 	renderPie('#chartPseudoBriggs', [['Sansom', sansomMatchBriggs],
 								    ['Cooper',  cooperMatchBriggs],

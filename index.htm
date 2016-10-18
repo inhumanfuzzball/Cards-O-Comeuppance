@@ -278,27 +278,9 @@
 			  <div id="chartBriggs"></div>
 			</div>
 		</div>
-			
-		<h1>Current Season</h1>
-		<div class="row">
-			<div class="col-lg-3">
-			  <h2>Match Wins</h2>
-				<div id="chartYearMatches"></div>
-			</div>
-			<div class="col-lg-3">
-			  <h2>Game Wins</h2>
-			  <div id="chartYearGames"></div>
-			</div>
-			<div class="col-lg-3">
-			  <h2>Bridge Cards</h2>
-			  <div id="chartYearBridge"></div>
-			</div>
-			<div class="col-lg-3">
-			  <h2>Briggsings</h2>
-			  <div id="chartYearBriggs"></div>
-			</div>
-		</div>
 		
+		<div id="YearCharts"></div>
+			
 		<h1>Pseudo Matches</h1>
 		<div class="row">
 			<div class="col-lg-3">
@@ -347,6 +329,30 @@
 
 	</script>
 	
+	<script id="year-chart-template" type="text/x-handlebars-template">
+	
+		<h1>{{year}}</h1>
+		<div class="row">
+			<div class="col-lg-3">
+			  <h2>Match Wins</h2>
+				<div id="chart{{year}}Matches"></div>
+			</div>
+			<div class="col-lg-3">
+			  <h2>Game Wins</h2>
+			  <div id="chart{{year}}Games"></div>
+			</div>
+			<div class="col-lg-3">
+			  <h2>Bridge Cards</h2>
+			  <div id="chart{{year}}Bridge"></div>
+			</div>
+			<div class="col-lg-3">
+			  <h2>Briggsings</h2>
+			  <div id="chart{{year}}Briggs"></div>
+			</div>
+		</div>
+		
+	</script>
+	
 	<!-- Java script -->
 	<!-- JQuery -->
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -360,6 +366,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
 	<!-- Main JS -->
 	<script src="js/trophies.js"></script>
+	<script src="js/scores.js"></script>
 	<script src="js/code.js"></script>
 	<script src="js/charts.js"></script>
 </body>
