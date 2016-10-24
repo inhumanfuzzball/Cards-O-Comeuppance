@@ -198,8 +198,8 @@ function TrophyComeuppanceCup(player, template, data)
 {
 	var details = {glyph: "fa fa-trophy", title: "The Comeuppance Cup", desc: "Awarded to the player who has won the most matches", colour: "gold"};
 	
-	if( player === "Sansom" && data.stats.Sansom_Matches_Won < data.stats.Cooper_Matches_Won) return "";
-	if( player === "Cooper" && data.stats.Sansom_Matches_Won > data.stats.Cooper_Matches_Won) return "";
+	if( player === "Sansom" && scores.sansomMatches < scores.cooperMatches) return "";
+	if( player === "Cooper" && scores.sansomMatches > scores.cooperMatches) return "";
 	
 	return template(details);
 }
@@ -208,8 +208,8 @@ function TrophyPingtarPlaque(player, template, data)
 {
 	var details = {glyph: "fa fa-shield",  title: "The Pingtar Plaque", desc: "Awarded to the player who has won the most games", colour: "gold"};
 	
-	if( player === "Sansom" && data.stats.Sansom_Games_Won < data.stats.Cooper_Games_Won) return "";
-	if( player === "Cooper" && data.stats.Sansom_Games_Won > data.stats.Cooper_Games_Won) return "";
+	if( player === "Sansom" && scores.sansomGames < scores.cooperGames) return "";
+	if( player === "Cooper" && scores.sansomGames > scores.cooperGames) return "";
 	
 	return template(details);
 }
@@ -218,8 +218,8 @@ function TrophyThomasTrophy(player, template, data)
 {
 	var details = {glyph: "fa fa-shield",  title: "The Thomas Trophy", desc: "Awarded to the player for the dubious honour of being Briggsed the most times", colour: "rubbish"};
 	
-	if( player === "Sansom" && data.stats.Sansom_Briggsings < data.stats.Cooper_Briggsings) return "";
-	if( player === "Cooper" && data.stats.Sansom_Briggsings > data.stats.Cooper_Briggsings) return "";
+	if( player === "Sansom" && scores.sansomBriggs < scores.cooperBriggs) return "";
+	if( player === "Cooper" && scores.sansomBriggs > scores.cooperBriggs) return "";
 	
 	return template(details);
 }
@@ -228,8 +228,8 @@ function TrophyKonigsbergCup(player, template, data)
 {
 	var details = {glyph: "fa fa-beer", title: "The Konigsberg Cup", desc: "Awarded to the player for the dubious honour of picking up the most Bridge cards", colour: "rubbish"};
 	
-	if( player === "Sansom" && data.stats.Sansom_Bridge_Cards < data.stats.Cooper_Bridge_Cards) return "";
-	if( player === "Cooper" && data.stats.Sansom_Bridge_Cards > data.stats.Cooper_Bridge_Cards) return "";
+	if( player === "Sansom" && scores.sansomBridge < scores.cooperBridge) return "";
+	if( player === "Cooper" && scores.sansomBridge > scores.cooperBridge) return "";
 	
 	return template(details);
 }
@@ -265,7 +265,8 @@ function TrophyShafted(player, template, data)
 			glyph: "fa fa-hand-grab-o",  
 			title: "A Shaft of Shafts", 
 			desc: "Collected five Shafted trophies", 
-			colour: "rubbish"};
+			colour: "rubbish",
+			count: count};
 		returnText += template(details);
 	}
 	
@@ -273,9 +274,10 @@ function TrophyShafted(player, template, data)
 	{
 		var details = {
 			glyph: "fa fa-hand-grab-o",  
-			title: "The Golden Shaft", 
+			title: "Ultimate Shaft", 
 			desc: "Collected ten Shafted trophies", 
-			colour: "rubbish"};
+			colour: "rubbish",
+			count: count};
 		returnText += template(details);
 	}
 	
@@ -781,8 +783,8 @@ function TrophyChampionYear(player,template,data,year)
 	var details = {glyph: "fa fa-trophy", title: "Comeuppance King of " + year, desc: "Won the most matches in " + year, colour: "gold"};
 	var gameDetails = {glyph: "fa fa-trophy", title: "Comeuppance Qwa'ven of " + year, desc: "Won the most games in " + year, colour: "gold"};
 	
-	if(player==="Sansom" && yearScores[year].sansomWins > yearScores[year].cooperWins) html += template(details);
-	if(player==="Cooper" && yearScores[year].cooperWins > yearScores[year].sansomWins) html += template(details);	
+	if(player==="Sansom" && yearScores[year].sansomMatches > yearScores[year].cooperMatches) html += template(details);
+	if(player==="Cooper" && yearScores[year].cooperMatches > yearScores[year].sansomMatches) html += template(details);	
 	
 	if(player==="Sansom" && yearScores[year].sansomGames > yearScores[year].cooperGames) html += template(gameDetails);
 	if(player==="Cooper" && yearScores[year].cooperGames > yearScores[year].sansomGames) html += template(gameDetails);
