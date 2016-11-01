@@ -1,4 +1,6 @@
 var yearScores;
+var monthScores;
+
 var scores;
 var currentYear = new Date().getFullYear();
 
@@ -6,58 +8,49 @@ function calculateScores(){
 
 	scores = getScoresObject();
 	yearScores = [];
+	monthScores = [];
 	
 	for(var i = 0; i < matches.length; i++){
 		var match = matches[i];
-		var year = 	match.date.substring(match.date.length - 4, match.date.length)*1;
+		var year = 	match.date.split("-")[2]*1;
+		var month = match.date.split("-")[1]*1;
 		
 		if(yearScores[year] == null) yearScores[year] = getScoresObject();
+		if(monthScores[month] == null) monthScores[month] = getScoresObject();
 		
-		if(match.sansom*1 > match.cooper*1 && match.sansom*1 >= match.table*1) yearScores[year].sansomMatches++;
-		else if(match.cooper*1 > match.sansom*1 && match.cooper*1 >= match.table*1) yearScores[year].cooperMatches++;
-		else if(match.table*1 > match.sansom*1 && match.table*1 > match.cooper*1) yearScores[year].tableMatches++;
-		else if(match.cooper*1 === match.sansom*1) yearScores[year].drawMatches++;
-		
-		yearScores[year].cooperGames += match.cooper*1;
-		yearScores[year].cooperBridge += match.cooperbridge*1;	
-		yearScores[year].cooperBriggs += match.cooperbriggs*1;
-		
-		yearScores[year].sansomGames += match.sansom*1;	
-		yearScores[year].sansomBridge += match.sansombridge*1;
-		yearScores[year].sansomBriggs += match.sansombriggs*1;
-		
-		yearScores[year].tableGames += match.table*1;	
-		yearScores[year].tableBridge += match.tablebridge*1;
-		yearScores[year].tableBriggs += match.tablebriggs*1;
-		
-		yearScores[year].matchNumber++;
-		yearScores[year].gameNumber += (match.cooper*1 + match.sansom*1 + match.table*1);
-		yearScores[year].bridgeNumber += (match.cooperbridge*1 + match.sansombridge*1 + match.tablebridge*1);
-		yearScores[year].briggsNumber += (match.cooperbriggs*1 + match.sansombriggs*1 + match.tablebriggs*1);
+		addToTotal(match, yearScores[year]);
+		addToTotal(match, monthScores[month]);
+		addToTotal(match, scores);
 	}
+}
+
+function addToTotal(match,scoreCount)
+{
+	if(match.sansom*1 > match.cooper*1 && match.sansom*1 >= match.table*1) 
+		scoreCount.sansomMatches++;
+	else if(match.cooper*1 > match.sansom*1 && match.cooper*1 >= match.table*1) 
+		scoreCount.cooperMatches++;
+	else if(match.table*1 > match.sansom*1 && match.table*1 > match.cooper*1) 
+		scoreCount.tableMatches++;
+	else if(match.cooper*1 === match.sansom*1) 
+		scoreCount.drawMatches++;
 	
-	for(key in yearScores){
-		scores.cooperMatches += yearScores[key].cooperMatches;
-		scores.cooperGames += yearScores[key].cooperGames;
-		scores.cooperBridge += yearScores[key].cooperBridge;
-		scores.cooperBriggs += yearScores[key].cooperBriggs;
-		
-		scores.sansomMatches += yearScores[key].sansomMatches;
-		scores.sansomGames += yearScores[key].sansomGames;
-		scores.sansomBridge += yearScores[key].sansomBridge;
-		scores.sansomBriggs += yearScores[key].sansomBriggs;
-		
-		scores.tableMatches += yearScores[key].tableMatches;
-		scores.tableGames += yearScores[key].tableGames;
-		scores.tableBridge += yearScores[key].tableBridge;
-		scores.tableBriggs += yearScores[key].tableBriggs;
-		
-		scores.drawMatches += yearScores[key].drawMatches;
-		scores.matchNumber += yearScores[key].matchNumber;
-		scores.gameNumber += yearScores[key].gameNumber;
-		scores.briggsNumber += yearScores[key].briggsNumber;
-		scores.bridgeNumber += yearScores[key].bridgeNumber;
-	}
+	scoreCount.cooperGames += match.cooper*1;
+	scoreCount.cooperBridge += match.cooperbridge*1;	
+	scoreCount.cooperBriggs += match.cooperbriggs*1;
+
+	scoreCount.sansomGames += match.sansom*1;	
+	scoreCount.sansomBridge += match.sansombridge*1;
+	scoreCount.sansomBriggs += match.sansombriggs*1;
+
+	scoreCount.tableGames += match.table*1;	
+	scoreCount.tableBridge += match.tablebridge*1;
+	scoreCount.tableBriggs += match.tablebriggs*1;
+
+	scoreCount.matchNumber++;
+	scoreCount.gameNumber += (match.cooper*1 + match.sansom*1 + match.table*1);
+	scoreCount.bridgeNumber += (match.cooperbridge*1 + match.sansombridge*1 + match.tablebridge*1);
+	scoreCount.briggsNumber += (match.cooperbriggs*1 + match.sansombriggs*1 + match.tablebriggs*1);	
 }
 
 function addScore(column)

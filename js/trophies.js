@@ -198,9 +198,10 @@ function TrophyComeuppanceCup(player, template, data)
 {
 	var details = {glyph: "fa fa-trophy", title: "The Comeuppance Cup", desc: "Awarded to the player who has won the most matches", colour: "gold"};
 	
+	var diff = 0
 	if( player === "Sansom" && scores.sansomMatches < scores.cooperMatches) return "";
 	if( player === "Cooper" && scores.sansomMatches > scores.cooperMatches) return "";
-	
+	details.count = "+" + Math.abs(scores.sansomMatches - scores.cooperMatches);
 	return template(details);
 }
 
@@ -210,7 +211,7 @@ function TrophyPingtarPlaque(player, template, data)
 	
 	if( player === "Sansom" && scores.sansomGames < scores.cooperGames) return "";
 	if( player === "Cooper" && scores.sansomGames > scores.cooperGames) return "";
-	
+	details.count = "+" + Math.abs(scores.sansomGames - scores.cooperGames);
 	return template(details);
 }
 
@@ -220,7 +221,7 @@ function TrophyThomasTrophy(player, template, data)
 	
 	if( player === "Sansom" && scores.sansomBriggs < scores.cooperBriggs) return "";
 	if( player === "Cooper" && scores.sansomBriggs > scores.cooperBriggs) return "";
-	
+	details.count = "+" + Math.abs(scores.sansomBriggs - scores.cooperBriggs);
 	return template(details);
 }
 
@@ -230,7 +231,7 @@ function TrophyKonigsbergCup(player, template, data)
 	
 	if( player === "Sansom" && scores.sansomBridge < scores.cooperBridge) return "";
 	if( player === "Cooper" && scores.sansomBridge > scores.cooperBridge) return "";
-	
+	details.count = "+" + Math.abs(scores.sansomBridge - scores.cooperBridge);
 	return template(details);
 }
 
@@ -239,7 +240,6 @@ function TrophyShafted(player, template, data)
 	var returnText = "";
 
 	var count = 0;
-	
 	
 	for(var i = 0; i < data.matches.length; i++)
 	{

@@ -1,5 +1,7 @@
 function doCharts()
 {
+	var monthNames = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	
 	var gameStats;
 	
     var sansomGamesChart = ['Sansom'];
@@ -47,6 +49,11 @@ function doCharts()
 	var cooperBridgeCounter = 0;
 	var _tableBridgeCounter = 0;
 	
+	var swingometerGames = ['Games', null];
+	var swingometerMatches = ['Matches', null];
+	var swingometerBriggs = ['Briggs', null];
+	var swingometerBridge = ['Bridge', null];
+	
     for(var i = 0; i < matches.length; i++){
 
     	sansomGamesChart.push(matches[i].sansom);
@@ -74,8 +81,8 @@ function doCharts()
 		cooperCumulativeBridge.push(cooperBridgeCounter);
 		_tableCumulativeBridge.push(_tableBridgeCounter);	
 
-		if(matches[i].sansom > matches[i].cooper && matches[i].sansom > matches[i].table) sansomMatchCounter++;
-		else if(matches[i].cooper > matches[i].sansom && matches[i].cooper > matches[i].table) cooperMatchCounter++;
+		if(matches[i].sansom > matches[i].cooper && matches[i].sansom >= matches[i].table) sansomMatchCounter++;
+		else if(matches[i].cooper > matches[i].sansom && matches[i].cooper >= matches[i].table) cooperMatchCounter++;
 		else if(matches[i].table > matches[i].sansom && matches[i].table > matches[i].cooper) tableMatchCounter++;
 		else if(matches[i].sansom === matches[i].cooper) drawMatchCounter++;
 		
@@ -84,22 +91,32 @@ function doCharts()
 		tableCumulativeMatches.push(tableMatchCounter);
 		drawCumulativeMatches.push(drawMatchCounter);
 		
-		if(matches[i].sansombriggs > matches[i].cooperbriggs && matches[i].sansombriggs > matches[i].tablebriggs)
+		if(matches[i].sansombriggs > matches[i].cooperbriggs && matches[i].sansombriggs >= matches[i].tablebriggs)
 			sansomMatchBriggs++;
-		if(matches[i].cooperbriggs > matches[i].sansombriggs && matches[i].cooperbriggs > matches[i].tablebriggs)
+		if(matches[i].cooperbriggs > matches[i].sansombriggs && matches[i].cooperbriggs >= matches[i].tablebriggs)
 			cooperMatchBriggs++;
 		if(matches[i].tablerbriggs > matches[i].sansombriggs && matches[i].tablebriggs > matches[i].cooperbriggs)
 			_tableMatchBriggs++;
 		
-		if(matches[i].sansombridge > matches[i].cooperbridge && matches[i].sansombridge > matches[i].tablebridge)
+		if(matches[i].sansombridge > matches[i].cooperbridge && matches[i].sansombridge >= matches[i].tablebridge)
 			sansomMatchBridge++;
-		if(matches[i].cooperbridge > matches[i].sansombridge && matches[i].cooperbridge > matches[i].tablebridge)
+		if(matches[i].cooperbridge > matches[i].sansombridge && matches[i].cooperbridge >= matches[i].tablebridge)
 			cooperMatchBridge++;
 		if(matches[i].tablerbridge > matches[i].sansombridge && matches[i].tablebridge > matches[i].cooperbridge)
 			_tableMatchBridge++;
+		
+		swingometerGames.push(sansomCounter-cooperCounter);
+		swingometerMatches.push(sansomMatchCounter-cooperMatchCounter);
+		swingometerBridge.push(sansomBridgeCounter-cooperBridgeCounter);
+		swingometerBriggs.push(sansomBriggsCounter-cooperBriggsCounter);
+		
     }
 	
-    renderBar('#chartGamesBar', [sansomGamesChart,cooperGamesChart,tableGamesChart]);
+    //renderBar('#chartGamesBar', [sansomGamesChart,cooperGamesChart,tableGamesChart]);
+	renderLine2('#chartGamesSwing', [swingometerGames]);
+	renderLine2('#chartMatchesSwing', [swingometerMatches]);
+	renderLine2('#chartBridgeSwing', [swingometerBridge]);
+	renderLine2('#chartBriggsSwing', [swingometerBriggs]);
 
 	renderLine('#chartCumulativeGames', [sansomCumulativeGames,cooperCumulativeGames,tableCumulativeGames]);
 	
@@ -128,47 +145,26 @@ function doCharts()
 							  ['Table', scores.tableBriggs]]);
 							  
 		
-	var source = $("#year-chart-template").html();
+	var source = $("#chart-template").html();
 	var template = Handlebars.compile(source);
-	$('#YearCharts').empty();
+	$('#Charts').empty();
 	
+	// Rneder year pie charts
 	var currentYear = new Date().getFullYear()*1;
 	for(var year = currentYear; year >= START_YEAR; year--)
 	{
-		$("#YearCharts").append(template({year: year}));
-		
-		renderPie('#chart'+year+'Matches',  [['Sansom', yearScores[year].sansomMatches],
-											['Cooper',  yearScores[year].cooperMatches],
-											['Table',   yearScores[year].tableMatches],
-											['Draw',    yearScores[year].drawMatches],]);
+		timeCharts(yearScores[year], year, template, "#Charts");  
+	}	
 
-		renderPie('#chart'+year+'Games', 	[['Sansom', yearScores[year].sansomGames],
-											['Cooper',  yearScores[year].cooperGames],
-											['Table',   yearScores[year].tableGames],]);
-		
-		if(yearScores[year].sansomBridge > 0 || yearScores[year].cooperBridge > 0 || yearScores[year].tableBridge > 0)
-		{
-			renderPie('#chart'+year+'Bridge', 	[['Sansom', yearScores[year].sansomBridge],
-												['Cooper',  yearScores[year].cooperBridge],
-												['Table',   yearScores[year].tableBridge],]);
-		}
-		else
-		{
-			$('#chart'+year+'Bridge').html("<p>Nothing to see here.</p>");
-		}	
-
-		if(yearScores[year].sansomBriggs > 0 || yearScores[year].cooperBriggs > 0 || yearScores[year].tableBriggs > 0)
-		{
-			renderPie('#chart'+year+'Briggs', 	[['Sansom',  yearScores[year].sansomBriggs],
-												['Cooper',   yearScores[year].cooperBriggs],
-												['Table',    yearScores[year].tableBriggs],]);
-		}
-		else
-		{
-			$('#chart'+year+'Briggs').html("<p>Nothing to see here.</p>");			
-		}
-						  
-	}						  
+	// render month pie charts
+	for(var i = 1; i <= 12; i++){
+		var month = monthNames[i];
+		timeCharts(monthScores[i], month, template, "#Charts"); 
+	}
+	
+	$("#CurrentSeason").empty();
+	timeCharts(yearScores[currentYear], "Season", template, "#CurrentSeason");  
+	
 
 	// Special Pseudo matches
 	renderPie('#chartPseudoBriggs', [['Sansom', sansomMatchBriggs],
@@ -178,6 +174,41 @@ function doCharts()
 	renderPie('#chartPseudoBridge', [['Sansom',  sansomMatchBridge],
 							        ['Cooper',   cooperMatchBridge],
 							        ['Table',    _tableMatchBridge],]);
+}
+
+function timeCharts(scores, description, template, section){
+	$(section).append(template({description: description}));
+		
+	renderPie('#chart'+description+'Matches',  	[['Sansom', scores.sansomMatches],
+												['Cooper',  scores.cooperMatches],
+												['Table',   scores.tableMatches],
+												['Draw',    scores.drawMatches],]);
+
+	renderPie('#chart'+description+'Games', 	[['Sansom', scores.sansomGames],
+												['Cooper',  scores.cooperGames],
+												['Table',   scores.tableGames],]);
+	
+	if(scores.sansomBridge > 0 || scores.cooperBridge > 0 || scores.tableBridge > 0)
+	{
+		renderPie('#chart'+description+'Bridge', 	[['Sansom', scores.sansomBridge],
+													['Cooper',  scores.cooperBridge],
+													['Table',   scores.tableBridge],]);
+	}
+	else
+	{
+		$('#chart'+description+'Bridge').html("<p>Nothing to see here.</p>");
+	}	
+
+	if(scores.sansomBriggs > 0 || scores.cooperBriggs > 0 || scores.tableBriggs > 0)
+	{
+		renderPie('#chart'+description+'Briggs', 	[['Sansom',  scores.sansomBriggs],
+													['Cooper',   scores.cooperBriggs],
+													['Table',    scores.tableBriggs],]);
+	}
+	else
+	{
+		$('#chart'+description+'Briggs').html("<p>Nothing to see here.</p>");			
+	}
 }
 
 function renderBar(id, columns){
@@ -200,6 +231,40 @@ function renderLine(id, columns){
 			x: {
 				min: 1
 			}
+		},
+		grid: {
+			y: {
+				lines: [
+					{value: 0},
+				]
+			}
+		}
+	});
+}
+
+function renderLine2(id, columns){
+	var chart = c3.generate({
+		bindto: id,	
+		data: {
+			columns: columns,
+			types: {
+				Games: 'area',
+				Matches: 'area',
+				Briggs: 'area',
+				Bridge: 'area',
+			}
+		},
+		axis: {
+			x: {
+				min: 1
+			}
+		},
+		grid: {
+			y: {
+				lines: [
+					{value: 0},
+				]
+			}
 		}
 	});
 }
@@ -213,6 +278,14 @@ function renderPie(id, columns){
 			onclick: function (d, i) { console.log("onclick", d, i); },
 			onmouseover: function (d, i) { console.log("onmouseover", d, i); },
 			onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+		},
+		pie: {
+			label: {
+				format: function(value, ratio, id) {
+					//return d3.format('')((ratio * 100).toFixed(0) + "% " + value);
+					return value;
+				}
+			}
 		}
     });
 }
