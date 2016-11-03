@@ -49,10 +49,10 @@ function doCharts()
 	var cooperBridgeCounter = 0;
 	var _tableBridgeCounter = 0;
 	
-	var swingometerGames = ['Games', null];
+	var swingometerGames =   ['Games', null];
 	var swingometerMatches = ['Matches', null];
-	var swingometerBriggs = ['Briggs', null];
-	var swingometerBridge = ['Bridge', null];
+	var swingometerBriggs =  ['Briggs', null];
+	var swingometerBridge =  ['Bridge', null];
 	
     for(var i = 0; i < matches.length; i++){
 
@@ -247,16 +247,22 @@ function renderLine2(id, columns){
 		bindto: id,	
 		data: {
 			columns: columns,
-			types: {
+			types: 
+			{ 
 				Games: 'area',
 				Matches: 'area',
 				Briggs: 'area',
 				Bridge: 'area',
-			}
+            }	
 		},
 		axis: {
 			x: {
 				min: 1
+			},
+			y: {
+				tick: {
+					format: function (y) { return Math.abs(y); }
+				}
 			}
 		},
 		grid: {
@@ -264,8 +270,18 @@ function renderLine2(id, columns){
 				lines: [
 					{value: 0},
 				]
+			},
+			x: {
+				lines: [
+					{value: 1, text: 'Sansom'},
+					{value: 1, text: 'Cooper', position: 'start'},
+				]
 			}
-		}
+		},
+		regions: [
+			{axis: 'y', start: 0, class: 'regionSansom', label: 'Sansom'},
+			{axis: 'y', end: 0, class: 'regionCooper', label: 'Cooper'},
+		]
 	});
 }
 
@@ -274,17 +290,11 @@ function renderPie(id, columns){
 		bindto: id,	
 		data: {		
 			columns: columns,
-			type : 'pie',
-			onclick: function (d, i) { console.log("onclick", d, i); },
-			onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-			onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+			type : 'pie'
 		},
 		pie: {
 			label: {
-				format: function(value, ratio, id) {
-					//return d3.format('')((ratio * 100).toFixed(0) + "% " + value);
-					return value;
-				}
+				format: function(value, ratio, id) { return value; }
 			}
 		}
     });

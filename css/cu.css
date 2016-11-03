@@ -161,6 +161,14 @@ input.form-fixer, span.form-fixer {
 	color: #A3A375;
 }
 
+/* Graphs */
+.c3-region.regionSansom {
+  fill: blue;
+}
+.c3-region.regionCooper {
+  fill: orange;
+}
+
 .loading{
 	position: fixed;
 	width:100%;
