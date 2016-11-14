@@ -340,3 +340,8 @@ function PlayVideo(videoId, startTime, endTime){
 		}
 	});
 }
+
+function PlayAudio(file){
+	var audio = new Audio('sounds/'+file+'.mp3');
+	audio.play();
+}
