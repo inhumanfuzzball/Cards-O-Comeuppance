@@ -254,63 +254,19 @@
 	</div>
 	
 	<div class="container-fluid" id="chart-view">
-		<h1>Scores</h1>
-		<div class="row">
-			<div class="col-lg-3">
-			  <h2>Match Wins</h2>
-				<div id="chartMatches"></div>
-			</div>
-			<div class="col-lg-3">
-			  <h2>Game Wins</h2>
-			  <div id="chartGames"></div>
-			</div>
-			<div class="col-lg-3">
-			  <h2>Bridge Cards</h2>
-			  <div id="chartBridge"></div>
-			</div>
-			<div class="col-lg-3">
-			  <h2>Briggsings</h2>
-			  <div id="chartBriggs"></div>
-			</div>
+		<div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			Select Chart
+			<span class="caret"></span>
+		  </button>
+		  <ul id="Charts-Dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<li><a href="#">Action</a></li>
+			<li><a href="#">Another action</a></li>
+			<li><a href="#">Something else here</a></li>
+			<li role="separator" class="divider"></li>
+			<li><a href="#">Separated link</a></li>
+		  </ul>
 		</div>
-		
-		<div id="CurrentSeason"></div>
-
-		<h1>Pseudo Matches</h1>
-		<div class="row">
-			<div class="col-lg-3">
-			  <h2>Briggsing Match Wins</h2>
-				<div id="chartPseudoBriggs"></div>
-			</div>
-			<div class="col-lg-3">
-			  <h2>Bridge Card Match Wins</h2>
-			  <div id="chartPseudoBridge"></div>
-			</div>
-		</div>
-		
-		<h1>Games Swingometer</h1>
-		<div id="chartGamesSwing"></div>
-		
-		<h1>Matches Swingometer</h1>
-		<div id="chartMatchesSwing"></div>
-		
-		<h1>Bridge Swingometer</h1>
-		<div id="chartBridgeSwing"></div>
-		
-		<h1>Briggs Swingometer</h1>
-		<div id="chartBriggsSwing"></div>
-		
-		<h1>Games Wins vs. Time</h1>
-		<div id="chartCumulativeGames"></div>
-		
-		<h1>Match Wins vs. Time</h1>
-		<div id="chartCumulativeMatches"></div>
-	
-		<h1>Bridge Cards vs. Time</h1>
-		<div id="chartCumulativeBridge"></div>
-		
-		<h1>Briggsings vs. Time</h1>
-		<div id="chartCumulativeBriggs"></div>
 		
 		<div id="Charts"></div>
 		
@@ -356,6 +312,21 @@
 			  <div id="chart{{description}}Briggs"></div>
 			</div>
 		</div>
+	</script>
+	
+	<script id="chart-template-full" type="text/x-handlebars-template">
+		<h1>{{description}}</h1>
+		<h2>Match Wins</h2>
+		<div id="chart{{description}}Matches"></div>
+			
+		<h2>Game Wins</h2>
+		<div id="chart{{description}}Games"></div>
+			
+		<h2>Bridge Cards</h2>
+		<div id="chart{{description}}Bridge"></div>
+		
+		<h2>Briggsings</h2>
+		<div id="chart{{description}}Briggs"></div>
 	</script>
 	
 	<!-- Java script -->

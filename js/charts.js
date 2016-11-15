@@ -1,10 +1,47 @@
 var charts = [];
+var monthNames = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+var swingometerGames;
+var swingometerMatches;
+var swingometerBriggs;
+var swingometerBridge;
+
+var sansomCumulativeGames;
+var cooperCumulativeGames;
+var tableCumulativeGames;
+
+var sansomCumulativeMatches;
+var cooperCumulativeMatches;
+var tableCumulativeMatches;
+var drawCumulativeMatches;
+
+var sansomCumulativeBriggs;
+var cooperCumulativeBriggs;
+var _tableCumulativeBriggs;
+                          
+var sansomCumulativeBridge;
+var cooperCumulativeBridge;
+var _tableCumulativeBridge;
 
 function doCharts()
 {
-	var monthNames = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-	
-	var gameStats;
+	swingometerGames =   ['Games', null];
+	swingometerMatches = ['Matches', null];
+	swingometerBriggs =  ['Briggs', null];
+	swingometerBridge =  ['Bridge', null];
+	sansomCumulativeGames = ['Sansom', null];
+	cooperCumulativeGames = ['Cooper', null];
+	tableCumulativeGames = ['Table', null];
+	sansomCumulativeMatches = ['Sansom', null];
+	cooperCumulativeMatches = ['Cooper', null];
+	tableCumulativeMatches = ['Table', null];
+	drawCumulativeMatches = ['Draw', null];
+	sansomCumulativeBriggs = ['Sansom', null];
+	cooperCumulativeBriggs = ['Cooper', null];
+	_tableCumulativeBriggs = ['Table', null];
+	sansomCumulativeBridge = ['Sansom', null];
+	cooperCumulativeBridge = ['Cooper', null];
+	_tableCumulativeBridge = ['Table', null];
 	
     var sansomGamesChart = ['Sansom'];
     var cooperGamesChart = ['Cooper'];
@@ -17,23 +54,6 @@ function doCharts()
 	var _tableMatchBriggs = 0;
 	var _tableMatchBridge = 0;
 	
-	var sansomCumulativeGames = ['Sansom', null];
-    var cooperCumulativeGames = ['Cooper', null];
-	var tableCumulativeGames = ['Table', null];
-	
-	var sansomCumulativeMatches = ['Sansom', null];
-    var cooperCumulativeMatches = ['Cooper', null];
-	var tableCumulativeMatches = ['Table', null];
-	var drawCumulativeMatches = ['Draw', null];
-	
-	var sansomCumulativeBriggs = ['Sansom', null];
-    var cooperCumulativeBriggs = ['Cooper', null];
-	var _tableCumulativeBriggs = ['Table', null];
-	
-	var sansomCumulativeBridge = ['Sansom', null];
-    var cooperCumulativeBridge = ['Cooper', null];
-	var _tableCumulativeBridge = ['Table', null];
-    
 	var sansomCounter = 0;
 	var cooperCounter = 0;
 	var tableCounter = 0;
@@ -50,12 +70,7 @@ function doCharts()
 	var sansomBridgeCounter = 0;
 	var cooperBridgeCounter = 0;
 	var _tableBridgeCounter = 0;
-	
-	var swingometerGames =   ['Games', null];
-	var swingometerMatches = ['Matches', null];
-	var swingometerBriggs =  ['Briggs', null];
-	var swingometerBridge =  ['Bridge', null];
-	
+
     for(var i = 0; i < matches.length; i++){
 
     	sansomGamesChart.push(matches[i].sansom);
@@ -114,59 +129,24 @@ function doCharts()
 		
     }
 	
-    //renderBar('#chartGamesBar', [sansomGamesChart,cooperGamesChart,tableGamesChart]);
-	renderLine2('#chartGamesSwing', [swingometerGames]);
-	renderLine2('#chartMatchesSwing', [swingometerMatches]);
-	renderLine2('#chartBridgeSwing', [swingometerBridge]);
-	renderLine2('#chartBriggsSwing', [swingometerBriggs]);
-
-	renderLine('#chartCumulativeGames', [sansomCumulativeGames,cooperCumulativeGames,tableCumulativeGames]);
+	$("#Charts-Dropdown").empty();
+	$("#Charts-Dropdown").append("<li><a href='javascript:showTotal();'>Scores</a></li>");
+	$("#Charts-Dropdown").append("<li><a href='javascript:showCurrentSeason();'>Current Season</a></li>");
+	$("#Charts-Dropdown").append("<li><a href='javascript:showSwingometer();'>Swingometer</a></li>");
+	$("#Charts-Dropdown").append("<li><a href='javascript:showVersesTime();'>Verses Time</a></li>");
 	
-	renderLine('#chartCumulativeMatches', [sansomCumulativeMatches,cooperCumulativeMatches,tableCumulativeMatches,drawCumulativeMatches]);
-	
-	renderLine('#chartCumulativeBriggs', [sansomCumulativeBriggs,cooperCumulativeBriggs,_tableCumulativeBriggs]);
-		
-	renderLine('#chartCumulativeBridge', [sansomCumulativeBridge,cooperCumulativeBridge,_tableCumulativeBridge]);
-		
-	// All time scores
-	renderPie('#chartMatches', [['Sansom', scores.sansomMatches],
-								['Cooper', scores.cooperMatches],
-								['Table', scores.tableMatches],
-							    ['Draw', scores.drawMatches]]);
-		
-	renderPie('#chartGames', [['Sansom', scores.sansomGames],
-							  ['Cooper', scores.cooperGames],
-							  ['Table', scores.tableGames]]);
-							  
-	renderPie('#chartBridge', [['Sansom', scores.sansomBridge],
-								['Cooper', scores.cooperBridge],
-								['Table', scores.tableBridge]]);
-
-	renderPie('#chartBriggs', [['Sansom', scores.sansomBriggs],
-							  ['Cooper', scores.cooperBriggs],
-							  ['Table', scores.tableBriggs]]);
-							  
-		
-	var source = $("#chart-template").html();
-	var template = Handlebars.compile(source);
-	$('#Charts').empty();
-	
-	// Rneder year pie charts
 	var currentYear = new Date().getFullYear()*1;
 	for(var year = currentYear; year >= START_YEAR; year--)
-	{
-		timeCharts(yearScores[year], year, template, "#Charts");  
+	{	
+		$("#Charts-Dropdown").append("<li><a href='javascript:showYearCharts("+year+");'>"+year+"</a></li>");
 	}	
-
-	// render month pie charts
+	
 	for(var i = 1; i <= 12; i++){
 		var month = monthNames[i];
-		timeCharts(monthScores[i], month, template, "#Charts"); 
+		$("#Charts-Dropdown").append("<li><a href='javascript:showMonthCharts("+i+");'>"+month+"</a></li>");
 	}
 	
-	$("#CurrentSeason").empty();
-	timeCharts(yearScores[currentYear], "Season", template, "#CurrentSeason");  
-	
+	/*
 
 	// Special Pseudo matches
 	renderPie('#chartPseudoBriggs', [['Sansom', sansomMatchBriggs],
@@ -176,6 +156,10 @@ function doCharts()
 	renderPie('#chartPseudoBridge', [['Sansom',  sansomMatchBridge],
 							        ['Cooper',   cooperMatchBridge],
 							        ['Table',    _tableMatchBridge],]);
+									
+	*/
+	
+	showTotal();
 }
 
 function destroyCharts(){
@@ -183,6 +167,72 @@ function destroyCharts(){
 		charts[i].destroy();
 	}
 	charts = [];
+}
+
+function initialiseTemplate(full){
+	destroyCharts();
+	var source = $(full ? "#chart-template-full" : "#chart-template").html();
+	var template = Handlebars.compile(source);
+	$('#Charts').empty();
+	return template;
+}
+
+function showTotal(){
+	var template = initialiseTemplate(false);
+	$("#Charts").append(template({description: "Scores"}));
+	
+	renderPie('#chartScoresMatches', [['Sansom', scores.sansomMatches],
+									['Cooper', scores.cooperMatches],
+									['Table', scores.tableMatches],
+									['Draw', scores.drawMatches]]);
+		
+	renderPie('#chartScoresGames', [['Sansom', scores.sansomGames],
+									['Cooper', scores.cooperGames],
+									['Table', scores.tableGames]]);
+							  
+	renderPie('#chartScoresBridge', [['Sansom', scores.sansomBridge],
+									['Cooper', scores.cooperBridge],
+									['Table', scores.tableBridge]]);
+
+	renderPie('#chartScoresBriggs', [['Sansom', scores.sansomBriggs],
+									['Cooper', scores.cooperBriggs],
+									['Table', scores.tableBriggs]]);
+}
+
+function showSwingometer(){
+	var template = initialiseTemplate(true);
+	$("#Charts").append(template({description: "Swingometer"}));
+	
+	renderLine2('#chartSwingometerGames', [swingometerGames]);
+	renderLine2('#chartSwingometerMatches', [swingometerMatches]);
+	renderLine2('#chartSwingometerBridge', [swingometerBridge]);
+	renderLine2('#chartSwingometerBriggs', [swingometerBriggs]);
+}
+
+function showVersesTime(){
+	var template = initialiseTemplate(true);
+	$("#Charts").append(template({description: "Time"}));
+	
+	renderLine('#chartTimeGames', [sansomCumulativeGames,cooperCumulativeGames,tableCumulativeGames]);
+	renderLine('#chartTimeMatches', [sansomCumulativeMatches,cooperCumulativeMatches,tableCumulativeMatches,drawCumulativeMatches]);
+	renderLine('#chartTimeBriggs', [sansomCumulativeBriggs,cooperCumulativeBriggs,_tableCumulativeBriggs]);	
+	renderLine('#chartTimeBridge', [sansomCumulativeBridge,cooperCumulativeBridge,_tableCumulativeBridge]);
+}
+
+function showMonthCharts(monthNumber){
+	var template = initialiseTemplate(false);
+	var month = monthNames[monthNumber];
+	timeCharts(monthScores[monthNumber], month, template, "#Charts"); 
+}
+
+function showCurrentSeason(){
+	var currentYear = new Date().getFullYear()*1;
+	showYearCharts(currentYear);
+}
+
+function showYearCharts(year){
+	var template = initialiseTemplate(false);
+	timeCharts(yearScores[year], year, template, "#Charts");  
 }
 
 function timeCharts(scores, description, template, section){
