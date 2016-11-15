@@ -1,3 +1,5 @@
+var charts = [];
+
 function doCharts()
 {
 	var monthNames = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -176,6 +178,13 @@ function doCharts()
 							        ['Table',    _tableMatchBridge],]);
 }
 
+function destroyCharts(){
+	for(var i = 0; i < charts.length; i++){
+		charts[i].destroy();
+	}
+	charts = [];
+}
+
 function timeCharts(scores, description, template, section){
 	$(section).append(template({description: description}));
 		
@@ -219,6 +228,7 @@ function renderBar(id, columns){
 			type: 'bar'
 		}
 	});
+	charts.push(chart);
 }
 
 function renderLine(id, columns){
@@ -240,6 +250,7 @@ function renderLine(id, columns){
 			}
 		}
 	});
+	charts.push(chart);
 }
 
 function renderLine2(id, columns){
@@ -283,6 +294,7 @@ function renderLine2(id, columns){
 			{axis: 'y', end: 0, class: 'regionCooper', label: 'Cooper'},
 		]
 	});
+	charts.push(chart);
 }
 
 function renderPie(id, columns){
@@ -298,4 +310,5 @@ function renderPie(id, columns){
 			}
 		}
     });
+	charts.push(chart);
 }

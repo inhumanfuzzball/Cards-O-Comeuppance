@@ -20,13 +20,19 @@ function refresh(){
 }
 
 function showTrophies(){
-	$(".container-fluid").hide();
-	$("#trophy-view").show();
+	$(".loading").fadeIn("slow");	
+	$(".container-fluid").fadeOut("slow");
+	
+	doTrophies();
+	
+	$("#trophy-view").fadeIn("slow");
+	$(".loading").fadeOut("slow");	
 }
 
 function showCharts(){
-	$(".container-fluid").hide();
-	$("#chart-view").show();
+	doCharts();
+	$(".container-fluid").fadeOut("slow");
+	$("#chart-view").fadeIn("slow");
 	$(window).trigger('resize');
 }
 
@@ -126,8 +132,8 @@ function getMatches(){
 	$(".container-fluid").fadeOut("slow");
 	$(".loading").fadeIn("slow");
 	$.getJSON(SCRIPT_URL+"?callback=?&method=MATCHES", function (data) { 
+		destroyCharts();
 		displayMatches(data);
-		buildTrophies(data);
 		$("#match-view").fadeIn("slow");
 		$(".loading").fadeOut("slow");
 	});
@@ -229,7 +235,6 @@ function displayMatches(data){
 	displayTable();
 	calculateScores();
 	displayScores();
-	doCharts();
 }
 
 function updateGameNumber(data){
@@ -308,39 +313,6 @@ function displayGame(data){
 
 	// Store the current game date as its the key for updating the game
 	gameDate = data.gameDate;
-}
-
-/* youtube player */
-
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-function PlayVideo(videoId, startTime, endTime){
-	var player = new YT.Player('player', {
-		videoId: videoId,
-		events: {
-			'onReady': 
-			function(event) 
-			{
-				$(".ytVideo").slideDown();
-				event.target.playVideo();
-			},
-			'onStateChange': 
-			function(event) { 
-				if(event.data == YT.PlayerState.ENDED)
-				{ 
-					$(".ytVideo").slideUp();
-					$("#playerParent").html("<div id='player'></div>");			
-				} 
-			}
-		},
-		playerVars: {
-			start: startTime,
-			end: endTime
-		}
-	});
 }
 
 function PlayAudio(file, element){

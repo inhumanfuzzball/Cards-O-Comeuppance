@@ -4,7 +4,7 @@ var GOLD = "#ff9900";
 var GASH = "#737373";
 
 //Trophies
-function buildTrophies(data)
+function doTrophies()
 {
 	var trophies = [
 	"TrophyComeuppanceCup",
@@ -37,8 +37,8 @@ function buildTrophies(data)
 	var source = $("#entry-template").html();
 	var template = Handlebars.compile(source);
 	
-	calculateLosingStreaks(data);
-	calculateWinningStreaks(data);
+	calculateLosingStreaks();
+	calculateWinningStreaks();
 	
 	$("#sansom-trophies-year").empty();
 	$("#cooper-trophies-year").empty();
@@ -52,22 +52,22 @@ function buildTrophies(data)
 	
 	for(var i = START_YEAR; i < new Date().getFullYear(); i++)
 	{
-		$("#sansom-trophies-year").append(TrophyChampionYear("Sansom",template, data, i));
-		$("#cooper-trophies-year").append(TrophyChampionYear("Cooper",template, data, i));
+		$("#sansom-trophies-year").append(TrophyChampionYear("Sansom",template, i));
+		$("#cooper-trophies-year").append(TrophyChampionYear("Cooper",template, i));
 	}		
 	
 	for(var i = START_YEAR; i < new Date().getFullYear(); i++)
 	{
-		$("#sansom-trophies-year").append(TrophyLoserYear("Sansom",template, data, i));
-		$("#cooper-trophies-year").append(TrophyLoserYear("Cooper",template, data, i));
+		$("#sansom-trophies-year").append(TrophyLoserYear("Sansom",template, i));
+		$("#cooper-trophies-year").append(TrophyLoserYear("Cooper",template, i));
 	}
 	
 	var sansomHtml = "";
 	var cooperHtml = "";
 	for(var i = 0; i < trophies.length; i++)
 	{
-		sansomHtml += window[trophies[i]]("Sansom",template, data);
-		cooperHtml += window[trophies[i]]("Cooper",template, data);
+		sansomHtml += window[trophies[i]]("Sansom",template);
+		cooperHtml += window[trophies[i]]("Cooper",template);
 	}
 	if(sansomHtml === "") sansomHtml = "<p>Nothing to see here</p>";
 	if(cooperHtml === "") cooperHtml = "<p>Nothing to see here</p>";
@@ -77,25 +77,25 @@ function buildTrophies(data)
 	
 	for(var i = 0; i < trophiesShare.length; i++)
 	{
-		$("#sansom-trophies-share").append(window[trophiesShare[i]]("Sansom",template, data));
-		$("#cooper-trophies-share").append(window[trophiesShare[i]]("Cooper",template, data));
+		$("#sansom-trophies-share").append(window[trophiesShare[i]]("Sansom",template));
+		$("#cooper-trophies-share").append(window[trophiesShare[i]]("Cooper",template));
 	}
 	
 	for(var i = 0; i < trophiesShaft.length; i++)
 	{
-		$("#sansom-trophies-shaft").append(window[trophiesShaft[i]]("Sansom",template, data));
-		$("#cooper-trophies-shaft").append(window[trophiesShaft[i]]("Cooper",template, data));
+		$("#sansom-trophies-shaft").append(window[trophiesShaft[i]]("Sansom",template));
+		$("#cooper-trophies-shaft").append(window[trophiesShaft[i]]("Cooper",template));
 	}
 }
 
-function calculateWinningStreaks(data)
+function calculateWinningStreaks()
 {
 	winningStreaks = [];
 	var winner = "";
 	var currentWinningStreak = 0;
 	
 	
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(winner === "Cooper")
@@ -140,13 +140,13 @@ function calculateWinningStreaks(data)
 	winningStreaks.push({player:winner, streak:currentWinningStreak});
 }
 
-function calculateLosingStreaks(data)
+function calculateLosingStreaks()
 {
 	streaks = []
 	var loser = "";
 	var currentLosingStreak = 0;
 
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(loser === "Cooper")
@@ -194,7 +194,7 @@ function calculateLosingStreaks(data)
 
 /* Functions for each trophy */
 
-function TrophyComeuppanceCup(player, template, data)
+function TrophyComeuppanceCup(player, template)
 {
 	var details = {glyph: "fa fa-trophy", title: "The Comeuppance Cup", desc: "Awarded to the player who has won the most matches", colour: "gold"};
 	
@@ -205,7 +205,7 @@ function TrophyComeuppanceCup(player, template, data)
 	return template(details);
 }
 
-function TrophyPingtarPlaque(player, template, data)
+function TrophyPingtarPlaque(player, template)
 {
 	var details = {glyph: "fa fa-shield",  title: "The Pingtar Plaque", desc: "Awarded to the player who has won the most games", colour: "gold"};
 	
@@ -215,7 +215,7 @@ function TrophyPingtarPlaque(player, template, data)
 	return template(details);
 }
 
-function TrophyThomasTrophy(player, template, data)
+function TrophyThomasTrophy(player, template)
 {
 	var details = {glyph: "fa fa-shield",  title: "The Thomas Trophy", desc: "Awarded to the player for the dubious honour of being Briggsed the most times", colour: "rubbish"};
 	
@@ -225,7 +225,7 @@ function TrophyThomasTrophy(player, template, data)
 	return template(details);
 }
 
-function TrophyKonigsbergCup(player, template, data)
+function TrophyKonigsbergCup(player, template)
 {
 	var details = {glyph: "fa fa-beer", title: "The Konigsberg Cup", desc: "Awarded to the player for the dubious honour of picking up the most Bridge cards", colour: "rubbish"};
 	
@@ -235,13 +235,13 @@ function TrophyKonigsbergCup(player, template, data)
 	return template(details);
 }
 
-function TrophyShafted(player, template, data)
+function TrophyShafted(player, template)
 {
 	var returnText = "";
 
 	var count = 0;
 	
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom" && match.cooper - match.sansom >= 5) count++ 
@@ -284,11 +284,11 @@ function TrophyShafted(player, template, data)
 	return returnText;
 }
 
-function TrophyBlackHoleOfComeuppance(player, template, data)
+function TrophyBlackHoleOfComeuppance(player, template)
 {
 	var details = {glyph: "fa fa-circle", title: "Black Hole of Comeuppance", desc: "Has lost a match by ten or more games, forming a singularity of Comeuppance which even light cannot escape.", colour: "rubbish"};
 	
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom" && match.cooper - match.sansom >= 10) return template(details);
@@ -298,14 +298,14 @@ function TrophyBlackHoleOfComeuppance(player, template, data)
 	return "";
 }
 
-function TrophyPingtarPrince(player, template, data)
+function TrophyPingtarPrince(player, template)
 {
 	var details = {glyph: "fa fa-diamond", title: "Pingtar Prince", desc: "", colour: "silver"};
 	
 	var wonBy;
 	var winCount = 0;
 	var date;
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(match.cooper > match.sansom)
@@ -354,13 +354,13 @@ function TrophyPingtarPrince(player, template, data)
 	return "";
 }
 
-function TrophyBridgeTooFar(player, template, data)
+function TrophyBridgeTooFar(player, template)
 {
 	var details = {glyph: "fa fa-ban", title: "A Bridge too far!", desc: "Has had more than 3/4 of the bridge cards in a game.", colour: "rubbish"};
 	
 	var count = 0;
 	
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		// Ignore games with no bridge cards
@@ -380,7 +380,7 @@ function TrophyBridgeTooFar(player, template, data)
 	return "";
 }
 
-function TrophyCloudOfComeuppance(player, template, data)
+function TrophyCloudOfComeuppance(player, template)
 {
 	var details = {glyph: "fa fa-cloud", title: "Under the cloud of Comeuppance", desc: "Was under a cloud of Comeuppance by loosing 4 consecutive games", colour: "rubbish"};
 
@@ -392,7 +392,7 @@ function TrophyCloudOfComeuppance(player, template, data)
 	return "";
 }
 
-function TrophyShare(player, template, data)
+function TrophyShare(player, template)
 {
 	var details = {glyph: "fa fa-hand-stop-o", title: "The Kilroy Silk Award", desc: "Won the highest number of games in a match", colour: "silver"};
 
@@ -400,7 +400,7 @@ function TrophyShare(player, template, data)
 	var maxDate = "";
 	var maxGames = 0;
 	var shared = false;
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 
@@ -445,11 +445,11 @@ function TrophyShare(player, template, data)
 	return "";
 }
 
-function TrophyTeletext(player, template, data)
+function TrophyTeletext(player, template)
 {
 	var details = {glyph: "fa fa-cc", title: "888 Teletext Award", desc: "Got no Briggsings in a match.", colour: "silver"};
 	var count = 0;
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom" && match.sansombriggs === 0) count++	
@@ -461,11 +461,11 @@ function TrophyTeletext(player, template, data)
 	else return "";
 }
 
-function TrophyTollFree(player, template, data)
+function TrophyTollFree(player, template)
 {
 	var details = {glyph: "fa fa-smile-o", title: "Toll Free", desc: "Got no bridge cards in a match.", colour: "silver"};
 	var count = 0;
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom" && match.sansombridge === 0) count++;
@@ -477,13 +477,13 @@ function TrophyTollFree(player, template, data)
 	else return "";
 }
 
-function TrophyILiedTwice(player, template, data)
+function TrophyILiedTwice(player, template)
 {
 	var details = {glyph: "fa fa-hand-peace-o", title: "But I lied... twice", desc: "Managed to go two matches without being Briggsed", colour: "silver"};
 
 	var count = 0;
 	var maxCount = 0;
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom")
@@ -508,11 +508,11 @@ function TrophyILiedTwice(player, template, data)
 	else return "";
 }
 
-function TrophyHastingsAward(player, template, data)
+function TrophyHastingsAward(player, template)
 {
 	var details = {glyph: "fa fa-diamond", title: "The Hastings Award", desc: "Won 12 games in a match.", colour: "silver"};
 
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom" && match.sansom >= 12) return template(details)
@@ -522,11 +522,11 @@ function TrophyHastingsAward(player, template, data)
 	return "";
 }
 
-function TrophyCrippled(player,template,data)
+function TrophyCrippled(player,template)
 {
 	var details = {glyph: "fa fa-ambulance", title: "Crippled", desc: "Had more than five briggsings in a match", colour: "rubbish"};
 
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom" && match.sansombriggs >= 5) return template(details)
@@ -536,11 +536,11 @@ function TrophyCrippled(player,template,data)
 	return "";
 }
 
-function TrophyCrippledBurnt(player,template,data)
+function TrophyCrippledBurnt(player,template)
 {
 	var details = {glyph: "fa fa-fire-extinguisher", title: "Crippled and Burnt", desc: "Had more than eight briggsings in a match", colour: "rubbish"};
 
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom" && match.sansombriggs >= 8) return template(details)
@@ -550,12 +550,12 @@ function TrophyCrippledBurnt(player,template,data)
 	return "";
 }
 
-function TrophyPileOfComeuppance(player,template,data)
+function TrophyPileOfComeuppance(player,template)
 {
 	var details = {glyph: "fa fa-bomb", title: "Pile of Comeuppance", desc: "Came third in a match", colour: "rubbish"};
 	var count = 0;
 	var dates = "";
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom" && match.sansom < match.cooper && match.sansom < match.table) count++;
@@ -613,7 +613,7 @@ function TrophyPileOfComeuppance(player,template,data)
 	return "";
 }
 
-function TrophyComeuppanceSpree(player,template,data)
+function TrophyComeuppanceSpree(player,template)
 {
 	var count = 0;
 	var count3 = 0;
@@ -670,7 +670,7 @@ function TrophyComeuppanceSpree(player,template,data)
 	return html;
 }
 
-function TrophyNoComeuppance(player,template,data)
+function TrophyNoComeuppance(player,template)
 {
 	var count = 0;
 	var count3 = 0;
@@ -726,12 +726,12 @@ function TrophyNoComeuppance(player,template,data)
 	return html;
 }
 
-function TrophyHatTrick(player,template,data)
+function TrophyHatTrick(player,template)
 {
 	var details = {glyph: "fa fa-magic", title: "Hat-trick", desc: "Had the most game wins, bridge cards and Briggsings in a match", colour: "silver"};
 
 	var count = 0;
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(	player === "Sansom" && 
@@ -759,11 +759,11 @@ function TrophyHatTrick(player,template,data)
 	return "";
 }
 
-function TrophyBeelzebuerkStrikes(player,template,data)
+function TrophyBeelzebuerkStrikes(player,template)
 {
 	var details = {glyph: "fa fa-bolt", title: "Beelzebuerk Strikes", desc: "Didn't win a single game!", colour: "rubbish"};
 	var count = 0;
-	for(var i = 0; i < data.matches.length; i++)
+	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
 		if(player === "Sansom" && match.sansom === 0) count++;
@@ -776,7 +776,7 @@ function TrophyBeelzebuerkStrikes(player,template,data)
 	}
 }
 
-function TrophyChampionYear(player,template,data,year)
+function TrophyChampionYear(player,template,year)
 {
 	var html = "";
 	
@@ -792,7 +792,7 @@ function TrophyChampionYear(player,template,data,year)
 	return html;
 }
 
-function TrophyLoserYear(player,template,data,year)
+function TrophyLoserYear(player,template,year)
 {
 	var html = "";
 	
