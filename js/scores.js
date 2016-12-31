@@ -22,6 +22,11 @@ function calculateScores(){
 		addToTotal(match, monthScores[month]);
 		addToTotal(match, scores);
 	}
+	
+	if(yearScores[currentYear] == null)
+	{
+		yearScores[currentYear] = getScoresObject();
+	}
 }
 
 function addToTotal(match,scoreCount)

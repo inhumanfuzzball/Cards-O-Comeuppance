@@ -249,7 +249,7 @@ function toggleYearDisplay(){
 
 function displayScores(){
 	var year = new Date().getFullYear()*1;
-	
+
 	$("#match").text(yearScores[year].matchNumber + " (" + scores.matchNumber + ")");
 	$("#game").text(yearScores[year].gameNumber + " (" + scores.gameNumber + ")");
 	$("#sansomMatchScore").text(yearScores[year].sansomMatches + " (" + scores.sansomMatches+ ")");
