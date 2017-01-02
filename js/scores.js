@@ -84,7 +84,7 @@ function subScore(column)
 		scores.cooperGames--;
 	}
 	
-	if(column === "A" || column ==="B") // here incase additional columns are added, only game wins update hte game total
+	if(column === "A" || column ==="B") // here incase additional columns are added, only game wins update the game total
 	{
 		yearScores[currentYear].gameNumber--;
 		scores.gameNumber--;		

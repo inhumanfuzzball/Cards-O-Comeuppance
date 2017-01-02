@@ -28,6 +28,7 @@ function doTrophies()
 	"TrophyBeelzebuerkStrikes",
 	"TrophyBlackHoleOfComeuppance",
 	"TrophyBridgeTooFar",
+	"BridgingTheGap",
 	"TrophyCloudOfComeuppance",
 	"TrophyCrippled",
 	"TrophyCrippledBurnt",
@@ -374,6 +375,31 @@ function TrophyBridgeTooFar(player, template)
 	if(count > 0)
 	{
 		details.desc = "Has had more than 3/4 of the bridge cards in a game.";
+		details.count = count;
+		return template(details);
+	}
+	return "";
+}
+
+function BridgingTheGap(player, template)
+{
+	var details = {glyph: "fa fa-link", title: "Bridging the gap", desc: "Has had more than 2/3 of the bridge cards in a game.", colour: "rubbish"};
+	
+	var count = 0;
+	
+	for(var i = 0; i < matches.length; i++)
+	{
+		var match = matches[i];
+		// Ignore games with no bridge cards
+		if(match.sansombridge === "") continue;
+		
+		var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
+		if(player === "Sansom" && match.sansombridge/totalBridge > 0.66) count++;
+		if(player === "Cooper" && match.cooperbridge/totalBridge > 0.66) count++; 
+	}
+	
+	if(count > 0)
+	{
 		details.count = count;
 		return template(details);
 	}
