@@ -23,10 +23,8 @@ function calculateScores(){
 		addToTotal(match, scores);
 	}
 	
-	if(yearScores[currentYear] == null)
-	{
-		yearScores[currentYear] = getScoresObject();
-	}
+	// Set the scores for the current year if there have been no games yet
+	if(yearScores[currentYear] == null) yearScores[currentYear] = getScoresObject();
 }
 
 function addToTotal(match,scoreCount)

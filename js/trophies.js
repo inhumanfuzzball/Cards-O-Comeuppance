@@ -1,7 +1,5 @@
 var streaks = [];
 var winningStreaks = [];
-var GOLD = "#ff9900";
-var GASH = "#737373";
 
 //Trophies
 function doTrophies()
@@ -445,14 +443,8 @@ function TrophyShare(player, template)
 			maxPlayer = "Cooper";
 			maxDate = match.date;
 		}
-		if(match.cooper === maxGames)
-		{
-			if(maxPlayer === "Sansom") shared = true;
-		}
-		if(match.sansom === maxGames)
-		{
-			if(maxPlayer === "Cooper") shared = true;
-		}
+		
+		shared = (match.cooper === maxGames && maxPlayer === "Sansom") || (match.sansom === maxGames && maxPlayer === "Cooper");
 	}
 	
 	if(player === maxPlayer && !shared)
@@ -578,6 +570,8 @@ function TrophyCrippledBurnt(player,template)
 
 function TrophyPileOfComeuppance(player,template)
 {
+	var sizes = ["","A pile","Two piles","Three piles","Four piles","A mound","A hill","A mountain","An island","A continent","A planet","A star","A galexy"];
+	
 	var details = {glyph: "fa fa-bomb", title: "Pile of Comeuppance", desc: "Came third in a match", colour: "rubbish"};
 	var count = 0;
 	var dates = "";
@@ -590,45 +584,12 @@ function TrophyPileOfComeuppance(player,template)
 		
 	if(count > 0)
 	{
-		switch(count)
-		{
-			case 1:
-			case 2:
-			case 3:
-			case 4:
-				details.title = count + (count === 1 ? " pile " : " piles ") + "of comeuppance";
-				break;
-			case 5:
-				details.title = "A mound of comeuppance";
-				break;
-			case 6:
-				details.title = "A hill of comeuppance";
-				break;
-			case 7:
-				details.title = "A mountain of comeuppance";
-				break;
-			case 8:
-				details.title = "A island of comeuppance";
-				break;
-			case 9:
-				details.title = "An continent of comeuppance";
-				break;
-			case 10:
-				details.title = "A super-continent of comeuppance";
-				break;
-			case 11:
-				details.title = "A planet of comeuppance";
-				break;
-			case 12:
-				details.title = "A star of comeuppance";
-				break;
-			case 13:
-				details.title = "A galaxy of comeuppance";
-				break;
-			default:
-				details.title = "A universe of comeuppance";
-				details.glyph = "fa fa-sun-o fa-spin";
-				break;
+		if(sizes.length >= count){
+			details.title = sizes[count] + " of comeuppance";	
+		} 
+		else {
+			details.title = "A universe of comeuppance";
+			details.glyph = "fa fa-sun-o fa-spin";
 		}
 		
 		details.desc = "Has come third in a match";
@@ -822,8 +783,8 @@ function TrophyLoserYear(player,template,year)
 {
 	var html = "";
 	
-	var briggsDetails = {glyph: "fa fa-thumbs-o-down", title: "Comeuppance Briggs of " + year, desc: "Briggsed the most in " + year, colour: "rubbish"};
-	var bridgeDetails = {glyph: "fa fa-thumbs-o-down", title: "Comeuppance Kilroy of " + year, desc: "Had the most bridge cards in " + year, colour: "rubbish"};
+	var briggsDetails = {glyph: "fa fa-trophy fa-rotate-180", title: "Comeuppance Briggs of " + year, desc: "Briggsed the most in " + year, colour: "rubbish"};
+	var bridgeDetails = {glyph: "fa fa-trophy fa-rotate-180", title: "Comeuppance Kilroy of " + year, desc: "Had the most bridge cards in " + year, colour: "rubbish"};
 	
 	if(player==="Sansom" && yearScores[year].sansomBridge > yearScores[year].cooperBridge) html += template(bridgeDetails);
 	if(player==="Cooper" && yearScores[year].cooperBridge > yearScores[year].sansomBridge) html += template(bridgeDetails);
@@ -834,17 +795,3 @@ function TrophyLoserYear(player,template,year)
 
 	return html;
 }
-
-function NumberToWords(number)
-{
-	if (number === 1) return "once";
-	if (number === 2) return "twice";
-	if (number > 2) return number + " times";
-}
-
-
-
-
-
-
-

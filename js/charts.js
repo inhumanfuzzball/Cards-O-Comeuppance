@@ -126,7 +126,6 @@ function doCharts()
 		swingometerMatches.push(sansomMatchCounter-cooperMatchCounter);
 		swingometerBridge.push(sansomBridgeCounter-cooperBridgeCounter);
 		swingometerBriggs.push(sansomBriggsCounter-cooperBriggsCounter);
-		
     }
 	
 	$("#Charts-Dropdown").empty();
@@ -145,19 +144,6 @@ function doCharts()
 		var month = monthNames[i];
 		$("#Charts-Dropdown").append("<li><a href='javascript:showMonthCharts("+i+");'>"+month+"</a></li>");
 	}
-	
-	/*
-
-	// Special Pseudo matches
-	renderPie('#chartPseudoBriggs', [['Sansom', sansomMatchBriggs],
-								    ['Cooper',  cooperMatchBriggs],
-								    ['Table',   _tableMatchBriggs],]);
-	
-	renderPie('#chartPseudoBridge', [['Sansom',  sansomMatchBridge],
-							        ['Cooper',   cooperMatchBridge],
-							        ['Table',    _tableMatchBridge],]);
-									
-	*/
 	
 	showTotal();
 }
@@ -245,29 +231,15 @@ function timeCharts(scores, description, template, section){
 
 	renderPie('#chart'+description+'Games', 	[['Sansom', scores.sansomGames],
 												['Cooper',  scores.cooperGames],
-												['Table',   scores.tableGames],]);
-	
-	if(scores.sansomBridge > 0 || scores.cooperBridge > 0 || scores.tableBridge > 0)
-	{
-		renderPie('#chart'+description+'Bridge', 	[['Sansom', scores.sansomBridge],
-													['Cooper',  scores.cooperBridge],
-													['Table',   scores.tableBridge],]);
-	}
-	else
-	{
-		$('#chart'+description+'Bridge').html("<p>Nothing to see here.</p>");
-	}	
+												['Table',   scores.tableGames],]);		
+												
+	renderPie('#chart'+description+'Bridge', 	[['Sansom', scores.sansomBridge],
+												['Cooper',  scores.cooperBridge],
+												['Table',   scores.tableBridge],]);
 
-	if(scores.sansomBriggs > 0 || scores.cooperBriggs > 0 || scores.tableBriggs > 0)
-	{
-		renderPie('#chart'+description+'Briggs', 	[['Sansom',  scores.sansomBriggs],
-													['Cooper',   scores.cooperBriggs],
-													['Table',    scores.tableBriggs],]);
-	}
-	else
-	{
-		$('#chart'+description+'Briggs').html("<p>Nothing to see here.</p>");			
-	}
+	renderPie('#chart'+description+'Briggs', 	[['Sansom',  scores.sansomBriggs],
+												['Cooper',   scores.cooperBriggs],
+												['Table',    scores.tableBriggs],]);
 }
 
 function renderBar(id, columns){
@@ -348,17 +320,32 @@ function renderLine2(id, columns){
 }
 
 function renderPie(id, columns){
-	var chart = c3.generate({
-		bindto: id,	
-		data: {		
-			columns: columns,
-			type : 'pie'
-		},
-		pie: {
-			label: {
-				format: function(value, ratio, id) { return value; }
-			}
+	
+	var show = false;
+	for(var i = 0; i < columns.length; i++){
+		if(columns[i][1] > 0){
+			show = true;
+			break;
 		}
-    });
-	charts.push(chart);
+	}
+
+	if(show){
+		var chart = c3.generate({
+			bindto: id,	
+			data: {		
+				columns: columns,
+				type : 'pie'
+			},
+			pie: {
+				label: {
+					format: function(value, ratio, id) { return value; }
+				}
+			}
+		});
+		charts.push(chart);
+	}else{
+		$(id).html("<p>Nothing to see here.</p>");
+	}
+	
+
 }
