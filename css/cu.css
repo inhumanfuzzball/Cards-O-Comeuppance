@@ -104,6 +104,11 @@ input.form-fixer, span.form-fixer {
 	padding: 5px;
 }
 
+.dealer
+{
+	text-decoration: underline;
+}
+
 /* Label for score item */
 .label{
 	color: #000000;
