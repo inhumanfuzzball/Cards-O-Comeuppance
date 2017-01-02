@@ -9,8 +9,6 @@ var allrows = false;
 
 var playingAudio = false;
 
-var dealers = [];
-
 $(document).ready(function() {
 	$(".container-fluid").hide();
 	getMatches();
@@ -60,19 +58,22 @@ function  updateScore(column,method){
 	displayScores();
 }
 
-function updateDealer(randomSwitch){
-
-	// Random initialisation of dealers
-	if(dealers.length == 0) dealers = (Math.random() >= 0.5) ? ["Cooper","Sansom"] : ["Sansom","Cooper"];
-	
-	// Random chance of dealer swap
-	if(randomSwitch && Math.random() >= 0.90) dealers.reverse();
-
-	// Underline the dealer
+function highlightDealer(){
 	var scoresTotal = ($("#A > :input").val()*1) + ($("#B > :input").val()*1) + ($("#C > :input").val()*1);
+	
+	// Seed the random number generator so it always gives consistant reults for a given game date
+	Math.seedrandom(gameDate);
+	
+	// Initialise the dealers
+	var dealers = (Math.random() >= 0.5) ? ["Cooper","Sansom"] : ["Sansom","Cooper"];
+	
+	// Walk though the games swapping when necessary
+	for(var i = 0; i <= scoresTotal; i++){
+		if(Math.random() >= 0.90) dealers.reverse();
+	}
+
 	$(".topbox h3").removeClass("dealer");
 	$("#"+dealers[scoresTotal % 2]+"-Title").addClass("dealer");
-
 }
 
 function validate(){
@@ -159,7 +160,7 @@ function pushScore(element){
 	updateScore(column,method);
 	
 	// Update the dealer if necessary
-	if((column == "A" || column == "B" || column == "C") && method == "add") updateDealer(true);
+	highlightDealer();
 	
 	// Save back to server
 	updateScores();	
@@ -380,7 +381,7 @@ function displayGame(data){
 
 	// Store the current game date as its the key for updating the game
 	gameDate = data.gameDate;
-	updateDealer(false);
+	highlightDealer();
 	validate();
 }
 
