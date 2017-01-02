@@ -23,6 +23,8 @@ var sansomCumulativeBridge;
 var cooperCumulativeBridge;
 var _tableCumulativeBridge;
 
+var yearLines = [];
+
 function doCharts()
 {
 	swingometerGames =   ['Games', null];
@@ -71,8 +73,16 @@ function doCharts()
 	var cooperBridgeCounter = 0;
 	var _tableBridgeCounter = 0;
 
+	var lastYear = 0;
+	
     for(var i = 0; i < matches.length; i++){
 
+		var year = 	matches[i].date.split("-")[2]*1;
+		if(lastYear < year){
+			lastYear = year;
+			yearLines.push({value: i, text: year});
+		}
+	
     	sansomGamesChart.push(matches[i].sansom);
 		cooperGamesChart.push(matches[i].cooper);
 		tableGamesChart.push(matches[i].table);
@@ -265,10 +275,8 @@ function renderLine(id, columns){
 			}
 		},
 		grid: {
-			y: {
-				lines: [
-					{value: 0},
-				]
+			x: {
+				lines: yearLines
 			}
 		}
 	});
@@ -305,10 +313,7 @@ function renderLine2(id, columns){
 				]
 			},
 			x: {
-				lines: [
-					{value: 1, text: 'Sansom'},
-					{value: 1, text: 'Cooper', position: 'start'},
-				]
+				lines: yearLines
 			}
 		},
 		regions: [

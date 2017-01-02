@@ -53,7 +53,54 @@ function  updateScore(column,method){
 			subScore(column);
 		}
 	}
+	
+	validate();
 	displayScores();
+}
+
+function validate(){
+	// Check the scores add up
+	var scoresTotal = ($("#A > :input").val()*1) + ($("#B > :input").val()*1) + ($("#C > :input").val()*1);
+	var bridgeTotal = ($("#D > :input").val()*1) + ($("#E > :input").val()*1) + ($("#F > :input").val()*1);
+	
+	if(scoresTotal > bridgeTotal){
+		//disable scores add
+		$("#A > .add").prop('disabled', true);
+		$("#B > .add").prop('disabled', true);
+		$("#C > .add").prop('disabled', true);
+		
+		//disable bridge sub
+		$("#D > .sub").prop('disabled', true);
+		$("#E > .sub").prop('disabled', true);
+		$("#F > .sub").prop('disabled', true);
+		
+		//highlight bridge
+		$("#D > input").addClass('highlighted');
+		$("#E > input").addClass('highlighted');
+		$("#F > input").addClass('highlighted');
+	}
+	else if(bridgeTotal > scoresTotal){
+		//disable bridge add
+		$("#D > .add").prop('disabled', true);
+		$("#E > .add").prop('disabled', true);
+		$("#F > .add").prop('disabled', true);
+		
+		//disable scores sub
+		$("#A > .sub").prop('disabled', true);
+		$("#B > .sub").prop('disabled', true);
+		$("#C > .sub").prop('disabled', true);
+		
+		//highlight scores
+		$("#A > input").addClass('highlighted');
+		$("#B > input").addClass('highlighted');
+		$("#C > input").addClass('highlighted');
+	}
+	else{
+		$(".add").prop('disabled', false);
+		$(".sub").prop('disabled', false);
+		$("input").removeClass('highlighted');
+	}
+	
 }
 
 function updateScores(){
@@ -313,6 +360,7 @@ function displayGame(data){
 
 	// Store the current game date as its the key for updating the game
 	gameDate = data.gameDate;
+	validate();
 }
 
 function PlayAudio(file, element){
@@ -322,5 +370,17 @@ function PlayAudio(file, element){
 		playingAudio = true;
 		element.classList.add("lose");
 		audio.play();
+			
+		$.ajax({url: SCRIPT_URL+"?method=PLAYSOUND&sound="+file,
+			type: "POST",
+			crossDomain: true,
+			data: JSON.stringify(""),
+			dataType: "json"})
+		.done(function(data){
+		
+		})
+		.fail(function(xhr,status,error){
+
+		});
 	}
 }

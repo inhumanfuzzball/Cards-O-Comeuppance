@@ -147,6 +147,10 @@ input.form-fixer, span.form-fixer {
 .score-readonly > .sub {
 	display: none;
 }
+.highlighted{
+	background: yellow;
+}
+
 .ytVideo{
 	display: none;
 }

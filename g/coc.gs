@@ -16,10 +16,29 @@ function doGet(e) {
   else if(method === "MATCHES"){
     return getMatchesResponse(e.parameters.callback);
   }
+
+
 }
 
 function doPost(e) {
-
+  
+  if (e.parameter.method === "PLAYSOUND"){
+    var scriptProperties = PropertiesService.getScriptProperties();
+    var soundName = e.parameter.sound;
+    var soundsSheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName("Sounds");
+    
+    var row = scriptProperties.getProperty('LastSoundRow');
+    if(row == null) row = 1;
+    else row = (row*1)+1;
+    
+    soundsSheet.getRange(row,1).setValue(Utilities.formatDate(new Date(), "GMT", "yyyy-MM-dd'T'HH:mm:ss'Z'"));
+    soundsSheet.getRange(row,2).setValue(soundName);
+    
+    scriptProperties.setProperty('LastSoundRow', row);
+    
+    return ContentService.createTextOutput(callback + "(" + Utilities.jsonStringify("Success") + ")").setMimeType(ContentService.MimeType.JAVASCRIPT);   
+  }
+  
   var col = e.parameter.col;
   var method = e.parameter.method == null ? "ADD" : e.parameter.method.toUpperCase();
   var gameDate = e.parameter.date;
@@ -45,6 +64,26 @@ function doPost(e) {
   }
   
   return getScoresResponse(e.parameter.callback);
+}
+
+function logSoundPlay(){
+  var soundName = "test";
+  var soundsSheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName("Sounds");
+  
+  var scriptProperties = PropertiesService.getScriptProperties();
+  
+  var row = scriptProperties.getProperty('LastSoundRow');
+  Logger.log(row);
+  if(row == null) row = 1;
+  else row = (row*1)+1;
+  
+  soundsSheet.getRange(row,1).setValue(Utilities.formatDate(new Date(), "GMT", "yyyy-MM-dd'T'HH:mm:ss'Z'"));
+  soundsSheet.getRange(row,2).setValue(soundName);
+  
+  scriptProperties.setProperty('LastSoundRow', row);
+  
+  return true;
+
 }
 
 function save(rowData){

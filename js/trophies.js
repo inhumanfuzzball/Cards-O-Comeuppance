@@ -1,7 +1,6 @@
 var streaks = [];
 var winningStreaks = [];
 
-//Trophies
 function doTrophies()
 {
 	var trophies = [
