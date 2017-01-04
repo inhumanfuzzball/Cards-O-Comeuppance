@@ -1,4 +1,5 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
+var API_URL = "http://comeuppanceapi.azurewebsites.net/api/Scores/"
 var START_YEAR = 2014;
 
 var gameDate;
@@ -46,11 +47,15 @@ function  updateScore(column,method){
 	if(method === "add"){
 		$(control).val(($(control).val() * 1) + 1);
 		addScore(column)
+		
+		$.ajax({url: API_URL+column,type: "POST",crossDomain: true});
 	}
 	else if(method === "sub"){
 		if(($(control).val() * 1) > 0){ // Don't allow negative scores
 			$(control).val(($(control).val() * 1) - 1);
 			subScore(column);
+
+			$.ajax({url: API_URL+column,type: "DELETE",crossDomain: true});
 		}
 	}
 	
