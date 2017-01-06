@@ -143,7 +143,8 @@ function doCharts()
 	$("#Charts-Dropdown").append("<li><a href='javascript:showCurrentSeason();'>Current Season</a></li>");
 	$("#Charts-Dropdown").append("<li><a href='javascript:showSwingometer();'>Swingometer</a></li>");
 	$("#Charts-Dropdown").append("<li><a href='javascript:showVersesTime();'>Verses Time</a></li>");
-	
+	$("#Charts-Dropdown").append("<li><a href='javascript:showSound();'>Sounds</a></li>");
+		
 	var currentYear = new Date().getFullYear()*1;
 	for(var year = currentYear; year >= START_YEAR; year--)
 	{	
@@ -154,7 +155,7 @@ function doCharts()
 		var month = monthNames[i];
 		$("#Charts-Dropdown").append("<li><a href='javascript:showMonthCharts("+i+");'>"+month+"</a></li>");
 	}
-	
+
 	showTotal();
 }
 
@@ -229,6 +230,14 @@ function showCurrentSeason(){
 function showYearCharts(year){
 	var template = initialiseTemplate(false);
 	timeCharts(yearScores[year], year, template, "#Charts");  
+}
+
+function showSound(){
+	destroyCharts();
+	$("#Charts").empty();
+	$("#Charts").append("<h1>Sounds</h1>");
+	$("#Charts").append("<div id='chartSounds'></div>");
+	$.getJSON(API_URL+"SoundPlay/Stats",function (data) { renderPie('#chartSounds',data); });
 }
 
 function timeCharts(scores, description, template, section){

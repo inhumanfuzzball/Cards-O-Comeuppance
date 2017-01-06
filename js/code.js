@@ -1,5 +1,5 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
-var API_URL = "http://comeuppanceapi.azurewebsites.net/api/Scores/"
+var API_URL = "http://comeuppanceapi.azurewebsites.net/api/"
 var START_YEAR = 2014;
 
 var gameDate;
@@ -48,14 +48,14 @@ function  updateScore(column,method){
 		$(control).val(($(control).val() * 1) + 1);
 		addScore(column)
 		
-		$.ajax({url: API_URL+column,type: "POST",crossDomain: true});
+		$.ajax({url: API_URL+"scores/"+column,type: "POST",crossDomain: true});
 	}
 	else if(method === "sub"){
 		if(($(control).val() * 1) > 0){ // Don't allow negative scores
 			$(control).val(($(control).val() * 1) - 1);
 			subScore(column);
 
-			$.ajax({url: API_URL+column,type: "DELETE",crossDomain: true});
+			$.ajax({url: API_URL+"scores/"+column,type: "DELETE",crossDomain: true});
 		}
 	}
 	
@@ -396,18 +396,7 @@ function PlayAudio(file, element){
 		audio.onended = function() { playingAudio = false; element.classList.remove("lose"); }
 		playingAudio = true;
 		element.classList.add("lose");
-		audio.play();
-			
-		$.ajax({url: SCRIPT_URL+"?method=PLAYSOUND&sound="+file,
-			type: "POST",
-			crossDomain: true,
-			data: JSON.stringify(""),
-			dataType: "json"})
-		.done(function(data){
-		
-		})
-		.fail(function(xhr,status,error){
-
-		});
+		audio.play();			
+		$.ajax({url: API_URL+"SoundPlay/"+file,type: "POST",crossDomain: true});
 	}
 }
