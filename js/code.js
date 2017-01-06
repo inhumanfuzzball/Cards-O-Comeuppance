@@ -191,6 +191,9 @@ function addGame(){
 			$("#error-text").text("Error creating game. Reason: " + error);		
 			$("#error-box").show();
         });
+	
+	// create the match in the API
+	$.ajax({url: API_URL+"Matches",type:"POST",crossDomain: true});
 }
 
 function getScores(date){
