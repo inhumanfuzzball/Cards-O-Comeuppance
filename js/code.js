@@ -391,6 +391,23 @@ function displayGame(data){
 	gameDate = data.gameDate;
 	highlightDealer();
 	validate();
+	
+	if(data.complete){
+		var source = $("#timeline-template").html();
+		var template = Handlebars.compile(source);
+		$(".timeline").empty();
+		$(".timeline").append("<div class='line text-muted'></div>");
+		$.getJSON(API_URL+"Matches/"+ConvertDateToISO(gameDate)+"/Timeline", function (data) { 
+			jQuery.each(data, function(index, value) {
+				$(".timeline").append(template(this));
+			});
+		});
+	}
+}
+
+function ConvertDateToISO(date){
+	var elements = date.split("-");
+	return elements[2] + "-" + elements[1] + "-" + elements[0];
 }
 
 function PlayAudio(file, element){

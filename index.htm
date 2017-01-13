@@ -240,6 +240,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="timeline">
+				<div class="line text-muted"></div>
+			</div>
 			<div>
 				<h2>
 					<i class="fa fa-hand-peace-o" onclick="PlayAudio('5_I_lied_Twice', this);"></i>&nbsp;
@@ -324,7 +327,19 @@
 		<div id="chart{{description}}Briggs"></div>
 	</script>
 	
-	<!-- Java script -->
+	
+	<script id="timeline-template" type="text/x-handlebars-template">
+	    <article class="panel {{Type}} panel-outline">
+            <div class="panel-heading icon">
+                <i class="fa {{Image}}"></i>
+            </div>
+            <div class="panel-body">
+                <em>{{Date}}</em> {{Message}}
+            </div>
+        </article>
+	</script>
+	
+	<!-- Javascript -->
 	<!-- JQuery -->
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
