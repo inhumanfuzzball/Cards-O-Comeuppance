@@ -7,6 +7,7 @@ var matches;
 
 var showyear = false;
 var allrows = false;
+var allTimeLine = true;
 
 var playingAudio = false;
 
@@ -402,6 +403,16 @@ function displayGame(data){
 				$(".timeline").append(template(this));
 			});
 		});
+	}
+}
+
+function ToggleTimeLine(){
+	if(allTimeLine){
+		allTimeLine = false;
+		$(".panel-default").hide();
+	}else{
+		allTimeLine = true;
+		$(".panel-default").show();
 	}
 }
 

@@ -331,7 +331,8 @@
 	<script id="timeline-template" type="text/x-handlebars-template">
 	    <article class="panel {{Type}} panel-outline">
             <div class="panel-heading icon">
-                <i class="fa {{Image}}"></i>
+                <i class="fa {{Image}}" onclick="ToggleTimeLine();"></i>
+				
             </div>
             <div class="panel-body">
                 <em>{{Date}}</em> {{Message}}
