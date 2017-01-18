@@ -1,5 +1,6 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
-var API_URL = "http://comeuppanceapi.azurewebsites.net/api/"
+//var API_URL = "http://comeuppanceapi.azurewebsites.net/api/"
+var API_URL = "http://localhost:49972/api/"
 var START_YEAR = 2014;
 
 var gameDate;
@@ -8,12 +9,15 @@ var matches;
 var showyear = false;
 var allrows = false;
 var allTimeLine = true;
+var currentPosition = { latitude: 0, longitude: 0};
 
 var playingAudio = false;
 
 $(document).ready(function() {
 	$(".container-fluid").hide();
 	getMatches();
+	getLocation();
+	window.setInterval(getLocation, 300000);
 });
 
 function refresh(){
@@ -49,7 +53,7 @@ function  updateScore(column,method){
 		$(control).val(($(control).val() * 1) + 1);
 		addScore(column)
 		
-		$.ajax({url: API_URL+"scores/"+column,type: "POST",crossDomain: true});
+		$.ajax({url: API_URL+"scores/"+column,data:currentPosition,type: "POST",crossDomain: true});
 	}
 	else if(method === "sub"){
 		if(($(control).val() * 1) > 0){ // Don't allow negative scores
@@ -436,4 +440,17 @@ function PlayAudio(file, element){
 		audio.play();			
 		$.ajax({url: API_URL+"SoundPlay/"+file,type: "POST",crossDomain: true});
 	}
+}
+
+function getLocation(){
+	navigator.geolocation.getCurrentPosition(locationSuccess,locationError,{timeout:10000});
+}
+
+function locationSuccess(position){
+	currentPosition.latitude = position.coords.latitude;
+	currentPosition.longitude = position.coords.longitude;
+}
+
+function locationError(){
+
 }
