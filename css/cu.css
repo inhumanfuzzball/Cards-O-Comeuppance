@@ -258,6 +258,7 @@ input.form-fixer, span.form-fixer {
     padding: 21px 0px 10px;
     margin-top: 4px;
     margin-bottom: 30px;
+	width:350px; margin:0 auto;
 }
 
 .timeline .line {

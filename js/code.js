@@ -392,17 +392,23 @@ function displayGame(data){
 	gameDate = data.gameDate;
 	highlightDealer();
 	validate();
+
+	$(".timeline").hide();
+	$(".timeline").empty();	
 	
+	// Time line for completed games	
 	if(data.complete){
-		var source = $("#timeline-template").html();
-		var template = Handlebars.compile(source);
-		$(".timeline").empty();
-		$(".timeline").append("<div class='line text-muted'></div>");
-		$.getJSON(API_URL+"Matches/"+ConvertDateToISO(gameDate)+"/Timeline", function (data) { 
-			jQuery.each(data, function(index, value) {
-				$(".timeline").append(template(this));
+		if(data.complete){
+			var source = $("#timeline-template").html();
+			var template = Handlebars.compile(source);
+			$.getJSON(API_URL+"Matches/"+ConvertDateToISO(gameDate)+"/Timeline", function (data) {
+				$(".timeline").append("<br/><div class='line text-muted'></div>");	
+				$(".timeline").show();
+				jQuery.each(data, function(index, value) {
+					$(".timeline").append(template(this));
+				});
 			});
-		});
+		}
 	}
 }
 
