@@ -1,5 +1,5 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
-var API_URL = "http://comeuppanceapi.azurewebsites.net/api/"
+var API_URL = "https://comeuppanceapi.azurewebsites.net/api/"
 //var API_URL = "http://localhost:49972/api/"
 var START_YEAR = 2014;
 
