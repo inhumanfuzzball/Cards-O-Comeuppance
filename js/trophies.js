@@ -22,6 +22,7 @@ function doTrophies()
 	
 	var trophiesShaft = [
 	"TrophyShafted",
+	"TrophyMultiShaft",
 	"TrophyBeelzebuerkStrikes",
 	"TrophyBlackHoleOfComeuppance",
 	"TrophyBridgeTooFar",
@@ -233,6 +234,67 @@ function TrophyKonigsbergCup(player, template)
 	return template(details);
 }
 
+function TrophyMultiShaft(player, template){
+	
+	var doubleShaft = 0;
+	var multiShaft = 0;
+	var ultraShaft = 0;
+	var monsterShaft = 0;
+	
+	var shaftCount = 0;
+	for(var i = 0; i < matches.length; i++)
+	{
+		var match = matches[i];
+		if(player === "Sansom")
+		{
+			if(match.cooper - match.sansom >= 5) shaftCount++;
+			else shaftCount = 0;
+		} 
+		if(player === "Cooper")
+		{
+			if (match.sansom - match.cooper >= 5) shaftCount++;
+			else shaftCount = 0;
+		}
+		
+		if(shaftCount == 2) doubleShaft++;
+		if(shaftCount == 3) multiShaft++;
+		if(shaftCount == 4) ultraShaft++;
+		if(shaftCount >= 5) monsterShaft++;
+	}
+	
+	var html = "";
+	
+	if(doubleShaft > 0)
+	{
+		var details = {glyph: "fa fa-wheelchair", title: "Double Shaft", desc: "Shafted twice in a row", colour: "rubbish"};
+		details.count = doubleShaft;
+		html += template(details)
+	}
+	
+	if(multiShaft > 0)
+	{
+		var details = {glyph: "fa fa-wheelchair", title: "Multi Shaft", desc: "Shafted three times in a row", colour: "rubbish"};
+		details.count = multiShaft;
+		html += template(details)
+	}
+	
+	if(ultraShaft > 0)
+	{
+		var details = {glyph: "fa fa-wheelchair", title: "Ultra Shaft", desc: "Shafted four times in a row", colour: "rubbish"};
+		details.count = ultraShaft;
+		html += template(details)
+	}
+	
+	if(monsterShaft > 0)
+	{
+		var details = {glyph: "fa fa-wheelchair", title: "M-M-M-MONSTER SHAFT", desc: "Shafted five times in a row", colour: "rubbish"};
+		details.count = monsterShaft;
+		html += template(details)
+	}
+	
+	return html;
+}
+
 function TrophyShafted(player, template)
 {
 	var returnText = "";
@@ -263,8 +325,8 @@ function TrophyShafted(player, template)
 			glyph: "fa fa-hand-grab-o",  
 			title: "A Shaft of Shafts", 
 			desc: "Collected five Shafted trophies", 
-			colour: "rubbish",
-			count: count};
+			colour: "rubbish"
+			};
 		returnText += template(details);
 	}
 	
@@ -274,8 +336,8 @@ function TrophyShafted(player, template)
 			glyph: "fa fa-hand-grab-o",  
 			title: "Ultimate Shaft", 
 			desc: "Collected ten Shafted trophies", 
-			colour: "rubbish",
-			count: count};
+			colour: "rubbish"
+			};
 		returnText += template(details);
 	}
 	
