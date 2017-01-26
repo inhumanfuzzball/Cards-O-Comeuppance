@@ -3,6 +3,9 @@ var API_URL = "https://comeuppanceapi.azurewebsites.net/api/"
 //var API_URL = "http://localhost:49972/api/"
 var START_YEAR = 2014;
 
+var osmAttr = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
+						
+
 var gameDate;
 var matches;
 
@@ -409,7 +412,17 @@ function displayGame(data){
 				$(".timeline").append("<br/><div class='line text-muted'></div>");	
 				$(".timeline").show();
 				jQuery.each(data, function(index, value) {
+					
 					$(".timeline").append(template(this));
+					
+					if(this.Latitude != null)
+					{
+						var mymap = L.map('map-'+this.Date).setView([this.Latitude, this.Longitude], 16);
+						L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: osmAttr}).addTo(mymap);
+						L.marker([this.Latitude, this.Longitude]).addTo(mymap);					
+					}
+
+					
 				});
 			});
 		}

@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
 	<!-- c3 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" />
 	<!-- Main CSS -->
@@ -335,8 +336,7 @@
             </div>
             <div class="panel-body">
 				{{#if Latitude}}
-					<iframe width='250' height='250' frameborder='0' style='border:0' 
-					src='https://maps.google.com/maps?q={{Latitude}},{{Longitude}}&z=15&output=embed'</iframe>
+					<div id="map-{{Date}}" style="height: 250px"></div>
 				{{else}}
 					<em>{{Date}}</em> {{Message}}
 				{{/if}}
@@ -357,6 +357,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
 	<!-- Seeded random number generator -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.min.js"></script>
+	<!-- Leaflet for maps -->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 	<!-- Main JS -->
 	<script src="js/trophies.js"></script>
 	<script src="js/scores.js"></script>
