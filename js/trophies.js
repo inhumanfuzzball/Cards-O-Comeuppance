@@ -30,7 +30,8 @@ function doTrophies()
 	"TrophyCloudOfComeuppance",
 	"TrophyCrippled",
 	"TrophyCrippledBurnt",
-	"TrophyPileOfComeuppance"];
+	"TrophyPileOfComeuppance",
+	"TrophyBridgeRectifier"];
 	
 	
 	var source = $("#entry-template").html();
@@ -266,28 +267,28 @@ function TrophyMultiShaft(player, template){
 	
 	if(doubleShaft > 0)
 	{
-		var details = {glyph: "fa fa-wheelchair", title: "Double Shaft", desc: "Shafted twice in a row", colour: "rubbish"};
+		var details = {glyph: "fa fa-hand-peace-o", title: "Double Shaft", desc: "Shafted twice in a row", colour: "rubbish"};
 		details.count = doubleShaft;
 		html += template(details)
 	}
 	
 	if(multiShaft > 0)
 	{
-		var details = {glyph: "fa fa-wheelchair", title: "Multi Shaft", desc: "Shafted three times in a row", colour: "rubbish"};
+		var details = {glyph: "fa fa-hand-spock-o", title: "Multi Shaft", desc: "Shafted three times in a row", colour: "rubbish"};
 		details.count = multiShaft;
 		html += template(details)
 	}
 	
 	if(ultraShaft > 0)
 	{
-		var details = {glyph: "fa fa-wheelchair", title: "Ultra Shaft", desc: "Shafted four times in a row", colour: "rubbish"};
+		var details = {glyph: "fa fa-hand-lizard-o", title: "Ultra Shaft", desc: "Shafted four times in a row", colour: "rubbish"};
 		details.count = ultraShaft;
 		html += template(details)
 	}
 	
 	if(monsterShaft > 0)
 	{
-		var details = {glyph: "fa fa-wheelchair", title: "M-M-M-MONSTER SHAFT", desc: "Shafted five times in a row", colour: "rubbish"};
+		var details = {glyph: "fa fa-thermometer-full", title: "M-M-M-MONSTER SHAFT", desc: "Shafted five times in a row", colour: "rubbish"};
 		details.count = monsterShaft;
 		html += template(details)
 	}
@@ -439,6 +440,32 @@ function TrophyBridgeTooFar(player, template)
 	}
 	return "";
 }
+
+function TrophyBridgeRectifier(player, template)
+{
+	var details = {glyph: "fa fa-step-forward", title: "Bridge Rectifier", desc: "Has had more than 1/2 of the bridge cards in a game.", colour: "rubbish"};
+	
+	var count = 0;
+	
+	for(var i = 0; i < matches.length; i++)
+	{
+		var match = matches[i];
+		// Ignore games with no bridge cards
+		if(match.sansombridge === "") continue;
+		
+		var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
+		if(player === "Sansom" && match.sansombridge/totalBridge > 0.5) count++;
+		if(player === "Cooper" && match.cooperbridge/totalBridge > 0.5) count++; 
+	}
+	
+	if(count > 0)
+	{
+		details.count = count;
+		return template(details);
+	}
+	return "";
+}
+
 
 function BridgingTheGap(player, template)
 {
