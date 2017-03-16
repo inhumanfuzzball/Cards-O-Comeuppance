@@ -25,13 +25,13 @@ function doTrophies()
 	"TrophyMultiShaft",
 	"TrophyBeelzebuerkStrikes",
 	"TrophyBlackHoleOfComeuppance",
-	"TrophyBridgeTooFar",
+	"TrophyBridgeRectifier",	
 	"BridgingTheGap",
+	"TrophyBridgeTooFar",
 	"TrophyCloudOfComeuppance",
 	"TrophyCrippled",
 	"TrophyCrippledBurnt",
-	"TrophyPileOfComeuppance",
-	"TrophyBridgeRectifier"];
+	"TrophyPileOfComeuppance"];
 	
 	
 	var source = $("#entry-template").html();
@@ -698,46 +698,46 @@ function TrophyComeuppanceSpree(player,template)
 	
 	for(var i = 0; i < winningStreaks.length; i++)
 	{
-		if(winningStreaks[i].streak >= 2 && player !== streaks[i].player) count++;
-		if(winningStreaks[i].streak >= 3 && player !== streaks[i].player) count3++;
-		if(winningStreaks[i].streak >= 4 && player !== streaks[i].player) count4++;
-		if(winningStreaks[i].streak >= 5 && player !== streaks[i].player) count5++;	
-		if(winningStreaks[i].streak >= 6 && player !== streaks[i].player) count6++;			
+		if(winningStreaks[i].streak >= 2 && player === winningStreaks[i].player) count++;
+		if(winningStreaks[i].streak >= 3 && player === winningStreaks[i].player) count3++;
+		if(winningStreaks[i].streak >= 4 && player === winningStreaks[i].player) count4++;
+		if(winningStreaks[i].streak >= 5 && player === winningStreaks[i].player) count5++;	
+		if(winningStreaks[i].streak >= 6 && player === winningStreaks[i].player) count6++;			
 	}
 	
 	var html = "";
 	
 	if(count > 0)
 	{
-		var details = {glyph: "fa fa-fire", title: "Comeuppance Spree", desc: "Won two matches in a row", colour: "silver"};
+		var details = {glyph: "fa fa-thermometer-empty", title: "Comeuppance Spree", desc: "Won two matches in a row", colour: "silver"};
 		details.count = count;
 		html += template(details)
 	}
 	
 	if(count3 > 0)
 	{
-		var details = {glyph: "fa fa-fire", title: "Comeuppance Rampage", desc: "Won three matches in a row", colour: "silver"};
+		var details = {glyph: "fa fa-thermometer-quarter", title: "Comeuppance Rampage", desc: "Won three matches in a row", colour: "silver"};
 		details.count = count3;
 		html += template(details)
 	}
 	
 	if(count4 > 0)
 	{
-		var details = {glyph: "fa fa-fire", title: "Dominating", desc: "Won four matches in a row", colour: "silver"};
+		var details = {glyph: "fa fa-thermometer-half", title: "Dominating", desc: "Won four matches in a row", colour: "silver"};
 		details.count = count4;
 		html += template(details)
 	}
 	
 	if(count5 > 0)
 	{
-		var details = {glyph: "fa fa-fire", title: "Unstoppable", desc: "Won five matches in a row", colour: "gold"};
+		var details = {glyph: "fa fa-thermometer-three-quarter", title: "Unstoppable", desc: "Won five matches in a row", colour: "gold"};
 		details.count = count5;
 		html += template(details)
 	}
 	
 	if(count6 > 0)
 	{
-		var details = {glyph: "fa fa-fire", title: "GODLIKE!", desc: "Won six matches in a row", colour: "gold"};
+		var details = {glyph: "fa fa-thermometer-full", title: "GODLIKE!", desc: "Won six matches in a row", colour: "gold"};
 		details.count = count6;
 		html += template(details)
 	}
