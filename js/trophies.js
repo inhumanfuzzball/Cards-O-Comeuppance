@@ -28,6 +28,7 @@ function doTrophies()
 	"TrophyBridgeRectifier",	
 	"BridgingTheGap",
 	"TrophyBridgeTooFar",
+	"ChasmOfComeuppance",
 	"TrophyCloudOfComeuppance",
 	"TrophyCrippled",
 	"TrophyCrippledBurnt",
@@ -412,6 +413,32 @@ function TrophyPingtarPrince(player, template)
 		return template(details);
 	}
 	
+	return "";
+}
+
+function ChasmOfComeuppance(player, template)
+{
+	var details = {glyph: "fa fa-exclamation-triangle", title: "Chasm of Comeuppance", desc: "Fell into the chasm of Comeuppance.", colour: "rubbish"};
+	
+	var count = 0;
+	
+	for(var i = 0; i < matches.length; i++)
+	{
+		var match = matches[i];
+		// Ignore games with no bridge cards
+		if(match.sansombridge === "") continue;
+		
+		var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
+		if(player === "Sansom" && match.sansombridge >= totalBridge) count++;
+		if(player === "Cooper" && match.cooperbridge >= totalBridge) count++; 
+	}
+	
+	if(count > 0)
+	{
+		details.desc = "Fell into the chasm of Comeuppance with all the bridge cards in the match.";
+		details.count = count;
+		return template(details);
+	}
 	return "";
 }
 

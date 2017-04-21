@@ -48,6 +48,9 @@
 	<div class="loading">
 		<div class="large-loader"></div>
 	</div>
+
+	<div id="kilroyShare"></div>
+	<div id="kilroyShaft"></div>
 	
 	<div class="container-fluid" id="match-view">
 		
@@ -175,7 +178,7 @@
 			<div class="row">
 				<!-- Dan Sansom Scores -->
 				<div class="col-xs-6 col-md-4">
-					<h3>Dan S</h3>
+					<h4>Dan S <span id="sansomFlair"></h4>
 									
 					<div class="score" id="A">
 						<div class="label">Score</div>
@@ -198,7 +201,7 @@
 				</div>
 				<!-- Dan Cooper Scores -->
 				<div class="col-xs-6 col-md-4">
-					<h3>Dan C</h3>
+					<h4>Dan C <span id="cooperFlair"></h4>
 					<div class="score" id="B">
 						<div class="label">Score</div>
 						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
@@ -220,7 +223,7 @@
 				</div>
 				<!-- Table Scores -->
 				<div class="col-xs-6 col-md-4">
-					<h3>Table</h3>
+					<h4>Table</h4>
 					<div class="score" id="C">
 						<div class="label">Score</div>
 						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
@@ -255,7 +258,9 @@
 					<i class="fa fa-question" onclick="PlayAudio('7_I_dont_know_jeff', this);"></i>
 				</h2>
 			</div>
+
 		</form>	
+
 	</div>
 	
 	<div class="container-fluid" id="chart-view">

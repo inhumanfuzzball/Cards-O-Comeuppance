@@ -8,3 +8,4 @@ It's not pretty and uses a very odd technology stack which I am calling GooStack
 JQuery          <- Presentation Layer 
 
 Trust me you don't want to fork this!
+

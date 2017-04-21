@@ -25,7 +25,7 @@ button.disabled{
 
 input.form-fixer, span.form-fixer {
 	padding: 2px;
-   font-size: 16px;
+  font-size: 16px;
 }
 /* Containing div */
 .score,.score-readonly{
@@ -344,4 +344,29 @@ input.form-fixer, span.form-fixer {
 }
 
 
+#kilroyShare
+{
+    position: fixed;
+    height:330px;
+    width:330px;
+    margin:0 auto;
+    bottom: 0;
+    display:none;
+    left:50%;
+    margin:-165px 0 0 -165px;
 
+    background-image: url(../img/share.png);
+}
+
+#kilroyShaft
+{
+    position: fixed;
+    height:330px;
+    width:330px;
+    margin:0 auto;
+    bottom: 0;
+    display:none;
+    left:50%;
+    margin:-165px 0 0 -165px;
+    background-image: url(../img/shaft.png);
+}

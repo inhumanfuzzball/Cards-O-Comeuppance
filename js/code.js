@@ -253,11 +253,19 @@ function displayTable(){
 			sansomClass = "";
 			cooperClass = "";		
 		}
-		
-		var sansomFlair = "";
-		var cooperFlair = "";
-		
-		// Killroy Shares and shafts (lost to and beat their opponent)
+		var flair = getFlair(match);
+		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+match.date+'\');"><td>'+match.date+'</td><td class="'+sansomClass+'"><b>'+match.sansom+flair.sansom+'</b></td><td class="'+cooperClass+'"><b>'+match.cooper+flair.cooper+'</b></td><td class="'+tableClass+'"><b>'+match.table+'</b></td></tr>');
+	}
+}
+
+function getFlair(match, showWinner){
+
+	var sansomFlair = "";
+	var cooperFlair = "";
+	
+	// Killroy Shares and shafts (lost to and beat their opponent)
+	if(showWinner)
+	{
 		if(match.cooper > match.sansom){
 			cooperFlair += "&nbsp;<i class=\"fa fa-thumbs-up\" title=\"Killroy Shares\"></i>";
 			sansomFlair += "&nbsp;<i class=\"fa fa-thumbs-down\" title=\"Killroy Shafts\"></i>";			
@@ -266,50 +274,50 @@ function displayTable(){
 			sansomFlair += "&nbsp;<i class=\"fa fa-thumbs-up\" title=\"Killroy Shares\"></i>";
 			cooperFlair += "&nbsp;<i class=\"fa fa-thumbs-down\" title=\"Killroy Shafts\"></i>";	
 		}
-			
-		// pile of comeuppance (came third)
-		if(match.sansom > match.cooper && match.table > match.cooper)
-			cooperFlair += "&nbsp;<i class=\"fa fa-bomb\" title=\"Pile of Comeuppance\"></i>";
-		if(match.cooper > match.sansom && match.table > match.sansom)
-			sansomFlair += "&nbsp;<i class=\"fa fa-bomb\" title=\"Pile of Comeuppance\"></i>";
-		
-		// shafted (lost by 5 or more games)
-		if(match.sansom - match.cooper >= 5)
-			cooperFlair += "&nbsp;<i class=\"fa fa-hand-grab-o\" title=\"Shafted\"></i>";
-		if(match.cooper - match.sansom >= 5)
-			sansomFlair += "&nbsp;<i class=\"fa fa-hand-grab-o\" title=\"Shafted\"></i>";
-		
-		// hat trick (won all 3)
-		if( (match.sansom > match.cooper && match.sansom > match.table) &&
-			(match.sansombriggs > match.cooperbriggs && match.sansombriggs > match.tablebriggs) &&
-			(match.sansombridge > match.cooperbridge && match.sansombridge > match.tablebridge) )
-			sansomFlair += "&nbsp;<i class=\"fa fa-magic\" title=\"Hat-Trick\"></i>";
-		if(	(match.cooper > match.sansom && match.cooper > match.table) &&
-			(match.cooperbriggs > match.sansombriggs && match.cooperbriggs > match.tablebriggs) &&
-			(match.cooperbridge > match.sansombridge && match.cooperbridge > match.tablebridge) )
-			cooperFlair += "&nbsp;<i class=\"fa fa-magic\" title=\"Hat-Trick\"></i>";
-		
-		// bridge too far (3/4 of bridge cards)
-		var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
-		if(match.sansombridge/totalBridge > 0.75)
-			sansomFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";
-		if(match.cooperbridge/totalBridge > 0.75)
-			cooperFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";		
-
-		// crippled (5 or more briggsings)
-		if(match.sansombriggs >= 5) 
-			sansomFlair += "&nbsp;<i class=\"fa fa-ambulance\" title=\"Crippled (5 Briggsings)\"></i>";
-		if(match.cooperbriggs >= 5) 		
-			cooperFlair += "&nbsp;<i class=\"fa fa-ambulance\" title=\"Crippled (5 Briggsings)\"></i>";
-		
-		// 888 award (no briggsings)
-		if(match.sansombriggs === 0)
-			sansomFlair += "&nbsp;<i class=\"fa fa-cc\" title=\"888 Award (No Briggsings)\"></i>";
-		if(match.cooperbriggs === 0)
-			cooperFlair += "&nbsp;<i class=\"fa fa-cc\" title=\"888 Award (No Briggsings)\"></i>";
-		
-		$('#match-list tr:last').after('<tr onclick="javascript:getScores(\''+match.date+'\');"><td>'+match.date+'</td><td class="'+sansomClass+'"><b>'+match.sansom+sansomFlair+'</b></td><td class="'+cooperClass+'"><b>'+match.cooper+cooperFlair+'</b></td><td class="'+tableClass+'"><b>'+match.table+'</b></td></tr>');
 	}
+
+	// pile of comeuppance (came third)
+	if(match.sansom > match.cooper && match.table > match.cooper)
+		cooperFlair += "&nbsp;<i class=\"fa fa-bomb\" title=\"Pile of Comeuppance\"></i>";
+	if(match.cooper > match.sansom && match.table > match.sansom)
+		sansomFlair += "&nbsp;<i class=\"fa fa-bomb\" title=\"Pile of Comeuppance\"></i>";
+	
+	// shafted (lost by 5 or more games)
+	if(match.sansom - match.cooper >= 5)
+		cooperFlair += "&nbsp;<i class=\"fa fa-hand-grab-o\" title=\"Shafted\"></i>";
+	if(match.cooper - match.sansom >= 5)
+		sansomFlair += "&nbsp;<i class=\"fa fa-hand-grab-o\" title=\"Shafted\"></i>";
+	
+	// hat trick (won all 3)
+	if( (match.sansom > match.cooper && match.sansom > match.table) &&
+		(match.sansombriggs > match.cooperbriggs && match.sansombriggs > match.tablebriggs) &&
+		(match.sansombridge > match.cooperbridge && match.sansombridge > match.tablebridge) )
+		sansomFlair += "&nbsp;<i class=\"fa fa-magic\" title=\"Hat-Trick\"></i>";
+	if(	(match.cooper > match.sansom && match.cooper > match.table) &&
+		(match.cooperbriggs > match.sansombriggs && match.cooperbriggs > match.tablebriggs) &&
+		(match.cooperbridge > match.sansombridge && match.cooperbridge > match.tablebridge) )
+		cooperFlair += "&nbsp;<i class=\"fa fa-magic\" title=\"Hat-Trick\"></i>";
+	
+	// bridge too far (3/4 of bridge cards)
+	var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
+	if(match.sansombridge/totalBridge > 0.75)
+		sansomFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";
+	if(match.cooperbridge/totalBridge > 0.75)
+		cooperFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";		
+
+	// crippled (5 or more briggsings)
+	if(match.sansombriggs >= 5) 
+		sansomFlair += "&nbsp;<i class=\"fa fa-ambulance\" title=\"Crippled (5 Briggsings)\"></i>";
+	if(match.cooperbriggs >= 5) 		
+		cooperFlair += "&nbsp;<i class=\"fa fa-ambulance\" title=\"Crippled (5 Briggsings)\"></i>";
+	
+	// 888 award (no briggsings)
+	if(match.sansombriggs === 0)
+		sansomFlair += "&nbsp;<i class=\"fa fa-cc\" title=\"888 Award (No Briggsings)\"></i>";
+	if(match.cooperbriggs === 0)
+		cooperFlair += "&nbsp;<i class=\"fa fa-cc\" title=\"888 Award (No Briggsings)\"></i>";
+
+	return { "cooper": cooperFlair, "sansom": sansomFlair };
 }
 
 function displayMatches(data){
@@ -400,6 +408,10 @@ function displayGame(data){
 	highlightDealer();
 	validate();
 
+	var flair = getFlair(ScoresToMatch(data.scores));
+	$("#sansomFlair").html(flair.sansom);
+	$("#cooperFlair").html(flair.cooper);
+
 	$(".timeline").hide();
 	$(".timeline").empty();	
 	
@@ -429,6 +441,48 @@ function displayGame(data){
 	}
 }
 
+function ScoresToMatch(scores){
+	var match = { 	
+					"sansom" :0, "cooper": 0, "table": 0, 
+					"sansombriggs": 0, "cooperbriggs": 0, "tablebriggs": 0, 
+					"sansombridge": 0, "cooperbridge": 0, "tablebridge": 0 
+				};
+
+	jQuery.each(scores, function(index, value) {
+		switch(this.column){
+			case "A":
+				match.sansom = this.value;
+				break;
+			case "B":
+				match.cooper = this.value;
+				break;
+			case "C":
+				match.table = this.value;
+				break;
+			case "D":
+				match.sansombridge = this.value;
+				break;
+			case "E":
+				match.cooperbridge = this.value;
+				break;
+			case "F":
+				match.tablebridge = this.value;
+				break;
+			case "G":
+				match.sansombriggs = this.value;
+				break;
+			case "H":
+				match.cooperbriggs = this.value;
+				break;
+			case "I":
+				match.tablebriggs = this.value;
+				break;
+		}
+	});
+	return match;
+}
+
+
 function ToggleTimeLine(){
 	if(allTimeLine){
 		allTimeLine = false;
@@ -452,6 +506,13 @@ function PlayAudio(file, element){
 		element.classList.add("lose");
 		audio.play();			
 		$.ajax({url: API_URL+"SoundPlay/"+file,type: "POST",crossDomain: true});
+		//kilroy
+		if(file == '4_Share_or_Shaft'){
+			$("#kilroyShare").fadeIn(1000).delay(1000).fadeOut(1000);
+			$("#kilroyShaft").delay(2000).fadeIn(1000).delay(1000).fadeOut(1000);
+			
+		}
+
 	}
 }
 
