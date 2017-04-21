@@ -354,8 +354,8 @@ input.form-fixer, span.form-fixer {
     display:none;
     left:50%;
     margin:-165px 0 0 -165px;
-
     background-image: url(../img/share.png);
+    z-index: 5;
 }
 
 #kilroyShaft
@@ -369,4 +369,5 @@ input.form-fixer, span.form-fixer {
     left:50%;
     margin:-165px 0 0 -165px;
     background-image: url(../img/shaft.png);
+    z-index: 5;
 }

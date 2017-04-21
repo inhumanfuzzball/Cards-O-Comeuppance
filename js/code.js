@@ -509,7 +509,7 @@ function PlayAudio(file, element){
 		//kilroy
 		if(file == '4_Share_or_Shaft'){
 			$("#kilroyShare").fadeIn(1000).delay(1000).fadeOut(1000);
-			$("#kilroyShaft").delay(2000).fadeIn(1000).delay(1000).fadeOut(1000);
+			$("#kilroyShaft").delay(2000).fadeIn(1000).delay(500).fadeOut(1000);
 			
 		}
 
