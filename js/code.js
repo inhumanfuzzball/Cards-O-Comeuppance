@@ -408,9 +408,9 @@ function displayGame(data){
 	highlightDealer();
 	validate();
 
-	var flair = getFlair(ScoresToMatch(data.scores));
-	$("#sansomFlair").html(flair.sansom);
-	$("#cooperFlair").html(flair.cooper);
+	//var flair = getFlair(ScoresToMatch(data.scores));
+	//$("#sansomFlair").html(flair.sansom);
+	//$("#cooperFlair").html(flair.cooper);
 
 	$(".timeline").hide();
 	$(".timeline").empty();	
@@ -512,7 +512,6 @@ function PlayAudio(file, element){
 			$("#kilroyShaft").delay(2000).fadeIn(1000).delay(500).fadeOut(1000);
 			
 		}
-
 	}
 }
 
