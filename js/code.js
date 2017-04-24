@@ -174,6 +174,9 @@ function pushScore(element){
 	
 	// Update the dealer if necessary
 	highlightDealer();
+
+	// Show any new flair
+	showFlair();
 	
 	// Save back to server
 	updateScores();	
@@ -407,10 +410,7 @@ function displayGame(data){
 	gameDate = data.gameDate;
 	highlightDealer();
 	validate();
-
-	//var flair = getFlair(ScoresToMatch(data.scores));
-	//$("#sansomFlair").html(flair.sansom);
-	//$("#cooperFlair").html(flair.cooper);
+	showFlair();
 
 	$(".timeline").hide();
 	$(".timeline").empty();	
@@ -433,55 +433,26 @@ function displayGame(data){
 						L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: osmAttr}).addTo(mymap);
 						L.marker([this.Latitude, this.Longitude]).addTo(mymap);					
 					}
-
-					
 				});
 			});
 		}
 	}
 }
 
-function ScoresToMatch(scores){
-	var match = { 	
-					"sansom" :0, "cooper": 0, "table": 0, 
-					"sansombriggs": 0, "cooperbriggs": 0, "tablebriggs": 0, 
-					"sansombridge": 0, "cooperbridge": 0, "tablebridge": 0 
-				};
-
-	jQuery.each(scores, function(index, value) {
-		switch(this.column){
-			case "A":
-				match.sansom = this.value;
-				break;
-			case "B":
-				match.cooper = this.value;
-				break;
-			case "C":
-				match.table = this.value;
-				break;
-			case "D":
-				match.sansombridge = this.value;
-				break;
-			case "E":
-				match.cooperbridge = this.value;
-				break;
-			case "F":
-				match.tablebridge = this.value;
-				break;
-			case "G":
-				match.sansombriggs = this.value;
-				break;
-			case "H":
-				match.cooperbriggs = this.value;
-				break;
-			case "I":
-				match.tablebriggs = this.value;
-				break;
-		}
-	});
-	return match;
+function showFlair(){
+	var flair = getFlair(DomToMatch());
+	$("#sansomFlair").html(flair.sansom);
+	$("#cooperFlair").html(flair.cooper);
 }
 
+function DomToMatch(){
+	var match = { 	
+					"sansom" :getScore("A"), "cooper": getScore("B"), "table": getScore("C"), 
+					"sansombriggs": getScore("G"), "cooperbriggs": getScore("H"), "tablebriggs": getScore("I"), 
+					"sansombridge": getScore("D"), "cooperbridge": getScore("E"), "tablebridge": getScore("F") 
+				};
+	return match;
+}
 
 function ToggleTimeLine(){
 	if(allTimeLine){
