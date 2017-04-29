@@ -371,3 +371,17 @@ input.form-fixer, span.form-fixer {
     background-image: url(../img/shaft.png);
     z-index: 5;
 }
+
+#kamara
+{
+    position: fixed;
+    height:330px;
+    width:330px;
+    margin:0 auto;
+    bottom: 0;
+    display:none;
+    left:50%;
+    margin:-165px 0 0 -165px;
+    background-image: url(../img/kamara.png);
+    z-index: 5;
+}

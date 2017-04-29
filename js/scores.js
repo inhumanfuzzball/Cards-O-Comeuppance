@@ -1,14 +1,22 @@
 var yearScores;
 var monthScores;
 
+var yearSwing;
+var monthSwing;
+
+var swing;
+
 var scores;
 var currentYear = new Date().getFullYear();
 
 function calculateScores(){
 
 	scores = getScoresObject();
+	swing = getSwingObject();
 	yearScores = [];
 	monthScores = [];
+	yearSwing = [];
+	monthSwing = [];
 	
 	for(var i = 0; i < matches.length; i++){
 		var match = matches[i];
@@ -18,13 +26,40 @@ function calculateScores(){
 		if(yearScores[year] == null) yearScores[year] = getScoresObject();
 		if(monthScores[month] == null) monthScores[month] = getScoresObject();
 		
+		if(yearSwing[year] == null) yearSwing[year] = getSwingObject();
+		if(monthSwing[month] == null) monthSwing[month] = getSwingObject();
+		
 		addToTotal(match, yearScores[year]);
 		addToTotal(match, monthScores[month]);
 		addToTotal(match, scores);
+		
+		addToSwing(match, yearSwing[year]);
+		addToSwing(match, monthSwing[month]);
+		addToSwing(match, swing);
 	}
 	
 	// Set the scores for the current year if there have been no games yet
 	if(yearScores[currentYear] == null) yearScores[currentYear] = getScoresObject();
+}
+
+function addToSwing(match, swingCount){
+	
+	if(match.sansom*1 > match.cooper*1 && match.sansom*1 >= match.table*1) 
+		swingCount.sansomMatchCounter++;
+	else if(match.cooper*1 > match.sansom*1 && match.cooper*1 >= match.table*1) 
+		swingCount.cooperMatchCounter++;
+		
+	swingCount.matches.push(swingCount.sansomMatchCounter-swingCount.cooperMatchCounter);
+	
+	swingCount.sansomGameCounter += match.sansom*1;
+	swingCount.cooperGameCounter += match.cooper*1;
+	swingCount.sansomBridgeCounter += match.sansombridge*1;
+	swingCount.cooperBridgeCounter += match.cooperbridge*1;
+	swingCount.sansomBriggsCounter += match.sansombriggs*1;
+	swingCount.cooperBriggsCounter += match.cooperbriggs*1;
+	swingCount.games.push(swingCount.sansomGameCounter*1 - swingCount.cooperGameCounter*1);
+	swingCount.bridge.push(swingCount.sansomBridgeCounter*1 - swingCount.cooperBridgeCounter*1);
+	swingCount.briggs.push(swingCount.sansomBriggsCounter*1 - swingCount.cooperBriggsCounter*1);
 }
 
 function addToTotal(match,scoreCount)
@@ -93,6 +128,16 @@ function subScore(column)
 		scores.gameNumber--;		
 	}
 }
+
+function getSwingObject(){
+	var obj = { matches: ["matches",null], games: ["games",null], bridge:["bridge",null], briggs: ["briggs",null], 
+	sansomMatchCounter: 0, cooperMatchCounter: 0,
+	sansomGameCounter: 0, cooperGameCounter: 0,
+	sansomBridgeCounter: 0, cooperBridgeCounter: 0,
+	sansomBriggsCounter: 0, cooperBriggsCounter: 0 };
+	return obj;
+}
+
 
 function getScoresObject(){
 	var obj = { cooperMatches: 0, cooperGames: 0, cooperBridge: 0, cooperBriggs: 0, 

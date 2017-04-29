@@ -27,7 +27,7 @@ var yearLines = [];
 
 function doCharts()
 {
-	swingometerGames =   ['Games', null];
+	swingometerGames =   ['Games'];
 	swingometerMatches = ['Matches', null];
 	swingometerBriggs =  ['Briggs', null];
 	swingometerBridge =  ['Bridge', null];
@@ -150,10 +150,18 @@ function doCharts()
 	{	
 		$("#Charts-Dropdown").append("<li><a href='javascript:showYearCharts("+year+");'>"+year+"</a></li>");
 	}	
-	
 	for(var i = 1; i <= 12; i++){
 		var month = monthNames[i];
 		$("#Charts-Dropdown").append("<li><a href='javascript:showMonthCharts("+i+");'>"+month+"</a></li>");
+	}
+
+	for(var year = currentYear; year >= START_YEAR; year--)
+	{	
+		$("#Charts-Dropdown").append("<li><a href='javascript:showSwingometerYear("+year+");'>Swingometer "+year+"</a></li>");
+	}	
+	for(var i = 1; i <= 12; i++){
+		var month = monthNames[i];
+		$("#Charts-Dropdown").append("<li><a href='javascript:showSwingometerMonth("+i+");'>Swingometer "+month+"</a></li>");
 	}
 
 	showTotal();
@@ -199,11 +207,33 @@ function showTotal(){
 function showSwingometer(){
 	var template = initialiseTemplate(true);
 	$("#Charts").append(template({description: "Swingometer"}));
-	
-	renderLine2('#chartSwingometerGames', [swingometerGames]);
-	renderLine2('#chartSwingometerMatches', [swingometerMatches]);
-	renderLine2('#chartSwingometerBridge', [swingometerBridge]);
-	renderLine2('#chartSwingometerBriggs', [swingometerBriggs]);
+
+	renderLine2('#chartSwingometerGames', [swing.games]);
+	renderLine2('#chartSwingometerMatches', [swing.matches]);
+	renderLine2('#chartSwingometerBridge', [swing.bridge]);
+	renderLine2('#chartSwingometerBriggs', [swing.briggs]);
+}
+
+function showSwingometerYear(year){
+
+	var template = initialiseTemplate(true);
+	$("#Charts").append(template({description: "Swingometer"}));
+
+	renderLine2('#chartSwingometerGames', [yearSwing[year].games]);
+	renderLine2('#chartSwingometerMatches', [yearSwing[year].matches]);
+	renderLine2('#chartSwingometerBridge', [yearSwing[year].bridge]);
+	renderLine2('#chartSwingometerBriggs', [yearSwing[year].briggs]);
+}
+
+function showSwingometerMonth(month){
+
+	var template = initialiseTemplate(true);
+	$("#Charts").append(template({description: "Swingometer"}));
+
+	renderLine2('#chartSwingometerGames', [monthSwing[month].games]);
+	renderLine2('#chartSwingometerMatches', [monthSwing[month].matches]);
+	renderLine2('#chartSwingometerBridge', [monthSwing[month].bridge]);
+	renderLine2('#chartSwingometerBriggs', [monthSwing[month].briggs]);
 }
 
 function showVersesTime(){

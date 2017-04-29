@@ -301,13 +301,26 @@ function getFlair(match, showWinner){
 		(match.cooperbridge > match.sansombridge && match.cooperbridge > match.tablebridge) )
 		cooperFlair += "&nbsp;<i class=\"fa fa-magic\" title=\"Hat-Trick\"></i>";
 	
+	// bridge trophy
 	// bridge too far (3/4 of bridge cards)
 	var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
-	if(match.sansombridge/totalBridge > 0.75)
+	var sansomBridgeRatio = match.sansombridge/totalBridge;
+	var cooperBridgeRatio = match.cooperbridge/totalBridge;
+	if(sansomBridgeRatio > 0.75){
 		sansomFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";
-	if(match.cooperbridge/totalBridge > 0.75)
-		cooperFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";		
-
+	}else if(sansomBridgeRatio > 0.66){
+		sansomFlair += "&nbsp;<i class=\"fa fa-link\" title=\"Bridging the gap (2/3 of bridge cards)\"></i>";
+	}else if(sansomBridgeRatio > 0.5){
+		sansomFlair += "&nbsp;<i class=\"fa fa-step-forward\" title=\"Bridge Rectifier (1/2 of bridge cards)\"></i>";
+	}
+	if(cooperBridgeRatio > 0.75){
+		cooperFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";
+	}else if(cooperBridgeRatio > 0.66){
+		cooperFlair += "&nbsp;<i class=\"fa fa-link\" title=\"Bridging the gap (2/3 of bridge cards)\"></i>";
+	}else if(cooperBridgeRatio > 0.5){
+		cooperFlair += "&nbsp;<i class=\"fa fa-step-forward\" title=\"Bridge Rectifier (1/2 of bridge cards)\"></i>";
+	}
+	
 	// crippled (5 or more briggsings)
 	if(match.sansombriggs >= 5) 
 		sansomFlair += "&nbsp;<i class=\"fa fa-ambulance\" title=\"Crippled (5 Briggsings)\"></i>";
@@ -482,6 +495,9 @@ function PlayAudio(file, element){
 			$("#kilroyShare").fadeIn(1000).delay(1000).fadeOut(1000);
 			$("#kilroyShaft").delay(2000).fadeIn(1000).delay(500).fadeOut(1000);
 			
+		}
+		if(file == '7_I_dont_know_jeff'){
+			$("#kamara").fadeIn(500).delay(500).fadeOut(500);
 		}
 	}
 }
