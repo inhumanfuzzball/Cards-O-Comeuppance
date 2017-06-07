@@ -306,6 +306,9 @@ function getFlair(match, showWinner){
 	var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
 	var sansomBridgeRatio = match.sansombridge/totalBridge;
 	var cooperBridgeRatio = match.cooperbridge/totalBridge;
+	$("#BridgeTooFarNeeds").text(Math.ceil(totalBridge * 0.7501));
+	$("#BridgingTheGapNeeds").text(Math.ceil(totalBridge * 0.66));
+	
 	if(sansomBridgeRatio > 0.75){
 		sansomFlair += "&nbsp;<i class=\"fa fa-ban\" title=\"A bridge too far (3/4 of bridge cards)\"></i>";
 	}else if(sansomBridgeRatio > 0.66){
@@ -379,7 +382,7 @@ function displayScores(){
 	$("#totalMatches").text(scoreBox.matchNumber);
 	$("#totalGames").text(scoreBox.gameNumber);
 	$("#totalBridge").text(scoreBox.bridgeNumber);
-	$("#totalBriggs").text(scoreBox.briggsNumber);		
+	$("#totalBriggs").text(scoreBox.briggsNumber);
 }
 
 function displayScore(tag,score,compareScore,left){

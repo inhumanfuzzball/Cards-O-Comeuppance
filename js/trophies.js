@@ -458,8 +458,8 @@ function TrophyBridgeTooFar(player, template)
 		if(match.sansombridge === "") continue;
 		
 		var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
-		if(player === "Sansom" && match.sansombridge/totalBridge > 0.75) count++;
-		if(player === "Cooper" && match.cooperbridge/totalBridge > 0.75) count++; 
+		if(player === "Sansom" && match.sansombridge/totalBridge >= 0.75) count++;
+		if(player === "Cooper" && match.cooperbridge/totalBridge >= 0.75) count++; 
 	}
 	
 	if(count > 0)
