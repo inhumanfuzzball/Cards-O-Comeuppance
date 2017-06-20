@@ -274,6 +274,7 @@ input.form-fixer, span.form-fixer {
     top: 0px;
     bottom: 0px;
     margin-left: 30px;
+	margin-top: 15px;
 }
 
 .timeline .separator {
@@ -401,4 +402,28 @@ input.form-fixer, span.form-fixer {
     margin:-165px 0 0 -165px;
     background-image: url(../img/kamara.png);
     z-index: 5;
+}
+
+.flip {
+    backface-visibility:             hidden;
+        -moz-backface-visibility:    hidden;
+        -ms-backface-visibility:     hidden;
+        -o-backface-visibility:      hidden;
+        -webkit-backface-visibility: hidden;
+    border: 1px solid black;
+    height: 105px;
+    font: normal 14px helvetica, arial, san serif;
+    padding: 10px;
+    position: absolute;
+    transform-origin:             50% 50% 0px;
+        -moz-transform-origin:    50% 50% 0px;
+        -ms-transform-origin:     50% 50% 0px;
+        -o-transform-origin:      50% 50% 0px;
+        -webkit-transform-origin: 50% 50% 0px;
+    transition: all 3s;
+        -moz-transition:    all 3s;
+        -ms-transition:     all 3s;
+        -o-transition:      all 3s;
+        -webkit-transition: all 3s;
+    width: 300px;    
 }

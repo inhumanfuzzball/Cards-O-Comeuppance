@@ -162,7 +162,7 @@
 			<thead>
 				<tr>
 					<td><h3 id="Sansom-Title">Sansom</h3></td>
-					<td><h3>&nbsp;</h3></td>
+					<td><h3><i id="Flip-Button" class="fa fa-exchange" onclick="flip()"></i></h3></td>
 					<td><h3 id="Cooper-Title">Cooper</h3></td>
 				</tr>
 			</thead>
@@ -176,101 +176,105 @@
 		</table>
 		</div>
 		<hr/>
-		<form class="form">
-			<div class="row">
-				<!-- Dan Sansom Scores -->
-				<div class="col-xs-6 col-md-4">
-					<h4>Dan S <span id="sansomFlair"></h4>
-									
-					<div class="score" id="A">
-						<div class="label">Score</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>
-						<input class="display" readonly></input>
+		<div id="card">
+			<div id="score-front">
+				<form class="form">
+					<div class="row">
+						<!-- Dan Sansom Scores -->
+						<div class="col-xs-6 col-md-4">
+							<h4>Dan S <span id="sansomFlair"></h4>
+											
+							<div class="score" id="A">
+								<div class="label">Score</div>
+								<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+								<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>
+								<input class="display" readonly></input>
+							</div>
+							<div class="score" id="D">
+								<div class="label">Bridge</div>
+								<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+								<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
+								<input class="display" readonly></input>
+							</div>
+							<div class="score" id="G">
+								<div class="label">Briggs</div>
+								<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+								<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
+								<input class="display" readonly></input>
+							</div>
+						</div>
+						<!-- Dan Cooper Scores -->
+						<div class="col-xs-6 col-md-4">
+							<h4>Dan C <span id="cooperFlair"></h4>
+							<div class="score" id="B">
+								<div class="label">Score</div>
+								<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+								<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
+								<input class="display" readonly></input>
+							</div>
+							<div class="score" id="E">
+								<div class="label">Bridge</div>
+								<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+								<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>					
+								<input class="display" readonly></input>
+							</div>
+							<div class="score" id="H">
+								<div class="label">Briggs</div>
+								<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+								<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>					
+								<input class="display" readonly></input>
+							</div>
+						</div>
+						<!-- Table Scores -->
+						<div class="col-xs-6 col-md-4">
+							<h4>Table</h4>
+							<div class="score" id="C">
+								<div class="label">Score</div>
+								<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+								<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
+								<input class="display" readonly></input>
+							</div>
+							<div class="score" id="F">
+								<div class="label">Bridge</div>
+								<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+								<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
+								<input class="display" readonly></input>
+							</div>
+							<div class="score" id="I">
+								<div class="label">Briggs</div>
+								<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
+								<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>			
+								<input class="display" readonly></input>
+							</div>
+						</div>
+						<div class="col-xs-6 col-md-4">
+							<h4>Info</h4>
+							<table class="infoTable">
+								<tr><td class="infoType"><i class="fa fa-ban"></i></td><td><span id="BridgeTooFarNeeds"></span></td>
+								<tr><td class="infoType"><i class="fa fa-link"></i></td><td><span id="BridgingTheGapNeeds"></span></td>
+							</table>
+						</div>
 					</div>
-					<div class="score" id="D">
-						<div class="label">Bridge</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
-						<input class="display" readonly></input>
-					</div>
-					<div class="score" id="G">
-						<div class="label">Briggs</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
-						<input class="display" readonly></input>
-					</div>
-				</div>
-				<!-- Dan Cooper Scores -->
-				<div class="col-xs-6 col-md-4">
-					<h4>Dan C <span id="cooperFlair"></h4>
-					<div class="score" id="B">
-						<div class="label">Score</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
-						<input class="display" readonly></input>
-					</div>
-					<div class="score" id="E">
-						<div class="label">Bridge</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>					
-						<input class="display" readonly></input>
-					</div>
-					<div class="score" id="H">
-						<div class="label">Briggs</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>					
-						<input class="display" readonly></input>
-					</div>
-				</div>
-				<!-- Table Scores -->
-				<div class="col-xs-6 col-md-4">
-					<h4>Table</h4>
-					<div class="score" id="C">
-						<div class="label">Score</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
-						<input class="display" readonly></input>
-					</div>
-					<div class="score" id="F">
-						<div class="label">Bridge</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>				
-						<input class="display" readonly></input>
-					</div>
-					<div class="score" id="I">
-						<div class="label">Briggs</div>
-						<button class="sub" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-minus"></span></button>						
-						<button class="add" type="button" onclick="pushScore(this);"><span class="glyphicon glyphicon-plus"></span></button>			
-						<input class="display" readonly></input>
-					</div>
-				</div>
-				<div class="col-xs-6 col-md-4">
-					<h4>Info</h4>
-					<table class="infoTable">
-						<tr><td class="infoType"><i class="fa fa-ban"></i></td><td><span id="BridgeTooFarNeeds"></span></td>
-						<tr><td class="infoType"><i class="fa fa-link"></i></td><td><span id="BridgingTheGapNeeds"></span></td>
-					</table>
+					<hr/>
+					<div>
+						<h2>
+							<i class="fa fa-hand-peace-o" onclick="PlayAudio('5_I_lied_Twice', this);"></i>&nbsp;
+							<i class="fa fa-user" onclick="PlayAudio('6_Didnt_think_of_that', this);"></i>&nbsp;
+							<i class="fa fa-hand-rock-o" onclick="PlayAudio('4_Share_or_Shaft', this);"></i>&nbsp;
+							<i class="fa fa-heartbeat" onclick="PlayAudio('2_999', this);"></i>&nbsp;
+							<i class="fa fa-umbrella" onclick="PlayAudio('3_Comeuppance', this);"></i>&nbsp;
+							<i class="fa fa-bolt" onclick="PlayAudio('1_Danger', this);"></i>&nbsp;
+							<i class="fa fa-question" onclick="PlayAudio('7_I_dont_know_jeff', this);"></i>
+						</h2>
+					</div>		
+				</form>	
+			</div>
+			<div id="score-back">
+				<div class="timeline">
+					<div class="line text-muted"></div>
 				</div>
 			</div>
-			<hr/>
-			<div class="timeline">
-				<div class="line text-muted"></div>
-			</div>
-			<div>
-				<h2>
-					<i class="fa fa-hand-peace-o" onclick="PlayAudio('5_I_lied_Twice', this);"></i>&nbsp;
-					<i class="fa fa-user" onclick="PlayAudio('6_Didnt_think_of_that', this);"></i>&nbsp;
-					<i class="fa fa-hand-rock-o" onclick="PlayAudio('4_Share_or_Shaft', this);"></i>&nbsp;
-					<i class="fa fa-heartbeat" onclick="PlayAudio('2_999', this);"></i>&nbsp;
-					<i class="fa fa-umbrella" onclick="PlayAudio('3_Comeuppance', this);"></i>&nbsp;
-					<i class="fa fa-bolt" onclick="PlayAudio('1_Danger', this);"></i>&nbsp;
-					<i class="fa fa-question" onclick="PlayAudio('7_I_dont_know_jeff', this);"></i>
-				</h2>
-			</div>
-
-		</form>	
-
+		</div>
 	</div>
 	
 	<div class="container-fluid" id="chart-view">
@@ -361,8 +365,7 @@
 
 	<!-- Javascript -->
 	<!-- JQuery -->
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<!-- Handlebars for templating -->

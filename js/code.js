@@ -428,21 +428,19 @@ function displayGame(data){
 	validate();
 	showFlair();
 
-	$(".timeline").hide();
 	$(".timeline").empty();	
+	$("#score-back").hide();
 	
 	// Time line for completed games	
 	if(data.complete){
+		$("#Flip-Button").show();
 		if(data.complete){
 			var source = $("#timeline-template").html();
 			var template = Handlebars.compile(source);
 			$.getJSON(API_URL+"Matches/"+ConvertDateToISO(gameDate)+"/Timeline", function (data) {
 				$(".timeline").append("<br/><div class='line text-muted'></div>");	
-				$(".timeline").show();
-				jQuery.each(data, function(index, value) {
-					
-					$(".timeline").append(template(this));
-					
+				jQuery.each(data, function(index, value) {					
+					$(".timeline").append(template(this));					
 					if(this.Latitude != null)
 					{
 						var mymap = L.map('map-'+this.Date).setView([this.Latitude, this.Longitude], 16);
@@ -452,6 +450,9 @@ function displayGame(data){
 				});
 			});
 		}
+	}
+	else{
+		$("#Flip-Button").hide();
 	}
 }
 
@@ -516,4 +517,15 @@ function locationSuccess(position){
 
 function locationError(){
 
+}
+
+function flip(){
+	if($("#score-back").is(':visible')){
+		$("#score-back").hide();
+		$("#score-front").show();
+	}
+	else{
+		$("#score-back").show();
+		$("#score-front").hide();
+	}
 }
