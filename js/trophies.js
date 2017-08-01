@@ -657,12 +657,17 @@ function TrophyILiedTwice(player, template)
 function TrophyHastingsAward(player, template)
 {
 	var details = {glyph: "fa fa-diamond", title: "The Hastings Award", desc: "Won 12 games in a match.", colour: "silver"};
-
+	var count = 0
 	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
-		if(player === "Sansom" && match.sansom >= 12) return template(details)
-		if(player === "Cooper" && match.cooper >= 12) return template(details)
+		if(player === "Sansom" && match.sansom >= 12) count++;
+		if(player === "Cooper" && match.cooper >= 12) count++;
+	}
+	
+	if(count > 0){
+		details.count = count;
+		return template(details)
 	}
 		
 	return "";
@@ -770,7 +775,7 @@ function TrophyComeuppanceSpree(player,template)
 	
 	if(count5 > 0)
 	{
-		var details = {glyph: "fa fa-thermometer-three-quarter", title: "Unstoppable", desc: "Won five matches in a row", colour: "gold"};
+		var details = {glyph: "fa fa-thermometer-three-quarters", title: "Unstoppable", desc: "Won five matches in a row", colour: "gold"};
 		details.count = count5;
 		html += template(details)
 	}
