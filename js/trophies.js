@@ -444,8 +444,11 @@ function ChasmOfComeuppance(player, template)
 
 function TrophyBridgeTooFar(player, template)
 {
-	var details = {glyph: "fa fa-ban", title: "A Bridge too far!", desc: "Has had more than 3/4 of the bridge cards in a game.", colour: "rubbish"};
+	var returnText = "";
 	
+	var details = {glyph: "fa fa-ban", title: "A Bridge too far!", desc: "Has had more than 3/4 of the bridge cards in a game.", colour: "rubbish"};
+	var forthBridge = {glyph: "fa fa-car", title: "The Forth bridge too far.", desc: "Has crossed the bridge of comeuppance 4 times! ", colour: "rubbish"};
+	var severnBridge = {glyph: "fa fa-car", title: "The Severn bridge too far.", desc: "Has crossed the bridge of comeuppance 7 times! ", colour: "rubbish"};
 	var count = 0;
 	
 	for(var i = 0; i < matches.length; i++)
@@ -455,17 +458,27 @@ function TrophyBridgeTooFar(player, template)
 		if(match.sansombridge === "") continue;
 		
 		var totalBridge = match.sansombridge + match.cooperbridge + match.tablebridge;
-		if(player === "Sansom" && match.sansombridge/totalBridge > 0.75) count++;
-		if(player === "Cooper" && match.cooperbridge/totalBridge > 0.75) count++; 
+		if(player === "Sansom" && match.sansombridge/totalBridge >= 0.75) count++;
+		if(player === "Cooper" && match.cooperbridge/totalBridge >= 0.75) count++; 
 	}
 	
 	if(count > 0)
 	{
-		details.desc = "Has had more than 3/4 of the bridge cards in a game.";
 		details.count = count;
-		return template(details);
+		returnText += template(details);
 	}
-	return "";
+	
+	if(count >= 4)
+	{
+		returnText += template(forthBridge);
+	}
+	
+	if(count >= 7)
+	{
+		returnText += template(severnBridge);
+	}
+	
+	return returnText;
 }
 
 function TrophyBridgeRectifier(player, template)
