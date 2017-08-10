@@ -1,5 +1,7 @@
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27RpwSYcLy5rSCfvt13vrgxhvBP5SOs/exec";
 var API_URL = "https://comeuppanceapi.azurewebsites.net/api/"
+
+//var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeAZvE0lTXptd_KeKUzNDK7uATghBLQN2iRpwDgtgKe7j6t4s/exec";
 //var API_URL = "http://localhost:49972/api/"
 var START_YEAR = 2014;
 
@@ -54,15 +56,13 @@ function  updateScore(column,method){
 	var control = "#" + column + " > :input";
 	if(method === "add"){
 		$(control).val(($(control).val() * 1) + 1);
-		addScore(column)
-		
+		addScore(column);
 		$.ajax({url: API_URL+"scores/"+column,data:currentPosition,type: "POST",crossDomain: true});
 	}
 	else if(method === "sub"){
 		if(($(control).val() * 1) > 0){ // Don't allow negative scores
 			$(control).val(($(control).val() * 1) - 1);
 			subScore(column);
-
 			$.ajax({url: API_URL+"scores/"+column,type: "DELETE",crossDomain: true});
 		}
 	}
@@ -171,7 +171,7 @@ function pushScore(element){
 	
 	// Update the score
 	updateScore(column,method);
-	
+
 	// Update the dealer if necessary
 	highlightDealer();
 
@@ -498,7 +498,6 @@ function PlayAudio(file, element){
 		if(file == '4_Share_or_Shaft'){
 			$("#kilroyShare").fadeIn(1000).delay(1000).fadeOut(1000);
 			$("#kilroyShaft").delay(2000).fadeIn(1000).delay(500).fadeOut(1000);
-			
 		}
 		if(file == '7_I_dont_know_jeff'){
 			$("#kamara").fadeIn(500).delay(500).fadeOut(500);

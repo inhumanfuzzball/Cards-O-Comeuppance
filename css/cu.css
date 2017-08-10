@@ -427,3 +427,25 @@ input.form-fixer, span.form-fixer {
         -webkit-transition: all 3s;
     width: 300px;    
 }
+
+.milestone{
+	display:none;
+	position: absolute;
+	top: 20px;
+	bottom: 0px;
+	width: 100%;
+    padding: 20px;
+	z-index:1000;	
+	background: #2848BF;
+	color: #FFFFFF;
+	font-family: 'Lobster', cursive;
+}
+
+.milestone img{
+	position:absolute;
+	left:50%;	
+	bottom:0;
+    z-index: 1001;
+	margin: -165px 0 0 -165px;
+    width: 330px;
+}

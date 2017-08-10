@@ -96,18 +96,80 @@ function addScore(column)
 	if(column === "A"){ // sansom games
 		yearScores[currentYear].sansomGames++;
 		scores.sansomGames++;
+		if(scores.sansomGames % 100 === 0){
+			showDialog('Century','Congratulations Sansom, you have won ' + scores.sansomGames +  ' games of cards o comeuppance.', true);
+		}
 	}
 	
 	if(column === "B"){ // cooper games
 		yearScores[currentYear].cooperGames++;
 		scores.cooperGames++;
+		if(scores.cooperGames % 100 === 0){
+			showDialog('Century','Congratulations Cooper, you have won ' + scores.sansomGames +  ' games of cards o comeuppance.', true);
+		}
 	}
 	
-	if(column === "A" || column ==="B") // here incase additional columns are added, only game wins update hte game total
+	if(column === "D"){ // sansom bridge
+		yearScores[currentYear].sansomBridge++;
+		scores.sansomBridge++;
+		if(scores.sansomBridge % 100 === 0){
+			showDialog('Century','Comeuppance is in order, Sansom has just achieved a total of ' + scores.sansomBridge +  ' bridge cards. A heavy toll indeed.', false);
+		}	
+	}
+	
+	if(column === "E"){ // cooper bridge
+		yearScores[currentYear].cooperBridge++;
+		scores.cooperBridge++;
+		if(scores.cooperBridge % 100 === 0){
+			showDialog('Century','Comeuppance is in order, Cooper has just achieved a total of ' + scores.cooperBridge +  ' bridge cards. A heavy toll indeed.',false);
+		}
+	}
+	
+	if(column === "G"){ // sansom briggs
+		yearScores[currentYear].sansomBriggs++;
+		scores.sansomBriggs++;
+		if(scores.sansomBriggs % 100 === 0){
+			showDialog('Century','Comeuppance is in order, Sansom has been Briggsed ' + scores.sansomBriggs +  ' times. Kilroy is impressed.',false);
+		}
+	}
+	
+	if(column === "H"){ // cooper briggs
+		yearScores[currentYear].cooperBriggs++;
+		scores.cooperrBriggs++;
+		if(scores.cooperBriggs % 100 === 0){
+			showDialog('Century','Comeuppance is in order, Cooper has been Briggsed ' + scores.cooperBriggs +  ' times. Kilroy is impressed.',false);
+		}
+	}
+	
+	if(column === "A" || column ==="B" || column ==="C")
 	{
 		yearScores[currentYear].gameNumber++;
-		scores.gameNumber++;		
+		scores.gameNumber++;
+		
+		if(scores.gameNumber % 1000 === 0)
+		{
+			showDialog('Kilo of games','Congratulations on playing' + scores.gameNumber +  ' games of cards o comeuppance.',true);
+		}
+		else if(scores.gameNumber % 100 === 0)
+		{
+			showDialog('Centuary of games','Congratulations on playing' + scores.gameNumber +  ' games of cards o comeuppance.',true);
+		}
+		
 	}
+}
+
+function showDialog(title, message, share){
+	$("#milestone-header").text(title);
+	$("#milestone-message").text(message);
+	if(share){
+		$("#milestone-img").attr("src","img/share.png");
+	}
+	else
+	{
+		$("#milestone-img").attr("src","img/shaft.png")
+	}
+	
+	$("#milestone").slideDown("slow");	
 }
 
 function subScore(column)
@@ -122,7 +184,27 @@ function subScore(column)
 		scores.cooperGames--;
 	}
 	
-	if(column === "A" || column ==="B") // here incase additional columns are added, only game wins update the game total
+	if(column === "D"){ // sansom bridge
+		yearScores[currentYear].sansomBridge--;
+		scores.sansomBridge--;
+	}
+	
+	if(column === "E"){ // cooper bridge
+		yearScores[currentYear].cooperBridge--;
+		scores.cooperBridge--;
+	}
+	
+	if(column === "G"){ // sansom briggs
+		yearScores[currentYear].sansomBriggs--;
+		scores.sansomBriggs--;
+	}
+	
+	if(column === "H"){ // cooper briggs
+		yearScores[currentYear].cooperBriggs--;
+		scores.cooperrBriggs--;
+	}
+	
+	if(column === "A" || column ==="B" || column ==="C")
 	{
 		yearScores[currentYear].gameNumber--;
 		scores.gameNumber--;		
@@ -146,3 +228,5 @@ function getScoresObject(){
 				drawMatches: 0, matchNumber: 0, gameNumber: 0, briggsNumber: 0, bridgeNumber: 0 };
 	return obj; 
 }
+
+$("#milestone").click(function() {$("#milestone").slideUp("slow");});
