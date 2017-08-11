@@ -97,7 +97,7 @@ function addScore(column)
 		yearScores[currentYear].sansomGames++;
 		scores.sansomGames++;
 		if(scores.sansomGames % 100 === 0){
-			showDialog('Century','Congratulations Sansom, you have won ' + scores.sansomGames +  ' games of cards o comeuppance.', true);
+			showDialog('Shared','Congratulations Sansom, you have won ' + scores.sansomGames +  ' games of cards o comeuppance.', true);
 		}
 	}
 	
@@ -105,7 +105,7 @@ function addScore(column)
 		yearScores[currentYear].cooperGames++;
 		scores.cooperGames++;
 		if(scores.cooperGames % 100 === 0){
-			showDialog('Century','Congratulations Cooper, you have won ' + scores.sansomGames +  ' games of cards o comeuppance.', true);
+			showDialog('Shared','Congratulations Cooper, you have won ' + scores.cooperGames +  ' games of cards o comeuppance.', true);
 		}
 	}
 	
@@ -113,7 +113,7 @@ function addScore(column)
 		yearScores[currentYear].sansomBridge++;
 		scores.sansomBridge++;
 		if(scores.sansomBridge % 100 === 0){
-			showDialog('Century','Comeuppance is in order, Sansom has just achieved a total of ' + scores.sansomBridge +  ' bridge cards. A heavy toll indeed.', false);
+			showDialog('Shafted','Sansom has just achieved a total of ' + scores.sansomBridge +  ' bridge cards. A heavy toll indeed.', false);
 		}	
 	}
 	
@@ -121,7 +121,7 @@ function addScore(column)
 		yearScores[currentYear].cooperBridge++;
 		scores.cooperBridge++;
 		if(scores.cooperBridge % 100 === 0){
-			showDialog('Century','Comeuppance is in order, Cooper has just achieved a total of ' + scores.cooperBridge +  ' bridge cards. A heavy toll indeed.',false);
+			showDialog('Shafted','Cooper has just achieved a total of ' + scores.cooperBridge +  ' bridge cards. A heavy toll indeed.',false);
 		}
 	}
 	
@@ -129,15 +129,15 @@ function addScore(column)
 		yearScores[currentYear].sansomBriggs++;
 		scores.sansomBriggs++;
 		if(scores.sansomBriggs % 100 === 0){
-			showDialog('Century','Comeuppance is in order, Sansom has been Briggsed ' + scores.sansomBriggs +  ' times. Kilroy is impressed.',false);
+			showDialog('Shafted','Comeuppance is in order. Sansom has been Briggsed ' + scores.sansomBriggs +  ' times. Kilroy is impressed.',false);
 		}
 	}
 	
 	if(column === "H"){ // cooper briggs
 		yearScores[currentYear].cooperBriggs++;
-		scores.cooperrBriggs++;
+		scores.cooperBriggs++;
 		if(scores.cooperBriggs % 100 === 0){
-			showDialog('Century','Comeuppance is in order, Cooper has been Briggsed ' + scores.cooperBriggs +  ' times. Kilroy is impressed.',false);
+			showDialog('Shafted','Comeuppance is in order. Cooper has been Briggsed ' + scores.cooperBriggs +  ' times. Kilroy is impressed.',false);
 		}
 	}
 	
@@ -148,20 +148,46 @@ function addScore(column)
 		
 		if(scores.gameNumber % 1000 === 0)
 		{
-			showDialog('Kilo of games','Congratulations on playing' + scores.gameNumber +  ' games of cards o comeuppance.',true);
+			showDialog('Shared','A KILO OF COMEUPPANCE! Congratulations on playing ' + scores.gameNumber +  ' games of cards o comeuppance.',true);
 		}
 		else if(scores.gameNumber % 100 === 0)
 		{
-			showDialog('Centuary of games','Congratulations on playing' + scores.gameNumber +  ' games of cards o comeuppance.',true);
+			showDialog('Shared','Congratulations on playing ' + scores.gameNumber +  ' games of cards o comeuppance.',true);
 		}
-		
+	}
+	
+	if(column === "D" || column ==="E" || column ==="F")
+	{
+		var totalBridge = scores.sansomBridge + scores.cooperBridge + scores.tableBridge;
+		if(totalBridge % 1000 === 0)
+		{
+			showDialog('Shafted','The bridge has been crossed ' + totalBridge +  ' times. Welcome to Koenigsberg.',false);
+		}
+		else if(totalBridge % 100 === 0)
+		{
+			showDialog('Shafted','The bridge has been crossed ' + totalBridge +  ' times. Welcome to Koenigsberg.',false);
+		}
+	}
+	
+	if(column === "G" || column ==="H" || column ==="I")
+	{
+		var totalBriggs = scores.sansomBriggs + scores.cooperBriggs + scores.tableBriggs;
+		if(totalBriggs % 1000 === 0)
+		{
+			showDialog('Shafted','There has been a total of ' + totalBriggs +  ' Briggsings.',false);
+		}
+		else if(totalBriggs % 100 === 0)
+		{
+			showDialog('Shafted','There has been a total of ' + totalBriggs +  ' Briggsings.',false);
+		}
 	}
 }
 
 function showDialog(title, message, share){
 	$("#milestone-header").text(title);
 	$("#milestone-message").text(message);
-	if(share){
+	if(share)
+	{
 		$("#milestone-img").attr("src","img/share.png");
 	}
 	else
@@ -201,7 +227,7 @@ function subScore(column)
 	
 	if(column === "H"){ // cooper briggs
 		yearScores[currentYear].cooperBriggs--;
-		scores.cooperrBriggs--;
+		scores.cooperBriggs--;
 	}
 	
 	if(column === "A" || column ==="B" || column ==="C")
