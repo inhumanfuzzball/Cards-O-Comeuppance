@@ -676,12 +676,17 @@ function TrophyHastingsAward(player, template)
 function TrophyCrippled(player,template)
 {
 	var details = {glyph: "fa fa-ambulance", title: "Crippled", desc: "Had more than five briggsings in a match", colour: "rubbish"};
-
+	var count = 0
 	for(var i = 0; i < matches.length; i++)
 	{
 		var match = matches[i];
-		if(player === "Sansom" && match.sansombriggs >= 5) return template(details)
-		if(player === "Cooper" && match.cooperbriggs >= 5) return template(details)
+		if(player === "Sansom" && match.sansombriggs >= 5) count++;
+		if(player === "Cooper" && match.cooperbriggs >= 5) count++; 
+	}
+
+	if(count > 0){
+		details.count = count;
+		return template(details);
 	}
 		
 	return "";
