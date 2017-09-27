@@ -401,7 +401,7 @@ function TrophyPingtarPrince(player, template)
 	
 	if(player === wonBy)
 	{
-		details.desc = "Won by the highest winning margin. Awarded on "  + date + " for winning by " + winCount + " matches.";
+		details.desc = "Won by the highest winning margin. Awarded on "  + date + " for winning by " + winCount + " games.";
 		return template(details);
 	}
 	
@@ -409,7 +409,7 @@ function TrophyPingtarPrince(player, template)
 	{
 		if(player === "Cooper") details.title = "Pingtar Prince (Shafted)"
 		if(player === "Sansom") details.title = "Pingtar Prince (Shared)"
-		details.desc = "Joint winner by the highest winning margin. Winning by " + winCount + " matches.";
+		details.desc = "Joint winner by the highest winning margin. Winning by " + winCount + " games.";
 		return template(details);
 	}
 	
@@ -446,7 +446,7 @@ function TrophyBridgeTooFar(player, template)
 {
 	var returnText = "";
 	
-	var details = {glyph: "fa fa-ban", title: "A Bridge too far!", desc: "Has had more than 3/4 of the bridge cards in a game.", colour: "rubbish"};
+	var details = {glyph: "fa fa-ban", title: "A Bridge too far!", desc: "Has had more than 3/4 of the bridge cards in a match.", colour: "rubbish"};
 	var forthBridge = {glyph: "fa fa-car", title: "The Forth bridge too far.", desc: "Has crossed the bridge of comeuppance 4 times! ", colour: "rubbish"};
 	var severnBridge = {glyph: "fa fa-car", title: "The Severn bridge too far.", desc: "Has crossed the bridge of comeuppance 7 times! ", colour: "rubbish"};
 	var count = 0;
@@ -483,7 +483,7 @@ function TrophyBridgeTooFar(player, template)
 
 function TrophyBridgeRectifier(player, template)
 {
-	var details = {glyph: "fa fa-step-forward", title: "Bridge Rectifier", desc: "Has had more than 1/2 of the bridge cards in a game.", colour: "rubbish"};
+	var details = {glyph: "fa fa-step-forward", title: "Bridge Rectifier", desc: "Has had more than 1/2 of the bridge cards in a match.", colour: "rubbish"};
 	
 	var count = 0;
 	
@@ -509,7 +509,7 @@ function TrophyBridgeRectifier(player, template)
 
 function BridgingTheGap(player, template)
 {
-	var details = {glyph: "fa fa-link", title: "Bridging the gap", desc: "Has had more than 2/3 of the bridge cards in a game.", colour: "rubbish"};
+	var details = {glyph: "fa fa-link", title: "Bridging the gap", desc: "Has had more than 2/3 of the bridge cards in a match.", colour: "rubbish"};
 	
 	var count = 0;
 	
@@ -534,7 +534,7 @@ function BridgingTheGap(player, template)
 
 function TrophyCloudOfComeuppance(player, template)
 {
-	var details = {glyph: "fa fa-cloud", title: "Under the cloud of Comeuppance", desc: "Was under a cloud of Comeuppance by loosing 4 consecutive games", colour: "rubbish"};
+	var details = {glyph: "fa fa-cloud", title: "Under the cloud of Comeuppance", desc: "Was under a cloud of Comeuppance by loosing 4 consecutive matches", colour: "rubbish"};
 
 	for(var i = 0; i < streaks.length; i++)
 	{
