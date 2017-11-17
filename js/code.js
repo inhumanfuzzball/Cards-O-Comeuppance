@@ -2,7 +2,7 @@ var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl425g7nwPAfSsH-Aw27R
 var API_URL = "https://comeuppanceapi.azurewebsites.net/api/"
 
 //var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeAZvE0lTXptd_KeKUzNDK7uATghBLQN2iRpwDgtgKe7j6t4s/exec";
-//var API_URL = "http://localhost:49972/api/"
+//var API_URL = "https://comeuppanceapitest.azurewebsites.net/api/"
 var START_YEAR = 2014;
 
 var osmAttr = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';

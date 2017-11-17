@@ -449,3 +449,7 @@ input.form-fixer, span.form-fixer {
 	margin: -165px 0 0 -165px;
     width: 330px;
 }
+
+.dropdown {
+	display:inline;
+}

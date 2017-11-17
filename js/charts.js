@@ -148,22 +148,30 @@ function doCharts()
 	var currentYear = new Date().getFullYear()*1;
 	for(var year = currentYear; year >= START_YEAR; year--)
 	{	
-		$("#Charts-Dropdown").append("<li><a href='javascript:showYearCharts("+year+");'>"+year+"</a></li>");
+		$("#Charts-Dates-Dropdown").append("<li><a href='javascript:showYearCharts("+year+");'>"+year+"</a></li>");
 	}	
 	for(var i = 1; i <= 12; i++){
 		var month = monthNames[i];
-		$("#Charts-Dropdown").append("<li><a href='javascript:showMonthCharts("+i+");'>"+month+"</a></li>");
+		$("#Charts-Dates-Dropdown").append("<li><a href='javascript:showMonthCharts("+i+");'>"+month+"</a></li>");
 	}
 
 	for(var year = currentYear; year >= START_YEAR; year--)
 	{	
-		$("#Charts-Dropdown").append("<li><a href='javascript:showSwingometerYear("+year+");'>Swingometer "+year+"</a></li>");
+		$("#Charts-Dates-Dropdown").append("<li><a href='javascript:showSwingometerYear("+year+");'>Swingometer "+year+"</a></li>");
 	}	
 	for(var i = 1; i <= 12; i++){
 		var month = monthNames[i];
-		$("#Charts-Dropdown").append("<li><a href='javascript:showSwingometerMonth("+i+");'>Swingometer "+month+"</a></li>");
+		$("#Charts-Dates-Dropdown").append("<li><a href='javascript:showSwingometerMonth("+i+");'>Swingometer "+month+"</a></li>");
 	}
 
+	$.getJSON(API_URL+"Locations",function (data) {
+		jQuery.each(data, function(index, value) {
+			if(value.Name !== "Unknown Location"){
+				$("#Charts-Dropdown").append("<li><a href='javascript:showLocation("+value.LocationId+",\""+value.Name+"\");'>"+value.Name+"</a></li>");				
+			}
+		});
+	});
+	
 	showTotal();
 }
 
@@ -265,9 +273,34 @@ function showYearCharts(year){
 function showSound(){
 	destroyCharts();
 	$("#Charts").empty();
-	$("#Charts").append("<h1>Sounds</h1>");
-	$("#Charts").append("<div id='chartSounds'></div>");
-	$.getJSON(API_URL+"SoundPlay/Stats",function (data) { renderPie('#chartSounds',data); });
+	$("#Charts").append("<p>Loading...</p>");
+	$.getJSON(API_URL+"SoundPlay/Stats",function (data) 
+	{ 
+		$("#Charts").empty();
+		$("#Charts").append("<h1>Sounds</h1>");
+		$("#Charts").append("<div id='chartSounds'></div>");
+		renderPie('#chartSounds',data); 
+	});
+}
+
+function showLocation(locationId, name){
+	destroyCharts();
+	$("#Charts").empty();
+	$("#Charts").append("<p>Loading...</p>");
+	$.getJSON(API_URL+"Location/"+locationId+"/Stats", function (data) 
+	{ 
+		$("#Charts").empty();
+		$("#Charts").append("<h1>"+name+"</h1>");
+		$("#Charts").append("<h2>Game Wins</h2>");
+		$("#Charts").append("<div id='chartLocationWin'></div>");
+		$("#Charts").append("<h2>Bridge Cards</h2>");
+		$("#Charts").append("<div id='chartLocationBridge'></div>");
+		$("#Charts").append("<h2>Briggsings</h2>");
+		$("#Charts").append("<div id='chartLocationBriggs'></div>");
+		renderPie('#chartLocationWin',data["Win"]); 
+		renderPie('#chartLocationBridge',data["Bridge"]); 
+		renderPie('#chartLocationBriggs',data["Briggs"]); 
+	});
 }
 
 function timeCharts(scores, description, template, section){
@@ -366,11 +399,13 @@ function renderLine2(id, columns){
 function renderPie(id, columns){
 	
 	var show = false;
-	for(var i = 0; i < columns.length; i++){
-		if(columns[i][1] > 0){
-			show = true;
-			break;
-		}
+	if(columns != null){
+		for(var i = 0; i < columns.length; i++){
+			if(columns[i][1] > 0){
+				show = true;
+				break;
+			}
+		}		
 	}
 
 	if(show){
